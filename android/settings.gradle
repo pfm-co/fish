@@ -1,0 +1,3 @@
+rootProject.name = 'Payslip'
+
+include ':app'
