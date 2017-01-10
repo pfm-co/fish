@@ -1,8 +1,6 @@
-<snippet>
-  <content><![CDATA[
-# ${1:Project Name}
+# Payslip Mobile app
 
-Mobile app for viewing payslips in details.
+Mobile app for viewing, browsing and sharing individual payslips in details.
 
 ## Installation
 
@@ -17,7 +15,7 @@ react-native run-android
 
 ## Usage
 
-TODO: Write usage instructions
+You can clone the repo and run a build command (*react-native run-android*), or (when ready) get a copy of released APK files in [releases](https://github.com/pfm-co/fish/releases) section.
 
 
 ## Contributing
@@ -28,17 +26,3 @@ TODO: Write usage instructions
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 
-## History
-
-TODO: Write history
-
-## Credits
-
-TODO: Write credits
-
-## License
-
-TODO: Write license
-]]></content>
-  <tabTrigger>readme</tabTrigger>
-</snippet>
