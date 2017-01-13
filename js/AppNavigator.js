@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, BackAndroid, StatusBar, NavigationExperimental } from 'react-native';
+import { Text, View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 import { actions } from 'react-native-navigation-redux-helpers';
@@ -13,6 +13,7 @@ import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
 import FmDrawer from './common/FmDrawer';
 import I18n from 'react-native-i18n'
+let MenuItem = require('./common/MenuItem');
 
 
 const {
@@ -140,16 +141,12 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="Car Groups"
-                selected={this.props.tab === 'cargroups'}
-                onPress={this.onTabSelect.bind(this, 'cargroups')}
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
             />
 
             <MenuItem
                 title="Maps"
-                selected={this.props.tab === 'map'}
-                onPress={this.onTabSelect.bind(this, 'map')}
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
             />

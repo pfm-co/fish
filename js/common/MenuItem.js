@@ -9,10 +9,10 @@
 var theme = require('../themes/theme-base');
 var React = require('React');
 var View = require('View');
-var { Text } = require('../common/FmText');
+var Text = require('Text');
 var Image = require('Image');
 var StyleSheet = require('StyleSheet');
-var FmTouchable = require('../common/FmTouchable');
+var FmTouchable = require('TouchableNativeFeedback');
 
 
 class MenuItem extends React.Component {

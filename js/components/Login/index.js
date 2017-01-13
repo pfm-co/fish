@@ -7,10 +7,16 @@ import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
 const ActivityIndicator = require('ActivityIndicator');
+import styles from './styles';
+import I18n from 'react-native-i18n'
+
 
 const {
   replaceAt,
 } = actions;
+
+
+const background = require('../../../images/bg_login.jpg');
 
 
 class Login extends Component {
@@ -28,7 +34,6 @@ class Login extends Component {
       name: '',
     };
   }
-
 
 
   render() {
@@ -53,7 +58,7 @@ class Login extends Component {
                 <ActivityIndicator
                     size="large"
                     color="#fff600"
-                    animating={this.props.authState.isLoginInProgress}
+                    animating={false}
                 />
 
                 
