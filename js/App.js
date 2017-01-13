@@ -39,7 +39,7 @@ class App extends Component {
     I18n.fallbacks = true;
     I18n.translations = Translations;
 
-    
+
     this.state = {
       showDownloadingModal: false,
       showInstalling: false,
@@ -95,7 +95,7 @@ class App extends Component {
                       fontSize: 15,
                     }}
                   >
-                    Installing update...
+                    {I18n.t("fa.InstallingUpdate")}
                   </Text> :
                   <View
                     style={{
@@ -113,7 +113,7 @@ class App extends Component {
                         fontSize: 15,
                       }}
                     >
-                      Downloading update... {`${parseInt(this.state.downloadProgress, 10)} %`}
+                      {I18n.t("fa.DownloadingUpdate")} {`${parseInt(this.state.downloadProgress, 10)} %`}
                     </Text>
                     <ProgressBar
                       color="theme.brandPrimary"
