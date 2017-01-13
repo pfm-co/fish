@@ -26,12 +26,12 @@ var logger = createLogger({
 });
 
 
-var createF8Store = applyMiddleware(thunk, promise, array, analytics, logger)(createStore);
+var createAppStore = applyMiddleware(thunk, promise, array, analytics, logger)(createStore);
 
 
 function configureStore(onComplete: ?() => void) {
     // TODO(frantic): reconsider usage of redux-persist, maybe add cache breaker
-    const store = autoRehydrate()(createF8Store)(reducers);
+    const store = autoRehydrate()(createAppStore)(reducers);
     persistStore(store, {storage: AsyncStorage}, onComplete);
     if (isDebuggingInChrome) {
         window.store = store;
