@@ -7,9 +7,9 @@ import { actions } from 'react-native-navigation-redux-helpers';
 
 import { closeDrawer } from './actions/drawer';
 
-import Login from './components/login/';
-import Home from './components/home/';
-import SplashPage from './components/splashscreen/';
+import Login from './components/Login';
+import Home from './components/Home';
+import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/base-theme';
 
 const {
