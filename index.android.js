@@ -4,4 +4,4 @@ import setup from './js/setup';
 
 
 
-AppRegistry.registerComponent('Payslip', () => Payslip);
+AppRegistry.registerComponent('Payslip', setup);

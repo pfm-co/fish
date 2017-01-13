@@ -1,11 +1,21 @@
 
-import type { Action } from './types';
+import type { Action } from '../actions/types';
+import { SET_USER } from '../actions/user';
 
-export const SET_USER = 'SET_USER';
+export type State = {
+    name: string
+}
 
-export function setUser(user:string):Action {
-  return {
-    type: SET_USER,
-    payload: user,
-  };
+const initialState = {
+  name: '',
+};
+
+export default function (state:State = initialState, action:Action): State {
+  if (action.type === SET_USER) {
+    return {
+      ...state,
+      name: action.payload,
+    };
+  }
+  return state;
 }

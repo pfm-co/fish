@@ -223,4 +223,9 @@ export default {
   inputLineHeight: 24,
   jumbotronBg: '#C9C9CE',
   jumbotronPadding: 30,
+
+
+
+  darkText: '#032250',
+  lightText: '#7F91A7',
 };
