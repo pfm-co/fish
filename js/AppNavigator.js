@@ -10,7 +10,7 @@ import { closeDrawer } from './actions/drawer';
 import Login from './components/Login';
 import Home from './components/Home';
 import SplashPage from './components/SplashScreen';
-import { statusBarColor } from './themes/base-theme';
+import { statusBarColor } from './themes/theme-base';
 
 const {
   popRoute,

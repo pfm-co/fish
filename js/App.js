@@ -9,7 +9,7 @@ import Modal from 'react-native-modalbox';
 import AppNavigator from './AppNavigator';
 import ProgressBar from './components/loaders/ProgressBar';
 
-import theme from './themes/base-theme';
+import theme from './themes/theme-base';
 import Translations from './common/Translations'
 import I18n from 'react-native-i18n';
 
