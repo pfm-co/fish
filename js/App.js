@@ -10,6 +10,9 @@ import AppNavigator from './AppNavigator';
 import ProgressBar from './components/loaders/ProgressBar';
 
 import theme from './themes/base-theme';
+import Translations from './common/Translations'
+import I18n from 'react-native-i18n';
+
 
 const styles = StyleSheet.create({
   container: {
@@ -30,6 +33,13 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
+    I18n.defaultLocale = this.props.appLang;
+    I18n.locale = this.props.appLang;
+    I18n.fallbacks = true;
+    I18n.translations = Translations;
+
+    
     this.state = {
       showDownloadingModal: false,
       showInstalling: false,

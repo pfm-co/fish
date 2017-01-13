@@ -9,9 +9,7 @@ import { closeDrawer } from './actions/drawer';
 
 import Login from './components/login/';
 import Home from './components/home/';
-import BlankPage from './components/blankPage';
 import SplashPage from './components/splashscreen/';
-import SideBar from './components/sideBar';
 import { statusBarColor } from './themes/base-theme';
 
 const {
