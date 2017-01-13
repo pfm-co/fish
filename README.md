@@ -4,7 +4,7 @@ Mobile app for viewing, browsing and sharing individual payslips in details.
 
 ## Installation
 
-You'll firt need a proper installation of react-native, please follow instructions here :
+You'll first need a proper installation of react-native, please follow instructions here :
 [Getting started to React Native](https://facebook.github.io/react-native/docs/getting-started.html)
 
 if everything is set-up, you should be able to run (you'll need a running android emulator or an android device connected to your pc)
