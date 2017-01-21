@@ -2,7 +2,7 @@
 
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
@@ -10,13 +10,14 @@ const ActivityIndicator = require('ActivityIndicator');
 import styles from './styles';
 import I18n from 'react-native-i18n'
 
+import { login } from '../../actions/user';
 
 const {
   replaceAt,
 } = actions;
 
 
-const background = require('../../../images/bg_login.jpg');
+const background = require('../../../images/bg3_small.jpg');
 
 
 class Login extends Component {
@@ -31,7 +32,8 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
+      username: props.username,
+      password: props.password,
     };
   }
 
@@ -45,13 +47,19 @@ class Login extends Component {
               <View style={styles.bg}>
                 <InputGroup style={styles.input}>
                   <Icon name="ios-person" />
-                  <Input placeholder={I18n.t("Login.Username")} onChangeText={name => this.setState({ name })} />
+                  <Input 
+                    placeholder={I18n.t("Login.Username")}
+                    onChangeText={username => this.setState({ username })}
+                    value={this.state.username}
+                   />
                 </InputGroup>
                 <InputGroup style={styles.input}>
                   <Icon name="ios-unlock-outline" />
                   <Input
                     placeholder={I18n.t("Login.Password")}
                     secureTextEntry
+                    onChangeText={password => this.setState({ password })}
+                    value={this.state.password}
                   />
                 </InputGroup>
 
@@ -62,8 +70,11 @@ class Login extends Component {
                 />
 
                 
-                <Button style={styles.btn} onPress={() => this.replaceRoute('home')}>
-                  {I18n.t("Login.Login")}
+                <Button style={styles.btn} onPress={() => { 
+                  // this.replaceRoute('home'); 
+                  this.props.login(this.state.username, this.state.password);
+                }}>
+                  <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
                 </Button>
               </View>
             </Image>
@@ -81,12 +92,14 @@ class Login extends Component {
 function bindActions(dispatch) {
   return {
     replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
-    setUser: name => dispatch(setUser(name)),
+    login: (username, password) => dispatch(login(username, password)),
   };
 }
 
-const mapStateToProps = state => ({
-  navigation: state.cardNavigation,
+const mapStoreToProps = store => ({
+  navigation: store.cardNavigation,
+  username: store.user.username,
+  password: store.user.password,
 });
 
-export default connect(mapStateToProps, bindActions)(Login);
+export default connect(mapStoreToProps, bindActions)(Login);

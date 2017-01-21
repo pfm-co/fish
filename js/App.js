@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import CodePush from 'react-native-code-push';
+import { connect } from 'react-redux';
+
 
 import { Container, Content, Text, View } from 'native-base';
 import Modal from 'react-native-modalbox';
@@ -38,6 +40,8 @@ class App extends Component {
     I18n.locale = this.props.appLang;
     I18n.fallbacks = true;
     I18n.translations = Translations;
+
+    console.log("Translations", Translations);
 
 
     this.state = {
@@ -132,4 +136,20 @@ class App extends Component {
   }
 }
 
-export default App;
+
+
+function bindActions(dispatch) {
+  return {
+  };
+}
+
+function bindStore(store)
+{
+  return {
+    appLang: store.settings.language,
+
+  };
+}
+
+
+export default connect(bindStore, bindActions)(App);

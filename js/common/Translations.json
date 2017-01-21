@@ -1,9 +1,18 @@
 {
 
   "en": {
-    
+  	"Login": {
+  		"Username": "نام کاربری",
+  		"Password": "پسورد",
+  		"Login": "ورود"
+  	},
   },
   "fa": {
+  	"Login": {
+  		"Username": "نام کاربری",
+  		"Password": "پسورد",
+  		"Login": "ورود"
+  	},
 
   }
 

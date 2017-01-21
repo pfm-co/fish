@@ -1,20 +1,24 @@
+'use strict';
 
 import type { Action } from '../actions/types';
-import { SET_USER } from '../actions/user';
+import { LOGGING_IN } from '../actions/user';
 
 export type State = {
-    name: string
+    username: string,
+    password: string,
 }
 
 const initialState = {
-  name: '',
+  username: '1271324369',
+  password: 'Arm@n123',
 };
 
 export default function (state:State = initialState, action:Action): State {
-  if (action.type === SET_USER) {
+  if (action.type === LOGGING_IN) {
     return {
       ...state,
-      name: action.payload,
+      username: action.data.username,
+      password: action.data.password,
     };
   }
   return state;
