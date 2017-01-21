@@ -30,7 +30,7 @@ function login(username: ?string, password: ?string) : ThunkAction
 
 		try
 		{
-		    fetch("http://fixsh.medu.ir/api/login", {
+		    fetch("http://fish.medu.ir/api/login", {
 		    	method: "POST",
 	    	    headers: new Headers({'content-type': 'application/json'}),
 		    	body: data,
