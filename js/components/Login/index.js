@@ -39,6 +39,17 @@ class Login extends Component {
 
 
   render() {
+    let errorMsg;
+    if (this.props.authState.hasError) {
+        errorMsg = (
+            <Text style={styles.loginError}>
+                { I18n.t('Login.LoginError') + '  ' +
+                  this.props.authState.errorMsg
+                }
+            </Text>
+        );
+    }
+
     return (
       <Container>
         <View style={styles.container}>
@@ -65,8 +76,8 @@ class Login extends Component {
 
                 <ActivityIndicator
                     size="large"
-                    color="#fff600"
-                    animating={false}
+                    color="#382B5C"
+                    animating={this.props.authState.isLoginInProgress}
                 />
 
                 
@@ -76,6 +87,9 @@ class Login extends Component {
                 }}>
                   <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
                 </Button>
+
+                {errorMsg}
+                
               </View>
             </Image>
           </Content>
@@ -100,6 +114,13 @@ const mapStoreToProps = store => ({
   navigation: store.cardNavigation,
   username: store.user.username,
   password: store.user.password,
+  authState: {
+    isLoginInProgress: store.user.isLoginInProgress,
+    hasError: store.user.hasError,
+    errorMsg: store.user.errorMsg,
+
+  }
+
 });
 
 export default connect(mapStoreToProps, bindActions)(Login);

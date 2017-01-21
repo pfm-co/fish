@@ -41,9 +41,6 @@ class App extends Component {
     I18n.fallbacks = true;
     I18n.translations = Translations;
 
-    console.log("Translations", Translations);
-
-
     this.state = {
       showDownloadingModal: false,
       showInstalling: false,

@@ -47,5 +47,10 @@ module.exports = StyleSheet.create({
   },
   btnText: {
     fontSize: 20,
-  }
+  },
+  loginError: {
+    fontSize: 20,
+    color: '#ea0000',
+    marginTop: 15
+  },
 });

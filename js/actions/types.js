@@ -6,7 +6,7 @@ type ParseObject = Object;
 export type Action =
     {   type: 'APP_STARTED' }
     | { type: 'LOGGING_IN', data: { username: string; password: string; } }
-    | { type: 'LOGGED_IN',  data: { id: string; firstName: string; lastName: string} }
+    | { type: 'LOGGED_IN',  data: { token: string, firstName: string; lastName: string; personelCode: string; nationalCode: string} }
     | { type: 'LOGIN_ERROR', errorMsg: string }
     | { type: 'LOGGED_OUT' autoLoginNext: boolean}
     | { type: 'SWITCH_TAB', tab, data }
