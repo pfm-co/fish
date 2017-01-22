@@ -9,28 +9,33 @@ const deviceWith = Dimensions.get('window').width;
 
 module.exports = StyleSheet.create({
   container: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
+    flex:1,
     backgroundColor: '#FBFAFA',
   },
   shadow: {
     flex: 1,
-    width: null,
-    height: null,
+    width: deviceWith,
+    height: deviceHeight,
+    bottom: 0,
+    resizeMode: "stretch", // or 'stretch'
+    alignSelf: 'stretch',
   },
   bg: {
     flex: 1,
-    marginTop: deviceHeight / 1.75,
     paddingTop: 20,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 30,
+    width: null,
+    height: null,
     bottom: 0,
-    height: deviceHeight,
-    width: deviceWith,
+  },
+  appLogo: {
+    width: 60,
+    height: 60,
+    resizeMode: 'cover',
+    marginTop: 50,
+    alignSelf: 'center',
   },
   input: {
     marginBottom: 20,
@@ -51,6 +56,7 @@ module.exports = StyleSheet.create({
   loginError: {
     fontSize: 20,
     color: '#ea0000',
-    marginTop: 15
+    marginTop: 15,
+    alignSelf: 'center',
   },
 });

@@ -44,16 +44,16 @@ function login(username: ?string, password: ?string) : ThunkAction
 		    	{
 		    		if (result.status)
 		    		{
-	    				// dispatch({
-	    				// 	type: LOGGED_IN,
-	    				// 	data: { 
-	    				// 		firstName: result.data.name,
-	    				// 		lastName: result.data.family,
-	    				// 		personelCode: result.data.personel_code,
-	    				// 		nationalCode: result.data.national_code,
-	    				// 		token: result.data.token
-    					// 	}
-	    				// });
+	    				dispatch({
+	    					type: LOGGED_IN,
+	    					data: { 
+	    						firstName: result.data.name,
+	    						lastName: result.data.family,
+	    						personelCode: result.data.personel_code,
+	    						nationalCode: result.data.national_code,
+	    						token: result.data.token
+    						}
+	    				});
 		    		}
 		    		else
 		    		{

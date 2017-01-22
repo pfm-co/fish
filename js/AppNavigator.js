@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental } from 'react-native';
+import { Text, View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 import { actions } from 'react-native-navigation-redux-helpers';
@@ -14,7 +14,8 @@ import { statusBarColor } from './themes/theme-base';
 import FmDrawer from './common/FmDrawer';
 import I18n from 'react-native-i18n'
 let MenuItem = require('./common/MenuItem');
-
+const deviceHeight = Dimensions.get('window').height;
+const deviceWith = Dimensions.get('window').width;
 
 const {
   popRoute,
@@ -25,6 +26,7 @@ const {
 } = NavigationExperimental;
 
 class AppNavigator extends Component {
+  _handlers = [];
 
   static propTypes = {
     drawerState: React.PropTypes.string,
@@ -34,6 +36,16 @@ class AppNavigator extends Component {
       key: React.PropTypes.string,
       routes: React.PropTypes.array,
     }),
+  }
+
+  constructor(props) {
+      super(props);
+
+      this._handlers = [];
+      this.addBackButtonListener = this.addBackButtonListener.bind(this);
+      this.removeBackButtonListener = this.removeBackButtonListener.bind(this);
+      this.handleBackButton = this.handleBackButton.bind(this);
+      this._renderScene = this._renderScene.bind(this);
   }
 
   componentDidMount() {
@@ -49,13 +61,19 @@ class AppNavigator extends Component {
     });
   }
 
-  componentDidUpdate() {
+  componentWillReceiveProps(nextProps)
+  {
+    console.log("isLoggedIn:", nextProps.isLoggedIn);
+  }
+
+
+  componentDidUpdate() {    
     if (this.props.drawerState === 'opened') {
       this.openDrawer();
     }
 
     if (this.props.drawerState === 'closed') {
-      this._drawer.close();
+      this.closeDrawer();
     }
   }
 
@@ -73,18 +91,68 @@ class AppNavigator extends Component {
     }
   }
 
+  getChildContext() {
+      return {
+          addBackButtonListener: this.addBackButtonListener,
+          removeBackButtonListener: this.removeBackButtonListener,
+      };
+  }
+
+  addBackButtonListener(listener) {
+      this._handlers.push(listener);
+  }
+
+  removeBackButtonListener(listener) {
+      this._handlers = this._handlers.filter((handler) => handler !== listener);
+  }
+
+  handleBackButton() {
+      for (let i = this._handlers.length - 1; i >= 0; i--) {
+          if (this._handlers[i]()) {
+              return true;
+          }
+      }
+
+      const {navigator} = this.refs;
+      if (navigator && navigator.getCurrentRoutes().length > 1) {
+          navigator.pop();
+          return true;
+      }
+
+      if (this.props.tab !== 'map') {
+          this.props.dispatch(switchTab('map'));
+          return true;
+      }
+
+      return false;
+  }
+
   _renderScene(props) { // eslint-disable-line class-methods-use-this
     switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
       case 'login':
-        return <Login />;
+        if (this.props.isLoggedIn)
+        {
+          return <Home />
+        }
+        else 
+        { 
+          return <Login /> 
+        }
       case 'home':
         return <Home />;
       case 'blankPage':
         return <BlankPage />;
       default :
-        return <Login />;
+        if (this.props.isLoggedIn)
+        {
+          return <Home />
+        }
+        else 
+        { 
+          return <Login /> 
+        }
     }
   }
 
@@ -158,8 +226,8 @@ class AppNavigator extends Component {
   render() {
     return (
       <FmDrawer
-        ref="drawer"
-        drawerWidth={290}
+        ref={(drawer) => { this._drawer = drawer; }}
+        drawerWidth={deviceWith / 1.7}
         drawerPosition="right"
         renderNavigationView={this.renderNavigationView}>
 
@@ -184,9 +252,11 @@ function bindAction(dispatch) {
   };
 }
 
-const mapStateToProps = state => ({
-  drawerState: state.drawer.drawerState,
-  navigation: state.cardNavigation,
+const mapStoreToProps = store => ({
+  drawerState: store.drawer.drawerState,
+  navigation: store.cardNavigation,
+  isLoggedIn: store.user.isLoggedIn, 
+
 });
 
 
@@ -211,4 +281,9 @@ let styles = StyleSheet.create({
 
 });
 
-export default connect(mapStateToProps, bindAction)(AppNavigator);
+AppNavigator.childContextTypes = {
+    addBackButtonListener: React.PropTypes.func,
+    removeBackButtonListener: React.PropTypes.func,
+};
+
+export default connect(mapStoreToProps, bindAction)(AppNavigator);

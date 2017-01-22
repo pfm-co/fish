@@ -18,7 +18,7 @@ const {
 
 
 const background = require('../../../images/bg3_small.jpg');
-
+const appLogo = require('../../../images/1_allah.png');
 
 class Login extends Component {
   static propTypes = {
@@ -37,6 +37,15 @@ class Login extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps)
+  {
+    // user login was successfull, navigate to home page
+    if (nextProps.isLoggedIn == true)
+    {
+        this.props.replaceAt('login', { key: route }, this.props.navigation.key);
+    }
+  }
+
 
   render() {
     let errorMsg;
@@ -53,10 +62,12 @@ class Login extends Component {
     return (
       <Container>
         <View style={styles.container}>
-          <Content>
+          <Content  scrollEnabled={false}>
             <Image source={background} style={styles.shadow}>
               <View style={styles.bg}>
-                <InputGroup style={styles.input}>
+                <Image source={appLogo} style={styles.appLogo} />
+
+                <InputGroup style={[styles.input, {marginTop: 150}]}>
                   <Icon name="ios-person" />
                   <Input 
                     placeholder={I18n.t("Login.Username")}
@@ -75,7 +86,7 @@ class Login extends Component {
                 </InputGroup>
 
                 <ActivityIndicator
-                    size="large"
+                    size="small"
                     color="#382B5C"
                     animating={this.props.authState.isLoginInProgress}
                 />

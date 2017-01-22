@@ -11,8 +11,17 @@
   	"Login": {
   		"Username": "نام کاربری",
   		"Password": "پسورد",
-  		"Login": "ورود"
+  		"Login": "ورود",
+      "Logout": "خروج",
+  		"LoginError": "خطا در ورود: ",
+  		"UnknownError": "مشکلی در ورود به حساب پیش آمده، دوباره تلاش کنید",
+  		"ServerTimeout": "دسترسی به سرور امکان پذیر نیست",
   	},
+    "Common": {
+      "DownloadingUpdate": "دریافت بروزرسانی...",
+      "InstallingUpdate": "در حال نصب بروزرسانی...",
+
+    }
 
   }
 

@@ -44,6 +44,8 @@ export default function (state:State = initialState, action:Action): State {
 	}
 	else if (action.type === LOGGED_IN)
 	{
+		console.log("LOGGED_IN");
+
 		return {
 			...state,
 			firstName: action.data.firstName,
@@ -54,6 +56,7 @@ export default function (state:State = initialState, action:Action): State {
 			isLoggedIn: true,
 			hasError: false,
 			errorMsg: '',
+			isLoginInProgress: false,
 		};
 	}
   	else if (action.type === LOGIN_ERROR)

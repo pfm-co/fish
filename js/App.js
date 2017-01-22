@@ -96,7 +96,7 @@ class App extends Component {
                       fontSize: 15,
                     }}
                   >
-                    {I18n.t("fa.InstallingUpdate")}
+                    {I18n.t("Common.InstallingUpdate")}
                   </Text> :
                   <View
                     style={{
@@ -114,7 +114,7 @@ class App extends Component {
                         fontSize: 15,
                       }}
                     >
-                      {I18n.t("fa.DownloadingUpdate")} {`${parseInt(this.state.downloadProgress, 10)} %`}
+                      {I18n.t("Common.DownloadingUpdate")} {`${parseInt(this.state.downloadProgress, 10)} %`}
                     </Text>
                     <ProgressBar
                       color="theme.brandPrimary"
