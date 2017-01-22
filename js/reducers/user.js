@@ -61,6 +61,7 @@ export default function (state:State = initialState, action:Action): State {
 	}
   	else if (action.type === LOGIN_ERROR)
 	{
+		console.log("LOGIN_ERROR");
 		return {
 			...state,
 			isLoggedIn: false,
@@ -71,6 +72,7 @@ export default function (state:State = initialState, action:Action): State {
 	}
   	else if (action.type === LOGGED_OUT)
 	{
+		console.log("LOGGED_OUT");
 		return initialState;
 	}
 

@@ -6,7 +6,7 @@ import cardNavigation from './cardNavigation';
 import user from './user';
 import settings from './settings';
 
-export default combineReducers({
+module.exports = combineReducers({
 
   drawer,
   user,

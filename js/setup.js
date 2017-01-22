@@ -3,20 +3,35 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import App from './App';
-import configureStore from './configureStore';
+import configureStore from './store/configureStore';
 
-function setup():React.Component {
+function setup(): React.Component {
+  let isMounted = false;
+      
   class Root extends Component {
-
     constructor() {
       super();
       this.state = {
-        isLoading: false,
-        store: configureStore(() => this.setState({ isLoading: false })),
+          isLoading: true,
+          store: configureStore(() => {
+              if (isMounted)
+                  this.setState({isLoading: false})
+          }),
       };
     }
 
+    componentDidMount() {
+        isMounted = true;
+    }
+
+    componentWillUnmount() {
+        isMounted = false;
+    }
+
     render() {
+      if (this.state.isLoading) {
+          return null;
+      }
       return (
         <Provider store={this.state.store}>
           <App />

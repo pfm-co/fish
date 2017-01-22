@@ -41,11 +41,14 @@ class AppNavigator extends Component {
   constructor(props) {
       super(props);
 
+      console.log("AppNavigator Props:", props);
+      
       this._handlers = [];
       this.addBackButtonListener = this.addBackButtonListener.bind(this);
       this.removeBackButtonListener = this.removeBackButtonListener.bind(this);
       this.handleBackButton = this.handleBackButton.bind(this);
       this._renderScene = this._renderScene.bind(this);
+      this.renderNavigationView = this.renderNavigationView.bind(this);
   }
 
   componentDidMount() {
@@ -159,22 +162,16 @@ class AppNavigator extends Component {
   renderNavigationView() {
     let accountItem, myAppItem, loginItem;
 
-    // if (this.props.user.isLoggedIn) {
-    if (true) {
-        // let name = this.props.user.name || '';
-        let name = '';
+    if (this.props.isLoggedIn) {
 
         accountItem = (
             <View style={{flexDirection:"row", justifyContent: 'space-between',}}>
-                {/*<TouchableOpacity onPress={this.openProfileSettings}>*/}
-                    {/*<ProfilePicture userID={this.props.user.id} size={80}/>*/}
-                {/*</TouchableOpacity>*/}
                 <Text style={styles.name}>
-                    {name.toUpperCase()}
+                    {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
                 </Text>
 
                 <Button
-                    style={{alignSelf: 'flex-end', padding:10}}
+                    style={{alignSelf: 'flex-start', padding:10}}
                     onPress={() => {
                         this.logout();
                     } }
@@ -256,7 +253,12 @@ const mapStoreToProps = store => ({
   drawerState: store.drawer.drawerState,
   navigation: store.cardNavigation,
   isLoggedIn: store.user.isLoggedIn, 
-
+  userInfo: {
+    firstName: store.user.firstName,
+    lastName: store.user.lastName,
+    personelCode: store.user.personelCode,
+    nationalCode: store.user.nationalCode,
+  }
 });
 
 

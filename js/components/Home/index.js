@@ -8,6 +8,9 @@ import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
 const ActivityIndicator = require('ActivityIndicator');
 
+import styles from './styles';
+import I18n from 'react-native-i18n'
+
 const {
   replaceAt,
 } = actions;
