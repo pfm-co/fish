@@ -45,13 +45,14 @@ module.exports = StyleSheet.create({
   btn: {
     marginTop: 20,
     alignSelf: 'center',
-    paddingLeft: 20,
-    paddingRight: 20,
+    paddingLeft: 40,
+    paddingRight: 40,
     paddingTop:5,
     paddingBottom:5,
   },
   btnText: {
     fontSize: 20,
+    color: '#DBDBDB'
   },
   loginError: {
     fontSize: 20,

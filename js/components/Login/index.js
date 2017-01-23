@@ -92,7 +92,7 @@ class Login extends Component {
                 />
 
                 
-                <Button primary ={styles.btn} onPress={() => { 
+                <Button primary style={styles.btn} onPress={() => { 
                   // this.replaceRoute('home'); 
                   this.props.login(this.state.username, this.state.password);
                 }}>

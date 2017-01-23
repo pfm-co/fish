@@ -37,7 +37,6 @@ function login(username: ?string, password: ?string) : ThunkAction
 		    	return result.json()
 		    })
 		    .then(result => {
-		    	alert(JSON.stringify(result));
 		    	if (result)
 		    	{
 		    		if (result.status)
