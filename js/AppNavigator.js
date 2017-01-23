@@ -49,6 +49,7 @@ class AppNavigator extends Component {
       this.handleBackButton = this.handleBackButton.bind(this);
       this._renderScene = this._renderScene.bind(this);
       this.renderNavigationView = this.renderNavigationView.bind(this);
+      this.openDrawer = this.openDrawer.bind(this);
   }
 
   componentDidMount() {
@@ -71,13 +72,13 @@ class AppNavigator extends Component {
 
 
   componentDidUpdate() {    
-    if (this.props.drawerState === 'opened') {
-      this.openDrawer();
-    }
+    // if (this.props.drawerState === 'opened') {
+    //   this.openDrawer();
+    // }
 
-    if (this.props.drawerState === 'closed') {
-      this.closeDrawer();
-    }
+    // if (this.props.drawerState === 'closed') {
+    //   this.closeDrawer();
+    // }
   }
 
   popRoute() {
@@ -85,7 +86,8 @@ class AppNavigator extends Component {
   }
 
   openDrawer() {
-    this._drawer.open();
+    // if (this._drawer)  
+    //     this._drawer.openDrawer();
   }
 
   closeDrawer() {
@@ -98,6 +100,7 @@ class AppNavigator extends Component {
       return {
           addBackButtonListener: this.addBackButtonListener,
           removeBackButtonListener: this.removeBackButtonListener,
+          openDrawer: this.openDrawer,
       };
   }
 
@@ -119,11 +122,6 @@ class AppNavigator extends Component {
       const {navigator} = this.refs;
       if (navigator && navigator.getCurrentRoutes().length > 1) {
           navigator.pop();
-          return true;
-      }
-
-      if (this.props.tab !== 'map') {
-          this.props.dispatch(switchTab('map'));
           return true;
       }
 
@@ -205,13 +203,25 @@ class AppNavigator extends Component {
             </Image>
 
             <MenuItem
-                title="Car Groups"
+                title="فیش حقوقی"
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
             />
 
             <MenuItem
-                title="Maps"
+                title="تاریخچه"
+                icon={require('../images/maps-icon.png')}
+                selectedIcon={require('../images/maps-icon-active.png')}
+            />
+
+            <MenuItem
+                title="درباره"
+                icon={require('../images/maps-icon.png')}
+                selectedIcon={require('../images/maps-icon-active.png')}
+            />
+
+            <MenuItem
+                title="راهنما"
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
             />
@@ -286,6 +296,7 @@ let styles = StyleSheet.create({
 AppNavigator.childContextTypes = {
     addBackButtonListener: React.PropTypes.func,
     removeBackButtonListener: React.PropTypes.func,
+    openDrawer: React.PropTypes.func,
 };
 
 export default connect(mapStoreToProps, bindAction)(AppNavigator);

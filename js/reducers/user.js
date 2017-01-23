@@ -14,8 +14,7 @@ export type State = {
     hasError: boolean,
     personelCode: string,
     nationalCode: string,
-
-
+    token: string,
 }
 
 const initialState = {
@@ -29,6 +28,7 @@ const initialState = {
 	isLoginInProgress: false,
 	errorMsg: '',
 	hasError: false,
+	token: '',
 };
 
 

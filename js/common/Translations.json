@@ -21,6 +21,11 @@
       "DownloadingUpdate": "دریافت بروزرسانی...",
       "InstallingUpdate": "در حال نصب بروزرسانی...",
 
+    },
+    "Home": {
+      "UnknownError": "خطای نامشخص در دریافت اطلاعات",
+      "SelectOne": "یک آیتم را انتخاب کنید",
+      
     }
 
   }

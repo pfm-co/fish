@@ -24,8 +24,6 @@ function login(username: ?string, password: ?string) : ThunkAction
 			password: password
 		};
 
-		let formData  = new FormData();
-		formData.append("json", JSON.stringify(userCredentials));
 		let data = JSON.stringify(userCredentials);
 
 		try
