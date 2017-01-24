@@ -45,14 +45,18 @@ module.exports = StyleSheet.create({
 		textAlign: 'center',
 		alignSelf: 'center',
 	},
-	pickersView: {
+	topSummaryView: {
 		flex:1,
 		flexDirection: 'row',
 		alignSelf: 'center',
 		justifyContent: 'space-between',
 	},
-	picker: {
-		width: 110,
+	periodText: {
+		fontSize: 23,
+		color: "#360000"
+	},
+	content: {
+		flex: 1,
 	},
 	card: {
 		marginLeft:10,
@@ -65,6 +69,7 @@ module.exports = StyleSheet.create({
 		marginTop:3,
 	},
 	paymentsView: {
+		flex: 1,
 		flexDirection: 'column',
 	},
 	paymentHeader: {

@@ -1,7 +1,13 @@
-import React,{Component,StyleSheet,View,Image,TouchableHighlight,Animated} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity, Animated} from 'react-native';
+import React, {Component} from 'react';
+import {Card, CardItem} from 'native-base';
 var { Text } = require('./FmText');
 
 class ExpandablePanel extends Component{
+    static propTypes = {
+        headerItem: React.PropTypes.element,
+    }
+
     constructor(props){
         super(props);
 
@@ -42,32 +48,30 @@ class ExpandablePanel extends Component{
     }
 
     render(){
-        let icon = this.icons['down'];
 
         if(this.state.expanded){
-            icon = this.icons['up'];
+            // icon = this.icons['up'];
         }
 
         return (
             <Animated.View 
-                style={[styles.container,{height: this.state.animation}]}>
-                <View style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
-                    <Text style={styles.title}>{this.state.title}</Text>
-                    <TouchableHighlight 
-                        style={styles.button} 
-                        onPress={this.toggle.bind(this)}
-                        underlayColor="#f1f1f1">
-                        <Image
-                            style={styles.buttonImage}
-                            source={icon}
-                        ></Image>
-                    </TouchableHighlight>
-                </View>
-                
-                <View style={styles.body} onLayout={this._setMaxHeight.bind(this)}>
-                    {this.props.children}
-                </View>
-
+                style={[styles.container, {height: this.state.animation}]}>
+                <Card>
+                    <CardItem style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
+                        <TouchableOpacity
+                            onPress={this.toggle.bind(this)}
+                            underlayColor="#f1f1f1"
+                            style={{flex:1}}>
+                            <View style={{flex:1}}>
+                                {this.props.headerItem}
+                            </View>
+                        </TouchableOpacity>
+                    </CardItem>
+                    
+                    <CardItem onLayout={this._setMaxHeight.bind(this)}>
+                        {this.props.children}
+                    </CardItem>
+                </Card>
             </Animated.View>
         );
     }
@@ -75,30 +79,16 @@ class ExpandablePanel extends Component{
 
 var styles = StyleSheet.create({
     container   : {
-        backgroundColor: '#fff',
         margin:10,
         overflow:'hidden'
     },
     titleContainer : {
+        flex: 1,
         flexDirection: 'row'
-    },
-    title       : {
-        flex    : 1,
-        padding : 10,
-        color   :'#2a2f43',
-        fontWeight:'bold'
     },
     button      : {
 
     },
-    buttonImage : {
-        width   : 30,
-        height  : 25
-    },
-    body        : {
-        padding     : 10,
-        paddingTop  : 0
-    }
 });
 
-export default ExpandablePanel;
+module.exports = ExpandablePanel;

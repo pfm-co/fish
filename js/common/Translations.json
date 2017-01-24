@@ -27,6 +27,8 @@
     "Home": {
       "UnknownError": "خطای نامشخص در دریافت اطلاعات",
       "SelectOne": "یک آیتم را انتخاب کنید",
+      "CurrencyUnit": "ریال",
+      "TotalPayment": "مجموع پرداختی",
       
     }
 
