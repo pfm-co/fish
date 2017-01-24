@@ -1,8 +1,10 @@
 
 import React, { Component } from 'react';
-import { Text, View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental, Dimensions } from 'react-native';
+import { View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
+var { Text } = require('./common/FmText');
+
 import { actions } from 'react-native-navigation-redux-helpers';
 
 import { closeDrawer } from './actions/drawer';
@@ -72,13 +74,13 @@ class AppNavigator extends Component {
 
 
   componentDidUpdate() {    
-    // if (this.props.drawerState === 'opened') {
-    //   this.openDrawer();
-    // }
+    if (this.props.drawerState === 'opened') {
+      this.openDrawer();
+    }
 
-    // if (this.props.drawerState === 'closed') {
-    //   this.closeDrawer();
-    // }
+    if (this.props.drawerState === 'closed') {
+      this.closeDrawer();
+    }
   }
 
   popRoute() {
@@ -86,8 +88,8 @@ class AppNavigator extends Component {
   }
 
   openDrawer() {
-    // if (this._drawer)  
-    //     this._drawer.openDrawer();
+    if (this._drawer)  
+        this._drawer.openDrawer();
   }
 
   closeDrawer() {
@@ -100,7 +102,6 @@ class AppNavigator extends Component {
       return {
           addBackButtonListener: this.addBackButtonListener,
           removeBackButtonListener: this.removeBackButtonListener,
-          openDrawer: this.openDrawer,
       };
   }
 
@@ -163,22 +164,19 @@ class AppNavigator extends Component {
     if (this.props.isLoggedIn) {
 
         accountItem = (
-            <View style={{flexDirection:"row", justifyContent: 'space-between',}}>
+            <View style={{flex:1, flexDirection:"column", justifyContent: 'space-between',}}>
+              <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
+                <View style={{marginTop: 15, marginRight: 10}}>
+                  <Text>{I18n.t("Common.NationalCode")}:  {this.props.userInfo.nationalCode}</Text>
+                  <Text>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
+                </View>
+
+                <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
+              </View>
+
                 <Text style={styles.name}>
                     {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
                 </Text>
-
-                <Button
-                    style={{alignSelf: 'flex-start', padding:10}}
-                    onPress={() => {
-                        this.logout();
-                    } }
-                >
-                    <Text 
-                        style={{color: 'white', fontWeight: 'bold'}}>
-                    {I18n.t('Login.Logout')}
-                  </Text>
-                </Button>
             </View>
         );
 
@@ -234,7 +232,7 @@ class AppNavigator extends Component {
     return (
       <FmDrawer
         ref={(drawer) => { this._drawer = drawer; }}
-        drawerWidth={deviceWith / 1.7}
+        drawerWidth={deviceWith / 1.7 > 290 ? 290 : deviceWith / 1.7 }
         drawerPosition="right"
         renderNavigationView={this.renderNavigationView}>
 
@@ -283,13 +281,19 @@ let styles = StyleSheet.create({
     },
     header: {
         padding: 20,
-        justifyContent: 'flex-end',
+        justifyContent: 'flex-start',
     },
     name: {
         marginTop: 10,
         color: '#6f0000',
-        fontSize: 12,
+        fontSize: 23,
     },
+    profilePic:
+    {
+      width: 70,
+      height: 70,
+      borderRadius: 35,
+    }
 
 });
 

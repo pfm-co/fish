@@ -1,6 +1,8 @@
 package com.payslip;
 
 import com.facebook.react.ReactActivity;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
+import android.content.Context;
 
 public class MainActivity extends ReactActivity {
 
@@ -11,5 +13,10 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "Payslip";
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

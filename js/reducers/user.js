@@ -10,7 +10,7 @@ export type State = {
     firstName: string,
     lastName: string,
     isLoginInProgress: boolean,
-    errorMsg: ?string,
+    errorMsg: string,
     hasError: boolean,
     personelCode: string,
     nationalCode: string,
@@ -18,8 +18,8 @@ export type State = {
 }
 
 const initialState = {
-	username: '1271324369',
-	password: 'Arm@n123',
+	username: '0569394910',
+	password: '3qag8pbv',
 	firstName: '',
 	lastName: '',
 	personelCode: '',

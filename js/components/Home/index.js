@@ -5,7 +5,8 @@ import React, { Component } from 'react';
 import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
-import { Container, Content, Picker, Card, CardItem, InputGroup, Text, Input, Button, Icon, View } from 'native-base';
+import { Container, Content, Picker, Card, CardItem, InputGroup, Input, Button, Icon, View } from 'native-base';
+var { Text } = require('../../common/FmText');
 const ActivityIndicator = require('ActivityIndicator');
 const FmHeader = require('../../common/FmHeader');
 const Item = Picker.Item;
@@ -116,11 +117,11 @@ class Home extends Component {
                   layout: 'icon',
                   title: 'Menu',
                   icon: require('../../common/img/hamburger.png'),
-                  onPress: this.context.openDrawer(),
+                  // onPress: this.context.openDrawer(),
               }}
               >
               <View style={styles.headerContent}>
-                  
+                  <View><Text style={styles.headerContentText}>{I18n.t("Common.AppName")}</Text></View>
               </View>
           </FmHeader>
 

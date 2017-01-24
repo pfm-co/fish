@@ -88,7 +88,7 @@ export default {
 
 
   // Font
-  fontFamily: (Platform.OS === 'ios') ? 'HelveticaNeue' : 'Roboto',
+  fontFamily: (Platform.OS === 'ios') ? 'HelveticaNeue' : 'Vazir',
   fontSizeBase: 15,
 
   get fontSizeH1() {

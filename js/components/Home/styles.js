@@ -26,8 +26,12 @@ module.exports = StyleSheet.create({
 		...Platform.select({
 		android: {
 			flex: 1,
-			alignItems: 'flex-start',
-			justifyContent: 'center',
+			flexDirection: 'row',
+			alignItems: 'center',
+			justifyContent: 'space-between',
+			// very very strangely, settings backgroundColor fixed alignment of inner text of headerContent!!!
+			backgroundColor: "#00000000",
+			marginRight: 40,
 		},
 		ios: {
 			height: 65,
@@ -35,6 +39,11 @@ module.exports = StyleSheet.create({
 			justifyContent: 'center',
 		}
 	})
+	},
+	headerContentText: {
+		color: "#f5f5f5",
+		textAlign: 'center',
+		alignSelf: 'center',
 	},
 	pickersView: {
 		flex:1,

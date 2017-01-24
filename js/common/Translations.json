@@ -20,7 +20,9 @@
     "Common": {
       "DownloadingUpdate": "دریافت بروزرسانی...",
       "InstallingUpdate": "در حال نصب بروزرسانی...",
-
+      "AppName": "فیش حقوقی فرهنگیان",
+      "NationalCode": "کد ملی",
+      "PersonelCode": "کد پرسنلی"
     },
     "Home": {
       "UnknownError": "خطای نامشخص در دریافت اطلاعات",

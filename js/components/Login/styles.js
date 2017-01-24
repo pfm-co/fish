@@ -17,8 +17,14 @@ module.exports = StyleSheet.create({
     width: deviceWith,
     height: deviceHeight,
     bottom: 0,
-    resizeMode: "stretch", // or 'stretch'
-    alignSelf: 'stretch',
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+  },
+  middleSpacer: {
+    flex: 1,
+  },
+  bottomSpacer: {
+    flex: 1,
   },
   bg: {
     flex: 1,
@@ -31,8 +37,8 @@ module.exports = StyleSheet.create({
     bottom: 0,
   },
   appLogo: {
-    width: 60,
-    height: 60,
+    width: 120,
+    height: 120,
     resizeMode: 'cover',
     marginTop: 50,
     alignSelf: 'center',

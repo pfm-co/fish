@@ -2,10 +2,11 @@
 
 
 import React, { Component } from 'react';
-import { Image, Text } from 'react-native';
+import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
+var { Text } = require('../../common/FmText');
 const ActivityIndicator = require('ActivityIndicator');
 import styles from './styles';
 import I18n from 'react-native-i18n'
@@ -18,7 +19,7 @@ const {
 
 
 const background = require('../../../images/bg3_small.jpg');
-const appLogo = require('../../../images/1_allah.png');
+const appLogo = require('../../../images/appLogo.png');
 
 class Login extends Component {
   static propTypes = {
@@ -67,6 +68,8 @@ class Login extends Component {
               <View style={styles.bg}>
                 <Image source={appLogo} style={styles.appLogo} />
 
+                <View style={styles.middleSpacer} />
+                
                 <InputGroup style={[styles.input, {marginTop: 150}]}>
                   <Icon name="ios-person" />
                   <Input 
@@ -101,6 +104,8 @@ class Login extends Component {
 
                 {errorMsg}
                 
+              <View style={styles.bottomSpacer} />
+
               </View>
             </Image>
           </Content>
