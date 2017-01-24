@@ -14,6 +14,8 @@ const Item = Picker.Item;
 
 import styles from './styles';
 import I18n from 'react-native-i18n'
+import { openDrawer } from '../../actions/drawer';
+
 
 const {
   replaceAt,
@@ -326,7 +328,7 @@ class Home extends Component {
                   layout: 'icon',
                   title: 'Menu',
                   icon: require('../../common/img/hamburger.png'),
-                  onPress: this.context.openDrawer(),
+                  onPress: () => this.props.openDrawer(),
               }}
               >
               <View style={styles.headerContent}>
@@ -352,7 +354,7 @@ class Home extends Component {
 function bindActions(dispatch) {
   return {
     replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
-    
+    openDrawer: () => dispatch(openDrawer()),
   };
 }
 
