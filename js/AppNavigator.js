@@ -18,6 +18,7 @@ import I18n from 'react-native-i18n'
 let MenuItem = require('./common/MenuItem');
 const deviceHeight = Dimensions.get('window').height;
 const deviceWith = Dimensions.get('window').width;
+const drawerWidth = deviceWith / 1.3 > 290 ? 290 : deviceWith / 1.3;
 
 const {
   popRoute,
@@ -164,7 +165,8 @@ class AppNavigator extends Component {
     if (this.props.isLoggedIn) {
 
         accountItem = (
-            <View style={{flex:1, flexDirection:"column", justifyContent: 'space-between',}}>
+            <View style={{width: drawerWidth, flex:1, flexDirection:"column", justifyContent: 'space-between',
+                        paddingRight: 40}}>
               <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
                 <View style={{marginTop: 15, marginRight: 10}}>
                   <Text>{I18n.t("Common.NationalCode")}:  {this.props.userInfo.nationalCode}</Text>
@@ -232,7 +234,7 @@ class AppNavigator extends Component {
     return (
       <FmDrawer
         ref={(drawer) => { this._drawer = drawer; }}
-        drawerWidth={deviceWith / 1.7 > 290 ? 290 : deviceWith / 1.7 }
+        drawerWidth={ drawerWidth }
         drawerPosition="right"
         renderNavigationView={this.renderNavigationView}>
 

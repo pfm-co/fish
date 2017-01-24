@@ -29,7 +29,15 @@
       "SelectOne": "یک آیتم را انتخاب کنید",
       "CurrencyUnit": "ریال",
       "TotalPayment": "مجموع پرداختی",
-      
+      "PaidAmount": "پرداختی",
+      "MoneyAmount": "مبلغ",
+      "PaymentTitle": "عناوین پرداختی",
+      "Deductions": "کسورات",
+      "Remaining": "باقی مانده",
+      "DeductionTitle": "عناوین کسری",
+      "JobDetais": "جزئیات کاری",
+      "InsuranceDetails": "وضعیت بیمه",
+
     }
 
   }

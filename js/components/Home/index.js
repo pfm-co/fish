@@ -69,6 +69,17 @@ class Home extends Component {
     return totalPayment;
   }
 
+  calculateTotalDeduction(deduction: Array[])
+  {
+    let totalDeduction = 0;
+    for (let i = 0; i < deduction.length; i++)
+    {
+      totalDeduction += deduction[i].value;
+    }
+
+    return totalDeduction;
+  }
+
   loadPayslip()
   {
     let that = this;
@@ -126,7 +137,18 @@ class Home extends Component {
     }
   }
 
+remove_duplicates_safe(arr) {
+    var seen = {};
+    var ret_arr = [];
+    for (var i = 0; i < arr.length; i++) {
+        if (!(arr[i].key in seen)) {
+            ret_arr.push(arr[i]);
+            seen[arr[i].key] = true;
+        }
+    }
+    return ret_arr;
 
+}
 
   render() {
     const content = this.state.isLoadingPayslip ? (
@@ -141,180 +163,142 @@ class Home extends Component {
     (
       <View style={styles.content}>
         <Card style={styles.card}>
-              <CardItem>
-                <View style={styles.topSummaryView}>
-                    <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
-                 </View>
-                 <Text style={styles.topSalarySummary}>
-                  {I18n.t("Home.TotalPayment")} : 
-                    {'  ' + this.formatMoney(this.calculateTotalPayment(this.state.paySlipResult.data.payment))} {I18n.t("Home.CurrencyUnit")}
-                 </Text>
-               </CardItem>
-            </Card>
-            <ExpandablePanel headerItem={
-              <View style={styles.paymentsView}>
-                  <View style={styles.paymentHeader}>
-                    <Text>17,654,000 ریال</Text>
-                    <Text>پرداختی</Text>
-                  </View>
+          <CardItem>
+            <View style={styles.topSummaryView}>
+                <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
               </View>
-            }>
+              <Text style={styles.topSalarySummary}>
+              {I18n.t("Home.TotalPayment")} : 
+                {'  ' + this.formatMoney(
+                              this.calculateTotalPayment(this.state.paySlipResult.data.payment) -
+                                 this.calculateTotalDeduction(this.state.paySlipResult.data.deduction)) 
+                                  + '  ' + I18n.t("Home.CurrencyUnit")}
+              </Text>
+            </CardItem>
+        </Card>
+
+            <ExpandablePanel headerItem=
+              {
+                <View style={styles.paymentsView}>
+                    <View style={styles.paymentHeader}>
+                      <Text>
+                          {this.formatMoney(this.calculateTotalPayment(this.state.paySlipResult.data.payment))} 
+                          {I18n.t("Home.CurrencyUnit")}
+                      </Text>
+                      <Text>{I18n.t("Home.PaidAmount")}</Text>
+                    </View>
+                </View>
+              }
+            >
                 <View style={styles.paymentDetailsView}>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
+                  <View style={styles.paymentDetailsItemHeaderView}>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:3.5}]}>{I18n.t("Home.PaymentTitle")}</Text>
                   </View>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
+                {this.state.paySlipResult.data.payment.map(payment => {
+                  return (
+                    <View style={styles.paymentDetailsItemView} key={'payment' + payment.title}>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>
+                        {this.formatMoney(payment.value) + " " + I18n.t("Home.CurrencyUnit")}
+                      </Text>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:4}]}>{payment.title}</Text>
+                    </View>
+                  );
+                })}
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
                 </View>
             </ExpandablePanel>
-            <Card style={styles.card}>
-              <CardItem>
+
+
+            <ExpandablePanel headerItem=
+              {
                 <View style={styles.paymentsView}>
-                  <View style={styles.paymentHeader}>
-                    <Text>17,654,000 ریال</Text>
-                    <Text>پرداختی</Text>
-                  </View>
+                    <View style={styles.paymentHeader}>
+                      <Text>{this.formatMoney(this.calculateTotalDeduction(this.state.paySlipResult.data.deduction))} {I18n.t("Home.CurrencyUnit")}</Text>
+                      <Text>{I18n.t("Home.Deductions")}</Text>
+                    </View>
                 </View>
-              </CardItem>
-              <CardItem>
+              }
+            >
                 <View style={styles.paymentDetailsView}>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
+                  <View style={styles.paymentDetailsItemHeaderView}>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:3}]}>{I18n.t("Home.DeductionTitle")}</Text>
                   </View>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
+                {this.state.paySlipResult.data.deduction.map(deduction => {
+                  return (
+                    <View style={styles.paymentDetailsItemView} key={'deduction' + deduction.title}>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{deduction.remain == "" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{this.formatMoney(deduction.value) + ' ریال'}</Text>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:3}]}>{deduction.title}</Text>
+                    </View>
+                  );
+                })}
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حقوق پایه</Text>
-                  </View>
                 </View>
-              </CardItem>
-            </Card>
+            </ExpandablePanel>
+            
 
-            <Card  style={styles.card}>
-              <CardItem>
+            <ExpandablePanel headerItem=
+              {
                 <View style={styles.paymentsView}>
-                  <View style={styles.paymentHeader}>
-                    <Text>17,654,000 ریال</Text>
-                    <Text>کسورات</Text>
-                  </View>
+                    <View style={styles.paymentHeader}>
+                      <View style={{flex:1}}></View>
+                      <Text>{I18n.t("Home.JobDetais")}</Text>
+                    </View>
                 </View>
-              </CardItem>
-              <CardItem>
-                <View style={styles.paymentDetailsView}>
+              }
+            >
+              <View style={[styles.paymentDetailsView, {marginTop: 0}]}>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
+                {this.remove_duplicates_safe(this.state.paySlipResult.data.job).map((jobDetails, i) => {
+                  return (
+                    <View style={[styles.paymentDetailsItemView, 
+                        {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'jobDetails' + jobDetails.key}>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{jobDetails.value}</Text>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{jobDetails.title}</Text>
+                    </View>
+                  );
+                })}
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
+              </View>
+            </ExpandablePanel>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
 
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
-
-                  <View style={styles.paymentDetailsItemView}>
-                    <Text>11,000,000 ریال</Text>
-                    <Text>حق بیمه</Text>
-                  </View>
+            <ExpandablePanel headerItem=
+              {
+                <View style={styles.paymentsView}>
+                    <View style={styles.paymentHeader}>
+                      <View style={{flex:1}}></View>
+                      <Text>{I18n.t("Home.InsuranceDetails")}</Text>
+                    </View>
                 </View>
-              </CardItem>
-            </Card>
+              }
+            >
+              <View style={[styles.paymentDetailsView, {marginTop: 0}]}>
+
+                {this.remove_duplicates_safe(this.state.paySlipResult.data.insurance).map((insuranceDetails, i) => {
+                  return (
+                    <View style={[styles.paymentDetailsItemView, 
+                        {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'insuranceDetails' + insuranceDetails.key}>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{insuranceDetails.value}</Text>
+                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{insuranceDetails.title}</Text>
+                    </View>
+                  );
+                })}
+
+              </View>
+            </ExpandablePanel>
+
           </View>
         ) : (
           <View>
-            <Text>ERRRRORRR</Text>
+            <Text>ERRRRORRR this is intentialy left ugly!</Text>
           </View>
 
         );

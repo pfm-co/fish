@@ -84,8 +84,26 @@ module.exports = StyleSheet.create({
 	paymentDetailsItemView: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		marginBottom: 10,
-	}
+		marginTop: 10,
+		borderTopColor: "#d3d3d3",
+		borderTopWidth: 1,
+		borderStyle: 'solid',
+		paddingTop: 8,
+	},
+	paymentDetailsItemHeaderView: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		paddingBottom: 13,
+		borderBottomColor: "#949494",
+		borderBottomWidth: 0,
+		borderStyle: 'solid',
+	},
+	paymentDetailsHeaderText: {
+		fontSize: 15,
+		fontWeight: 'bold',
+	},
+	paymentDetailsHeaderRowText: {
 
+	}
 
 });
