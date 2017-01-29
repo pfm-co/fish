@@ -48,7 +48,15 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.loadPayslip();
+      this.loadPayslip(this.props.payslipMonth, this.props.payslipYear);
+  }
+
+  componentWillReceiveProps(nextProps)
+  {
+    if (nextProps.payslipMonth !== this.props.payslipMonth || nextProps.payslipYear !== this.props.payslipYear)
+    {
+      this.loadPayslip(nextProps.payslipMonth, nextProps.payslipYear);
+    }
   }
 
   formatMoney(num) {
@@ -80,7 +88,7 @@ class Home extends Component {
     return totalDeduction;
   }
 
-  loadPayslip()
+  loadPayslip(month: int, year:int)
   {
     let that = this;
     try
@@ -89,7 +97,8 @@ class Home extends Component {
           isLoadingPayslip: true,
         });
 
-        fetch("http://fish.medu.ir/api/view/1395/10", {
+        let url = "http://fish.medu.ir/api/view/" + year + "/" + month;
+        fetch(url, {
           method: "GET",
           headers: new Headers({'token': this.props.loginToken}),
         })
@@ -229,7 +238,7 @@ remove_duplicates_safe(arr) {
                 {this.state.paySlipResult.data.deduction.map(deduction => {
                   return (
                     <View style={styles.paymentDetailsItemView} key={'deduction' + deduction.title}>
-                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{deduction.remain == "" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
+                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{ (typeof deduction.remain) == "string" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
                       <Text style={[styles.payslipRowValueText, {flex:1}]}>{this.formatMoney(deduction.value) + ' ریال'}</Text>
                       <Text style={[styles.payslipRowTitleText, {flex:3}]}>{deduction.title}</Text>
                     </View>

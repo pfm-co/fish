@@ -14,7 +14,7 @@ import I18n from 'react-native-i18n'
 import { login } from '../../actions/user';
 
 const {
-  replaceAt,
+  jumpTo,
 } = actions;
 
 
@@ -24,7 +24,7 @@ const appLogo = require('../../../images/appLogo.png');
 class Login extends Component {
   static propTypes = {
     setUser: React.PropTypes.func,
-    replaceAt: React.PropTypes.func,
+    jumpTo: React.PropTypes.func,
     navigation: React.PropTypes.shape({
       key: React.PropTypes.string,
     }),
@@ -44,7 +44,7 @@ class Login extends Component {
     console.log("componentWillReceiveProps nextProps.isLoggedIn", nextProps.authState.isLoggedIn);
     if (nextProps.authState.isLoggedIn == true)
     {
-        this.props.replaceAt('login', { key: 'home' }, this.props.navigation.key);
+        this.props.jumpTo( 'home' , this.props.navigation.key);
     }
   }
 
@@ -121,7 +121,7 @@ class Login extends Component {
 
 function bindActions(dispatch) {
   return {
-    replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
+    jumpTo: (routeKey, key) => dispatch(jumpTo(routeKey, key)),
     login: (username, password) => dispatch(login(username, password)),
   };
 }

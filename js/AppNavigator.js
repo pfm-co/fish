@@ -15,6 +15,7 @@ import { closeDrawer, openDrawer } from './actions/drawer';
 
 import Login from './components/Login';
 import Home from './components/Home';
+import About from './components/About';
 import ModalDatePicker from './components/ModalDatePicker';
 import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
@@ -27,6 +28,8 @@ const drawerWidth = deviceWith / 1.3 > 290 ? 290 : deviceWith / 1.3;
 
 const {
   popRoute,
+  pushRoute,
+  jumpTo
 } = actions;
 
 const {
@@ -39,6 +42,8 @@ class AppNavigator extends Component {
   static propTypes = {
     drawerState: React.PropTypes.string,
     popRoute: React.PropTypes.func,
+    pushRoute: React.PropTypes.func,
+    jumpTo: React.PropTypes.func,
     closeDrawer: React.PropTypes.func,
     navigation: React.PropTypes.shape({
       key: React.PropTypes.string,
@@ -75,7 +80,7 @@ class AppNavigator extends Component {
 
   componentWillReceiveProps(nextProps)
   {
-    console.log("isLoggedIn:", nextProps.isLoggedIn);
+
   }
 
 
@@ -89,9 +94,6 @@ class AppNavigator extends Component {
     }
   }
 
-  popRoute() {
-    this.props.popRoute();
-  }
 
   openDrawer() {
     if (this._drawer)  
@@ -145,6 +147,8 @@ class AppNavigator extends Component {
           return <Login /> 
       case 'home':
         return <Home />;
+      case 'about':
+        return <About />;
       case 'blankPage':
         return <BlankPage />;
       default :
@@ -208,6 +212,10 @@ class AppNavigator extends Component {
                 title="فیش حقوقی"
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
+                onPress={() => {
+                  this.props.closeDrawer();
+                  this.props.jumpTo('home', this.props.navigation.key);
+                }}
             />
 
             <MenuItem
@@ -215,7 +223,7 @@ class AppNavigator extends Component {
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
                 onPress={() => {
-                  this.closeDrawer();
+                  this.props.closeDrawer();
                   this.datePickerDlg.open();
                 }}
             />
@@ -224,6 +232,10 @@ class AppNavigator extends Component {
                 title="درباره"
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
+                onPress={() => {
+                  this.props.closeDrawer();
+                  this.props.pushRoute({key: 'about'}, this.props.navigation.key);
+                }}
             />
 
             <MenuItem
@@ -274,6 +286,8 @@ function bindAction(dispatch) {
     openDrawer: () => dispatch(openDrawer()),
     closeDrawer: () => dispatch(closeDrawer()),
     popRoute: key => dispatch(popRoute(key)),
+    pushRoute: (route, key) => dispatch(pushRoute(route, key)),
+    jumpTo: (routeKey, key) => dispatch(jumpTo(routeKey, key)),
     logout: () => dispatch(logout()),
   };
 }
