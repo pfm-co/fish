@@ -102,8 +102,16 @@ module.exports = StyleSheet.create({
 		fontSize: 15,
 		fontWeight: 'bold',
 	},
-	paymentDetailsHeaderRowText: {
+	payslipRowTitleText: {
 
+	},
+	payslipRowValueText: {
+
+	},
+	bottomSpacer:
+	{
+		flex:1,
+		height: 25,
 	}
 
 });

@@ -200,10 +200,10 @@ remove_duplicates_safe(arr) {
                 {this.state.paySlipResult.data.payment.map(payment => {
                   return (
                     <View style={styles.paymentDetailsItemView} key={'payment' + payment.title}>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>
                         {this.formatMoney(payment.value) + " " + I18n.t("Home.CurrencyUnit")}
                       </Text>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:4}]}>{payment.title}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:4}]}>{payment.title}</Text>
                     </View>
                   );
                 })}
@@ -233,9 +233,9 @@ remove_duplicates_safe(arr) {
                 {this.state.paySlipResult.data.deduction.map(deduction => {
                   return (
                     <View style={styles.paymentDetailsItemView} key={'deduction' + deduction.title}>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{deduction.remain == "" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{this.formatMoney(deduction.value) + ' ریال'}</Text>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:3}]}>{deduction.title}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>{deduction.remain == "" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>{this.formatMoney(deduction.value) + ' ریال'}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:3}]}>{deduction.title}</Text>
                     </View>
                   );
                 })}
@@ -260,8 +260,8 @@ remove_duplicates_safe(arr) {
                   return (
                     <View style={[styles.paymentDetailsItemView, 
                         {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'jobDetails' + jobDetails.key}>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{jobDetails.value}</Text>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{jobDetails.title}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>{jobDetails.value}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>{jobDetails.title}</Text>
                     </View>
                   );
                 })}
@@ -282,18 +282,19 @@ remove_duplicates_safe(arr) {
             >
               <View style={[styles.paymentDetailsView, {marginTop: 0}]}>
 
-                {this.remove_duplicates_safe(this.state.paySlipResult.data.insurance).map((insuranceDetails, i) => {
+                {this.state.paySlipResult.data.insurance.map((insuranceDetails, i) => {
                   return (
-                    <View style={[styles.paymentDetailsItemView, 
-                        {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'insuranceDetails' + insuranceDetails.key}>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{insuranceDetails.value}</Text>
-                      <Text style={[styles.paymentDetailsHeaderRowText, {flex:1}]}>{insuranceDetails.title}</Text>
+                    <View style={[styles.paymentDetailsItemView, {borderTopWidth: i == 0 ? 0 : 1}]} key={'insuranceDetails' + insuranceDetails.key}>
+                      <Text style={styles.payslipRowTitleText}>{insuranceDetails.value}</Text>
+                      <Text style={styles.payslipRowTitleText}>{insuranceDetails.title}</Text>
                     </View>
                   );
                 })}
 
               </View>
             </ExpandablePanel>
+
+            <View style={styles.bottomSpacer}/>
 
           </View>
         ) : (

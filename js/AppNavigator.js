@@ -6,6 +6,9 @@ import { Button } from 'native-base';
 var { Text } = require('./common/FmText');
 
 import { actions } from 'react-native-navigation-redux-helpers';
+import { logout } from './actions/user';
+
+var TouchableOpacity = require('TouchableOpacity');
 
 import { closeDrawer } from './actions/drawer';
 
@@ -94,8 +97,8 @@ class AppNavigator extends Component {
   }
 
   closeDrawer() {
-    if (this.props.drawerState === 'opened') {
-      this.props.closeDrawer();
+    if (this._drawer) {
+      this._drawer.closeDrawer();
     }
   }
 
@@ -176,9 +179,19 @@ class AppNavigator extends Component {
                 <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
               </View>
 
-                <Text style={styles.name}>
-                    {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
-                </Text>
+                <View>
+                  <Text style={styles.name}>
+                      {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
+                  </Text>
+                  <TouchableOpacity
+                    accessibilityTraits="button"
+                    onPress={() => { 
+                      this.props.closeDrawer();
+                      this.props.logout();
+                    }}>
+                      <Text style={styles.logout}>خروج</Text>
+                </TouchableOpacity>
+                </View>
             </View>
         );
 
@@ -186,10 +199,6 @@ class AppNavigator extends Component {
     else {
         accountItem = (
             <View>
-                <Image source={require('../images/default-logo.png')}/>
-                <Text style={styles.name}>
-                    DEFAULT, to be changed
-                </Text>
             </View>
         );
     }
@@ -256,6 +265,7 @@ function bindAction(dispatch) {
   return {
     closeDrawer: () => dispatch(closeDrawer()),
     popRoute: key => dispatch(popRoute(key)),
+    logout: () => dispatch(logout()),
   };
 }
 
@@ -289,6 +299,10 @@ let styles = StyleSheet.create({
         marginTop: 10,
         color: '#6f0000',
         fontSize: 23,
+    },
+    logout: {
+        fontSize: 15,
+        color: '#b80101',
     },
     profilePic:
     {

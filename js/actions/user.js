@@ -91,4 +91,12 @@ function login(username: ?string, password: ?string) : ThunkAction
 }
 
 
-module.exports = { login, LOGGING_IN, LOGIN_ERROR, LOGGED_OUT, LOGGED_IN };
+function logout() : Action
+{
+	return {
+		type: LOGGED_OUT
+	};
+}
+
+
+module.exports = { login, logout, LOGGING_IN, LOGIN_ERROR, LOGGED_OUT, LOGGED_IN };
