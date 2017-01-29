@@ -36,8 +36,10 @@
       "Remaining": "باقی مانده",
       "DeductionTitle": "عناوین کسری",
       "JobDetais": "جزئیات کاری",
-      "InsuranceDetails": "وضعیت بیمه",
-
+      "InsuranceDetails": "وضعیت بیمه"
+    },
+    "DatePicker": {
+      "ChooseADate": "ماه و سال مورد نظر خود را انتخاب کنید:",
     }
 
   }

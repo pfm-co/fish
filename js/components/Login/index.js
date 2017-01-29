@@ -41,9 +41,10 @@ class Login extends Component {
   componentWillReceiveProps(nextProps)
   {
     // user login was successfull, navigate to home page
-    if (nextProps.isLoggedIn == true)
+    console.log("componentWillReceiveProps nextProps.isLoggedIn", nextProps.authState.isLoggedIn);
+    if (nextProps.authState.isLoggedIn == true)
     {
-        this.props.replaceAt('login', { key: route }, this.props.navigation.key);
+        this.props.replaceAt('login', { key: 'home' }, this.props.navigation.key);
     }
   }
 
@@ -96,7 +97,6 @@ class Login extends Component {
 
                 
                 <Button primary style={styles.btn} onPress={() => { 
-                  // this.replaceRoute('home'); 
                   this.props.login(this.state.username, this.state.password);
                 }}>
                   <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
@@ -134,7 +134,7 @@ const mapStoreToProps = store => ({
     isLoginInProgress: store.user.isLoginInProgress,
     hasError: store.user.hasError,
     errorMsg: store.user.errorMsg,
-
+    isLoggedIn: store.user.isLoggedIn,
   }
 
 });

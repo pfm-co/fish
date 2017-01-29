@@ -254,7 +254,7 @@ remove_duplicates_safe(arr) {
                   return (
                     <View style={[styles.paymentDetailsItemView, 
                         {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'jobDetails' + jobDetails.key}>
-                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{jobDetails.value}</Text>
+                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{isNaN(jobDetails.value) ? jobDetails.value : (this.formatMoney(jobDetails.value) + ' ریال')}</Text>
                       <Text style={[styles.payslipRowTitleText, {flex:3}]}>{jobDetails.title}</Text>
                     </View>
                   );

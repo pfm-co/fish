@@ -4,6 +4,7 @@ import { View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
 var { Text } = require('./common/FmText');
+import Icon from 'react-native-vector-icons/Entypo';
 
 import { actions } from 'react-native-navigation-redux-helpers';
 import { logout } from './actions/user';
@@ -14,6 +15,7 @@ import { closeDrawer } from './actions/drawer';
 
 import Login from './components/Login';
 import Home from './components/Home';
+import ModalDatePicker from './components/ModalDatePicker';
 import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
 import FmDrawer from './common/FmDrawer';
@@ -134,35 +136,25 @@ class AppNavigator extends Component {
   }
 
   _renderScene(props) { // eslint-disable-line class-methods-use-this
+    if (!this.props.isLoggedIn)
+      return <Login />;
     switch (props.scene.route.key) {
       case 'splashscreen':
         return <SplashPage />;
       case 'login':
-        if (this.props.isLoggedIn)
-        {
-          return <Home />
-        }
-        else 
-        { 
           return <Login /> 
-        }
       case 'home':
         return <Home />;
       case 'blankPage':
         return <BlankPage />;
       default :
-        if (this.props.isLoggedIn)
-        {
-          return <Home />
-        }
-        else 
-        { 
-          return <Login /> 
-        }
+        return <Home />
     }
   }
 
   renderNavigationView() {
+    console.log("props.scene.route.key", this.props);
+
     let accountItem, myAppItem, loginItem;
 
     if (this.props.isLoggedIn) {
@@ -257,6 +249,8 @@ class AppNavigator extends Component {
             renderOverlay={this._renderOverlay}
             renderScene={this._renderScene}
           />
+
+          <ModalDatePicker />
       </FmDrawer>
     );
   }
