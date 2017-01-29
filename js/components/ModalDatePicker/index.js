@@ -33,12 +33,20 @@ constructor(props) {
 
   componentDidMount()
   {
-      this.refs.modal.open();
+      
   }
 
   render() { 
     return (
-      <Modal style={[styles.modal]} backdrop={true}  position={"center"} ref={"modal"}>
+      <Modal 
+        style={[styles.modal]} 
+        backdrop={true}  
+        position={"center"}
+        ref={(modalDlg) => {
+            this.props.refr(modalDlg);
+            this.modalDlg = modalDlg;
+        }}
+        >
           <Text style={styles.messageText}>{I18n.t("DatePicker.ChooseADate")}</Text>
           
           <View style={styles.pickersView}>
@@ -81,8 +89,7 @@ constructor(props) {
             <Button 
                 style={styles.button}
                 onPress={() => {
-                    this.props.changePayslipYearMonth(parseInt(this.state.month), parseInt(this.state.year));
-                    this.refs.modal.close();
+                    this.modalDlg.close();
                 }}
             >
                 <Text style={styles.buttonText}>{I18n.t("Common.Close") + " "} <Icon name="remove" /> </Text>
@@ -92,7 +99,7 @@ constructor(props) {
                 style={[styles.button, {marginLeft: 30}]}
                 onPress={() => {
                     this.props.changePayslipYearMonth(this.state.month, this.state.year);
-                    this.refs.modal.close();
+                    this.modalDlg.close();
                 }}
             >
                 <Text style={styles.buttonText}> {I18n.t("Common.Ok") + " " } <Icon name="check" /> </Text>

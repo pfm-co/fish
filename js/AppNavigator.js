@@ -214,6 +214,10 @@ class AppNavigator extends Component {
                 title="تاریخچه"
                 icon={require('../images/maps-icon.png')}
                 selectedIcon={require('../images/maps-icon-active.png')}
+                onPress={() => {
+                  this.closeDrawer();
+                  this.datePickerDlg.open();
+                }}
             />
 
             <MenuItem
@@ -259,7 +263,7 @@ class AppNavigator extends Component {
             renderScene={this._renderScene}
           />
 
-          <ModalDatePicker />
+          <ModalDatePicker refr={(datePickerDlg) => { this.datePickerDlg = datePickerDlg; }} />
       </FmDrawer>
     );
   }
