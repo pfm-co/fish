@@ -179,18 +179,19 @@ class AppNavigator extends Component {
                 <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
               </View>
 
-                <View>
-                  <Text style={styles.name}>
-                      {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
-                  </Text>
-                  <TouchableOpacity
-                    accessibilityTraits="button"
-                    onPress={() => { 
-                      this.props.closeDrawer();
-                      this.props.logout();
-                    }}>
-                      <Text style={styles.logout}>خروج</Text>
-                </TouchableOpacity>
+                <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between'}}>
+                    <TouchableOpacity
+                      accessibilityTraits="button"
+                      onPress={() => { 
+                        this.props.closeDrawer();
+                        this.props.logout();
+                      }}>
+                        <Text style={styles.logout}>خروج</Text>
+                    </TouchableOpacity>
+
+                    <Text style={styles.name}>
+                        {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
+                    </Text>
                 </View>
             </View>
         );
@@ -299,6 +300,9 @@ let styles = StyleSheet.create({
         marginTop: 10,
         color: '#6f0000',
         fontSize: 23,
+        textShadowColor: "#c06262",
+        textShadowOffset: {width: 0, height: 3},
+        textShadowRadius: 5,
     },
     logout: {
         fontSize: 15,

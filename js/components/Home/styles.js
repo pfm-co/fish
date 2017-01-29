@@ -68,16 +68,17 @@ module.exports = StyleSheet.create({
 		color: '#4E0000',
 		marginTop:3,
 	},
-	paymentsView: {
-		flex: 1,
-		flexDirection: 'column',
-	},
-	paymentHeader: {
+	payslipHeaderView: {
+		flex:1,
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 
 	},
-	paymentDetailsView: {
+	payslipHeaderText:{
+		fontSize: 18,
+		color: "#00032a",
+	},
+	payslipDetailsView: {
 		flexDirection: 'column',
 		marginTop: 10,
 	},
@@ -103,10 +104,12 @@ module.exports = StyleSheet.create({
 		fontWeight: 'bold',
 	},
 	payslipRowTitleText: {
-
+		color: "#00010f",
 	},
 	payslipRowValueText: {
-
+		color: "#00033f",
+		alignSelf: 'flex-start',
+		textAlign: 'right',
 	},
 	bottomSpacer:
 	{
