@@ -17,13 +17,14 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 30,
+    paddingBottom: 20
   },
     pickersView: {
         flex:1,
         flexDirection: 'row',
         alignSelf: 'center',
         justifyContent: 'space-between',
-        marginTop: 20,
+        marginTop: 30,
     },
     picker: {
         width: 110,
@@ -33,5 +34,18 @@ module.exports = StyleSheet.create({
         color: "#000B3D",
         textAlign: 'center',
         alignSelf: 'center',
+    },
+    buttons: {
+        flexDirection: 'row',
+
+    },
+    button: {
+        backgroundColor: "#0B1C6A",
+        borderRadius: 5,
+    },
+    buttonText: {
+        marginLeft: 20,
+        marginRight: 20,
+        color: "#FFFFFF"
     }
 });

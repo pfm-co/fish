@@ -36,7 +36,7 @@ export default function (state:State = initialState, action:Action): State {
       ...state,
       payslipMonth: action.month,
       payslipYear: action.year,
-      payslipMonthStr: moment().jMonth(action.month).format('MMMM'),
+      payslipMonthStr: m.jMonth(action.month - 1).format('jMMMM'),
     }
   }
 

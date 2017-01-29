@@ -1,15 +1,19 @@
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 var Modal   = require('react-native-modalbox');
 var { Text } = require('../../common/FmText');
 import styles from './styles';
-import { Picker, View } from 'native-base';
+import { Picker, Button, View } from 'native-base';
 import I18n from 'react-native-i18n'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Item = Picker.Item;
+import { changePayslipYearMonth } from '../../actions/settings';
 
 
-export default class ModalDatePicker extends Component {
+class ModalDatePicker extends Component {
   static propTypes = {
     navigator: React.PropTypes.shape({}),
   }
@@ -17,10 +21,9 @@ export default class ModalDatePicker extends Component {
 constructor(props) {
     super(props);
     this.state = {
-
+        year: props.year.toString(),
+        month: props.month.toString()
     };
-
-
   }
 
   componentWillMount() {
@@ -30,12 +33,12 @@ constructor(props) {
 
   componentDidMount()
   {
-      this.refs.modal2.open();
+      this.refs.modal.open();
   }
 
   render() { 
     return (
-      <Modal style={[styles.modal]} backdrop={true}  position={"center"} ref={"modal2"}>
+      <Modal style={[styles.modal]} backdrop={true}  position={"center"} ref={"modal"}>
           <Text style={styles.messageText}>{I18n.t("DatePicker.ChooseADate")}</Text>
           
           <View style={styles.pickersView}>
@@ -73,7 +76,43 @@ constructor(props) {
                 <Item label="اسفند" value="12" />
             </Picker>
         </View>
+
+        <View style={styles.buttons}>
+            <Button 
+                style={styles.button}
+                onPress={() => {
+                    this.props.changePayslipYearMonth(parseInt(this.state.month), parseInt(this.state.year));
+                    this.refs.modal.close();
+                }}
+            >
+                <Text style={styles.buttonText}>{I18n.t("Common.Close") + " "} <Icon name="remove" /> </Text>
+            </Button>
+
+            <Button 
+                style={[styles.button, {marginLeft: 30}]}
+                onPress={() => {
+                    this.props.changePayslipYearMonth(this.state.month, this.state.year);
+                    this.refs.modal.close();
+                }}
+            >
+                <Text style={styles.buttonText}> {I18n.t("Common.Ok") + " " } <Icon name="check" /> </Text>
+            </Button>
+        </View>
       </Modal>
     );
   }
 }
+
+
+function bindActions(dispatch) {
+  return {
+    changePayslipYearMonth: (month: int, year: int) => dispatch(changePayslipYearMonth(month, year)),
+  };
+}
+
+const mapStoreToProps = store => ({
+    year: store.settings.payslipYear,
+    month: store.settings.payslipMonth,
+});
+
+export default connect(mapStoreToProps, bindActions)(ModalDatePicker);

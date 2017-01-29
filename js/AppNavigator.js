@@ -11,7 +11,7 @@ import { logout } from './actions/user';
 
 var TouchableOpacity = require('TouchableOpacity');
 
-import { closeDrawer } from './actions/drawer';
+import { closeDrawer, openDrawer } from './actions/drawer';
 
 import Login from './components/Login';
 import Home from './components/Home';
@@ -238,7 +238,16 @@ class AppNavigator extends Component {
         ref={(drawer) => { this._drawer = drawer; }}
         drawerWidth={ drawerWidth }
         drawerPosition="right"
-        renderNavigationView={this.renderNavigationView}>
+        renderNavigationView={this.renderNavigationView}
+        onDrawerOpen={() => {
+          if (this.props.drawerState == "closed")
+            this.props.openDrawer();
+        }}
+        onDrawerClose={() => {
+          if (this.props.drawerState == "opened")
+            this.props.closeDrawer();
+        }}
+        >
 
           <StatusBar
             backgroundColor={statusBarColor}
@@ -258,6 +267,7 @@ class AppNavigator extends Component {
 
 function bindAction(dispatch) {
   return {
+    openDrawer: () => dispatch(openDrawer()),
     closeDrawer: () => dispatch(closeDrawer()),
     popRoute: key => dispatch(popRoute(key)),
     logout: () => dispatch(logout()),
