@@ -54,7 +54,6 @@ class AppNavigator extends Component {
   constructor(props) {
       super(props);
 
-      console.log("AppNavigator Props:", props);
       
       this._handlers = [];
       this.addBackButtonListener = this.addBackButtonListener.bind(this);
@@ -157,8 +156,6 @@ class AppNavigator extends Component {
   }
 
   renderNavigationView() {
-    console.log("props.scene.route.key", this.props);
-
     let accountItem, myAppItem, loginItem;
 
     if (this.props.isLoggedIn) {

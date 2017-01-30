@@ -15,6 +15,8 @@ import { login } from '../../actions/user';
 
 const {
   jumpTo,
+  replaceAt,
+  pushRoute
 } = actions;
 
 
@@ -44,7 +46,7 @@ class Login extends Component {
     console.log("componentWillReceiveProps nextProps.isLoggedIn", nextProps.authState.isLoggedIn);
     if (nextProps.authState.isLoggedIn == true)
     {
-        this.props.jumpTo( 'home' , this.props.navigation.key);
+        this.props.pushRoute( { key: 'home' } , this.props.navigation.key);
     }
   }
 
@@ -121,6 +123,8 @@ class Login extends Component {
 
 function bindActions(dispatch) {
   return {
+    pushRoute: (route, key) => dispatch(pushRoute(route, key)),
+    replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
     jumpTo: (routeKey, key) => dispatch(jumpTo(routeKey, key)),
     login: (username, password) => dispatch(login(username, password)),
   };

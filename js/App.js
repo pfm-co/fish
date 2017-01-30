@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Dimensions } from 'react-native';
 import CodePush from 'react-native-code-push';
 import { connect } from 'react-redux';
 
@@ -15,19 +15,28 @@ import theme from './themes/theme-base';
 import Translations from './common/Translations'
 import I18n from 'react-native-i18n';
 
+const deviceHeight = Dimensions.get('window').height;
+const deviceWith = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: null,
-    height: null,
+    width: deviceWith,
+    height: deviceHeight,
   },
   modal: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   modal1: {
-    height: 300,
+    height: deviceHeight / 4,
+    width: deviceWith * 0.90,
+    borderRadius: 10,
+    backgroundColor: "#F9F9F9",
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 30,
+    paddingBottom: 20
   },
 });
 
@@ -53,13 +62,16 @@ class App extends Component {
       (status) => {
         switch (status) {
           case CodePush.SyncStatus.DOWNLOADING_PACKAGE:
+            console.log("DOWNLOADING_PACKAGE")
             this.setState({ showDownloadingModal: true });
             this._modal.open();
             break;
           case CodePush.SyncStatus.INSTALLING_UPDATE:
+            console.log("INSTALLING_UPDATE");
             this.setState({ showInstalling: true });
             break;
           case CodePush.SyncStatus.UPDATE_INSTALLED:
+          console.log("UPDATE_INSTALLED");
             this._modal.close();
             this.setState({ showDownloadingModal: false });
             break;
@@ -68,6 +80,9 @@ class App extends Component {
         }
       },
       ({ receivedBytes, totalBytes }) => {
+        console.log("receivedBytes:", receivedBytes, "totalBytes:", totalBytes, "progress:",
+          parseInt(this.state.downloadProgress, 10));
+
         this.setState({ downloadProgress: (receivedBytes / totalBytes) * 100 });
       }
     );
@@ -76,18 +91,52 @@ class App extends Component {
   render() {
     if (this.state.showDownloadingModal) {
       return (
-        <Container theme={theme} style={{ backgroundColor: theme.defaultBackgroundColor }}>
-          <Content style={styles.container}>
+          <View style={styles.container}>
             <Modal
               style={[styles.modal, styles.modal1]}
-              backdrop={false}
+              position={"center"}
+              backdrop={true}
               ref={(c) => { this._modal = c; }}
               swipeToClose={false}
             >
-             
+              <View
+                style={{ flex: 1, alignSelf: 'stretch', justifyContent: 'center', padding: 20 }}
+              >
+                {this.state.showInstalling ?
+                  <Text
+                    style={{
+                      color: theme.brandPrimary,
+                      textAlign: 'center',
+                      marginBottom: 15,
+                      fontSize: 15,
+                    }}
+                  >
+                    Installing update...
+                  </Text> :
+                  <View
+                    style={{
+                      flex: 1,
+                      alignSelf: 'stretch',
+                      justifyContent: 'center',
+                      padding: 20,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: theme.brandPrimary,
+                        textAlign: 'center',
+                        marginBottom: 15,
+                        fontSize: 15,
+                      }}
+                    >
+                       در حال دریافت بروزرسانی... {`%${parseInt(this.state.downloadProgress, 10)}`}
+                    </Text>
+                   
+                  </View>
+                }
+              </View>
             </Modal>
-          </Content>
-        </Container>
+          </View>
       );
     }
 

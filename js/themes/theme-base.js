@@ -85,6 +85,7 @@ export default {
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
   brandSidebar: '#252932',
+  defaultBackgroundColor: "#F5F5F5",
 
 
   // Font
