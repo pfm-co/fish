@@ -200,7 +200,7 @@ remove_duplicates_safe(arr) {
                 <View style={styles.payslipDetailsView}>
 
                   <View style={styles.paymentDetailsItemHeaderView}>
-                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:3.5}]}>{I18n.t("Home.PaymentTitle")}</Text>
                   </View>
 
@@ -208,7 +208,7 @@ remove_duplicates_safe(arr) {
                   return (
                     <View style={styles.paymentDetailsItemView} key={'payment' + payment.title}>
                       <Text style={[styles.payslipRowValueText, {flex:1}]}>
-                        {this.formatMoney(payment.value) + " " + I18n.t("Home.CurrencyUnit")}
+                        {this.formatMoney(payment.value)}
                       </Text>
                       <Text style={[styles.payslipRowTitleText, {flex:4}]}>{payment.title}</Text>
                     </View>
@@ -230,16 +230,16 @@ remove_duplicates_safe(arr) {
                 <View style={styles.payslipDetailsView}>
 
                   <View style={styles.paymentDetailsItemHeaderView}>
-                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining")}</Text>
-                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:3}]}>{I18n.t("Home.DeductionTitle")}</Text>
                   </View>
 
                 {this.state.paySlipResult.data.deduction.map(deduction => {
                   return (
                     <View style={styles.paymentDetailsItemView} key={'deduction' + deduction.title}>
-                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{ (typeof deduction.remain) == "string" ? "" : (this.formatMoney(deduction.remain) + ' ریال')}</Text>
-                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{this.formatMoney(deduction.value) + ' ریال'}</Text>
+                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{ (typeof deduction.remain) == "string" ? "" : (this.formatMoney(deduction.remain))}</Text>
+                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{this.formatMoney(deduction.value)}</Text>
                       <Text style={[styles.payslipRowTitleText, {flex:3}]}>{deduction.title}</Text>
                     </View>
                   );
@@ -263,7 +263,7 @@ remove_duplicates_safe(arr) {
                   return (
                     <View style={[styles.paymentDetailsItemView, 
                         {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'jobDetails' + jobDetails.key}>
-                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{isNaN(jobDetails.value) ? jobDetails.value : (this.formatMoney(jobDetails.value) + ' ریال')}</Text>
+                      <Text style={[styles.payslipRowValueText, {flex:1}]}>{isNaN(jobDetails.value) ? jobDetails.value : (this.formatMoney(jobDetails.value))}</Text>
                       <Text style={[styles.payslipRowTitleText, {flex:3}]}>{jobDetails.title}</Text>
                     </View>
                   );

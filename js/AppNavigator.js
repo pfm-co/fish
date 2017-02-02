@@ -21,6 +21,8 @@ import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
 import FmDrawer from './common/FmDrawer';
 import I18n from 'react-native-i18n'
+import { zeroPad } from './common/Helper'
+
 let MenuItem = require('./common/MenuItem');
 const deviceHeight = Dimensions.get('window').height;
 const deviceWith = Dimensions.get('window').width;
@@ -165,7 +167,7 @@ class AppNavigator extends Component {
                         paddingRight: 40}}>
               <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
                 <View style={{marginTop: 15, marginRight: 10}}>
-                  <Text>{I18n.t("Common.NationalCode")}:  {this.props.userInfo.nationalCode}</Text>
+                  <Text>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
                   <Text>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
                 </View>
 
@@ -179,7 +181,7 @@ class AppNavigator extends Component {
                         this.props.closeDrawer();
                         this.props.logout();
                       }}>
-                        <Text style={styles.logout}>خروج</Text>
+                        <Text style={styles.logout}>{I18n.t("Login.Logout")}</Text>
                     </TouchableOpacity>
 
                     <Text style={styles.name}>

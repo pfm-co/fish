@@ -39,6 +39,7 @@ function login(username: ?string, password: ?string) : ThunkAction
 		    .then(result => {
 		    	if (result)
 		    	{
+					console.log("login result", result);
 		    		if (result.status)
 		    		{
 	    				dispatch({

@@ -31,6 +31,7 @@
       "UnknownError": "خطای نامشخص در دریافت اطلاعات",
       "SelectOne": "یک آیتم را انتخاب کنید",
       "CurrencyUnit": "ریال",
+      "CurrencyUnitPrnth": "(ریال)",
       "TotalPayment": "مجموع پرداختی",
       "PaidAmount": "پرداختی",
       "MoneyAmount": "مبلغ",
