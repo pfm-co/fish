@@ -1,7 +1,7 @@
 'use strict';
 
 import type { Action } from '../actions/types';
-import { CHANGE_APP_LANGUAGE, SET_PAYSLIP_YEAR_MONTH } from '../actions/settings';
+import { CHANGE_APP_LANGUAGE, SET_PAYSLIP_YEAR_MONTH, APP_STARTED } from '../actions/settings';
 var moment = require('moment-jalaali');
 
 
@@ -37,6 +37,15 @@ export default function (state:State = initialState, action:Action): State {
       payslipMonth: action.month,
       payslipYear: action.year,
       payslipMonthStr: m.jMonth(action.month - 1).format('jMMMM'),
+    }
+  }
+  else if (action.type == APP_STARTED)
+  {
+    return {
+      ...state,
+      payslipMonth: initialState.payslipMonth,
+      payslipYear: initialState.payslipYear,
+      payslipMonthStr: initialState.payslipMonthStr,
     }
   }
 

@@ -1,0 +1,118 @@
+
+
+Thu Feb  2 22:28:32 2017
+Command line: TestDisk
+
+TestDisk 7.0, Data Recovery Utility, April 2015
+Christophe GRENIER <grenier@cgsecurity.org>
+http://www.cgsecurity.org
+OS: Linux, kernel 4.4.0-59-generic (#80-Ubuntu SMP Fri Jan 6 17:47:47 UTC 2017) x86_64
+Compiler: GCC 5.3
+ext2fs lib: 1.42.13, ntfs lib: libntfs-3g, reiserfs lib: none, ewf lib: none, curses lib: ncurses 6.0
+/dev/sda: LBA, HPA, LBA48, DCO support
+/dev/sda: size       488397168 sectors
+/dev/sda: user_max   488397168 sectors
+/dev/sda: native_max 488397168 sectors
+/dev/sda: dco        488397168 sectors
+Warning: can't get size for Disk /dev/mapper/control - 0 B - 0 sectors, sector size=512
+Hard disk list
+Disk /dev/sda - 250 GB / 232 GiB - CHS 30401 255 63, sector size=512 - Samsung SSD 850 EVO 250GB, S/N:S21NNSAG320974A, FW:EMT01B6Q
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121597 255 63, sector size=512 - WD My Passport 259F, FW:1004
+
+Partition table type (auto): EFI GPT
+Disk /dev/sdb - 1000 GB / 931 GiB - WD My Passport 259F
+Partition table type: EFI GPT
+
+Analyse Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121597 255 63
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=1953458175 (expected 1953458175)
+hdr_lba_start=34
+hdr_lba_end=1953458142
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+Current partition structure:
+ 1 P MS Data                     2048 1953456127 1953454080 [My Passport]
+
+search_part()
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121597 255 63
+NTFS at 0/32/33
+filesystem size           1953454080
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS part_offset=1048576, part_size=1000168488960, sector_size=512
+NTFS partition cannot be added (part_offset<part_size).
+NTFS at 0/32/33
+filesystem size           1953454080
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data                     2048 1953456127 1953454080
+     NTFS, blocksize=4096, 1000 GB / 931 GiB
+
+Results
+   P MS Data                     2048 1953456127 1953454080
+     NTFS, blocksize=4096, 1000 GB / 931 GiB
+
+Hint for advanced users. dmsetup may be used if you prefer to avoid to rewrite the partition table for the moment:
+echo "0 1953454080 linear /dev/sdb 2048" | dmsetup create test0
+
+interface_write()
+ 1 P MS Data                     2048 1953456127 1953454080
+write!
+No extended partition
+You will have to reboot for the change to take effect.
+
+Analyse Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121597 255 63
+hdr_size=92
+hdr_lba_self=1
+hdr_lba_alt=1953458175 (expected 1953458175)
+hdr_lba_start=34
+hdr_lba_end=1953458142
+hdr_lba_table=2
+hdr_entries=128
+hdr_entsz=128
+Current partition structure:
+ 1 P MS Data                     2048 1953456127 1953454080
+
+search_part()
+Disk /dev/sdb - 1000 GB / 931 GiB - CHS 121597 255 63
+NTFS at 0/32/33
+filesystem size           1953454080
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+NTFS part_offset=1048576, part_size=1000168488960, sector_size=512
+NTFS partition cannot be added (part_offset<part_size).
+NTFS at 0/32/33
+filesystem size           1953454080
+sectors_per_cluster       8
+mft_lcn                   786432
+mftmirr_lcn               2
+clusters_per_mft_record   -10
+clusters_per_index_record 1
+     MS Data                     2048 1953456127 1953454080
+     NTFS, blocksize=4096, 1000 GB / 931 GiB
+
+Results
+   P MS Data                     2048 1953456127 1953454080
+     NTFS, blocksize=4096, 1000 GB / 931 GiB
+
+Hint for advanced users. dmsetup may be used if you prefer to avoid to rewrite the partition table for the moment:
+echo "0 1953454080 linear /dev/sdb 2048" | dmsetup create test0
+
+interface_write()
+ 1 P MS Data                     2048 1953456127 1953454080
+write!
+No extended partition
+You will have to reboot for the change to take effect.
+
+TestDisk exited normally.

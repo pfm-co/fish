@@ -15,6 +15,9 @@ import theme from './themes/theme-base';
 import Translations from './common/Translations'
 import I18n from 'react-native-i18n';
 
+import { appStarted } from './actions/settings';
+
+
 const deviceHeight = Dimensions.get('window').height;
 const deviceWith = Dimensions.get('window').width;
 
@@ -58,6 +61,8 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.props.appStarted();
+
     CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE },
       (status) => {
         switch (status) {
@@ -148,6 +153,7 @@ class App extends Component {
 
 function bindActions(dispatch) {
   return {
+    appStarted: () => dispatch(appStarted()),
   };
 }
 

@@ -43,7 +43,9 @@ class MenuItem extends React.Component {
         return (
             <FmTouchable onPress={this.props.onPress}>
                 <View style={styles.container}>
-                    <Image style={styles.icon} source={icon} />
+                    <View style={styles.icon}>
+                        {icon}
+                    </View>
                     <Text style={[styles.title, selectedTitleStyle]}>
                         {this.props.title}
                     </Text>

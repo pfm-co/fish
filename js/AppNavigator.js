@@ -24,6 +24,11 @@ import I18n from 'react-native-i18n'
 import { zeroPad } from './common/Helper'
 
 let MenuItem = require('./common/MenuItem');
+import { phonecall } from 'react-native-communications';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+
+
 const deviceHeight = Dimensions.get('window').height;
 const deviceWith = Dimensions.get('window').width;
 const drawerWidth = deviceWith / 1.3 > 290 ? 290 : deviceWith / 1.3;
@@ -209,7 +214,7 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="فیش حقوقی"
-                icon={require('../images/maps-icon.png')}
+                icon={<FontAwesomeIcon name="phone" size={30} color="#900" />}
                 selectedIcon={require('../images/maps-icon-active.png')}
                 onPress={() => {
                   this.props.closeDrawer();
@@ -219,7 +224,7 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="تاریخچه"
-                icon={require('../images/maps-icon.png')}
+                icon={<FontAwesomeIcon name="calendar" size={30} color="#900" />}
                 selectedIcon={require('../images/maps-icon-active.png')}
                 onPress={() => {
                   this.props.closeDrawer();
@@ -229,7 +234,7 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="درباره"
-                icon={require('../images/maps-icon.png')}
+                icon={<FontAwesomeIcon name="quote-left" size={30} color="#900" />}
                 selectedIcon={require('../images/maps-icon-active.png')}
                 onPress={() => {
                   this.props.closeDrawer();
@@ -239,8 +244,16 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="راهنما"
-                icon={require('../images/maps-icon.png')}
+                icon={<EntypoIcon name="help-with-circle" size={30} color="#900" />}
                 selectedIcon={require('../images/maps-icon-active.png')}
+            />
+
+            <MenuItem
+                title="تماس با پشتیبانی"
+                icon={<FontAwesomeIcon name="phone" size={30} color="#900" />}
+                onPress={() => {
+                  phonecall("02188402938", true);
+                }}
             />
         </View>
     )
