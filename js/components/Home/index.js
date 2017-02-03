@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, Picker, Card, CardItem, InputGroup, Input, Button, Icon, View } from 'native-base';
-var { Text } = require('../../common/FmText');
+const { Text } = require('../../common/FmText');
 import ExpandablePanel from '../../common/ExpandablePanel';
 const ActivityIndicator = require('ActivityIndicator');
 const FmHeader = require('../../common/FmHeader');

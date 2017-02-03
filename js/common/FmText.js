@@ -20,6 +20,10 @@ export function Heading1({style, ...props}: Object): ReactElement {
     return <ReactNative.Text style={[styles.font, styles.h1, style]} {...props} />;
 }
 
+export function Heading2({style, ...props}: Object): ReactElement {
+    return <ReactNative.Text style={[styles.font, styles.h2, style]} {...props} />;
+}
+
 export function Paragraph({style, ...props}: Object): ReactElement {
     return <ReactNative.Text style={[styles.font, styles.p, style]} {...props} />;
 }
@@ -37,6 +41,13 @@ const styles = StyleSheet.create({
     h1: {
         fontSize: normalize(24),
         lineHeight: normalize(27),
+        color: FmColors.darkText,
+        fontWeight: 'bold',
+        letterSpacing: -1,
+    },
+    h2: {
+        fontSize: normalize(18),
+        lineHeight: normalize(20),
         color: FmColors.darkText,
         fontWeight: 'bold',
         letterSpacing: -1,

@@ -70,10 +70,10 @@ var styles = StyleSheet.create({
     title: {
         flex: 1,
         fontSize: 17,
-        color: theme.lightText,
+        color: '#032250',
     },
     selectedTitle: {
-        color: theme.darkText,
+        color: '#7F91A7',
     },
     badge: {
         backgroundColor: '#DC3883',

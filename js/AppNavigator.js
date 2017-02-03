@@ -16,6 +16,7 @@ import { closeDrawer, openDrawer, navigateTo } from './actions/drawer';
 import Login from './components/Login';
 import Home from './components/Home';
 import About from './components/About';
+import Help from './components/Help';
 import ModalDatePicker from './components/ModalDatePicker';
 import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
@@ -163,14 +164,15 @@ class AppNavigator extends Component {
         return <Home />;
       case 'about':
         return <About />;
-      case 'blankPage':
-        return <BlankPage />;
+      case 'help':
+        return <Help />;
       default :
         return <Home />
     }
   }
 
   renderNavigationView() {
+    console.log("navigator.getCurrentRoutes()", this.props);
     let accountItem, myAppItem, loginItem;
 
     if (this.props.isLoggedIn) {
@@ -223,8 +225,9 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="تاریخچه"
-                icon={<FontAwesomeIcon name="calendar" size={30} color="#900" />}
-                selectedIcon={require('../images/maps-icon-active.png')}
+                icon={<FontAwesomeIcon name="calendar" size={30} color="#003372" />}
+                selectedIcon={<FontAwesomeIcon name="calendar" size={30} color="#d90101" />}
+                
                 onPress={() => {
                   this.props.closeDrawer();
                   this.datePickerDlg.open();
@@ -235,23 +238,27 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="درباره"
-                icon={<FontAwesomeIcon name="quote-left" size={30} color="#900" />}
-                selectedIcon={require('../images/maps-icon-active.png')}
+                icon={<FontAwesomeIcon name="quote-left" size={30} color="#003372" />}
+                selectedIcon={<FontAwesomeIcon name="quote-left" size={30} color="#5bc0de" />}
+                selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'about'}
                 onPress={() => {
-                  this.props.closeDrawer();
                   this.navigateTo('about');
                 }}
             />
 
             <MenuItem
                 title="راهنما"
-                icon={<EntypoIcon name="help-with-circle" size={30} color="#900" />}
-                selectedIcon={require('../images/maps-icon-active.png')}
+                icon={<EntypoIcon name="help-with-circle" size={30} color="#003372" />}
+                selectedIcon={<EntypoIcon name="help-with-circle" size={30} color="#1c54a9" />}
+                selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'help'}
+                onPress={() => {
+                  this.navigateTo('help');
+                }}
             />
 
             <MenuItem
                 title="تماس با پشتیبانی"
-                icon={<FontAwesomeIcon name="phone" size={30} color="#900" />}
+                icon={<FontAwesomeIcon name="phone" size={30} color="#003372" />}
                 onPress={() => {
                   phonecall("02188402938", true);
                 }}
