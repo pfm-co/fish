@@ -116,7 +116,7 @@ class App extends Component {
                       fontSize: 15,
                     }}
                   >
-                    Installing update...
+                    در حال نصب بروزرسانی...
                   </Text> :
                   <View
                     style={{

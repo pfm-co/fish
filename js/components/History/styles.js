@@ -46,6 +46,10 @@ module.exports = StyleSheet.create({
 	},
     content: {
         padding: 15
-    }
+    },
+	picker: {
+        width: 110,
+		
+    },
 
 });
