@@ -230,7 +230,7 @@ remove_duplicates_safe(arr) {
                 <View style={styles.payslipDetailsView}>
 
                   <View style={styles.paymentDetailsItemHeaderView}>
-                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining") }</Text>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:3}]}>{I18n.t("Home.DeductionTitle")}</Text>
                   </View>
