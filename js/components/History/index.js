@@ -74,12 +74,32 @@ constructor(props) {
         </View>
 
         <View style={{flex:1, flexDirection: 'column', marginLeft: 30, marginRight: 30, marginTop: 50}}>
+          
           <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
             <Button bordered info onPress={() => this.onSelectMonth(1)}> <Text>فروردین</Text> </Button>
-            <Button bordered info> اردیبهشت </Button>
-            <Button bordered info> خرداد </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(2)}> <Text>اردیبهشت</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(3)}> <Text>خرداد</Text> </Button>
+          </View>
+
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Button bordered info onPress={() => this.onSelectMonth(4)}> <Text>تیر</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(5)}> <Text>مرداد</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(6)}> <Text>شهریور</Text> </Button>
           </View>
         
+
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Button bordered info onPress={() => this.onSelectMonth(7)}> <Text>مهر</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(8)}> <Text>آبان</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(9)}> <Text>آذر</Text> </Button>
+          </View>
+
+          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+            <Button bordered info onPress={() => this.onSelectMonth(10)}> <Text>دی</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(11)}> <Text>بهمن</Text> </Button>
+            <Button bordered info onPress={() => this.onSelectMonth(12)}> <Text>اسفند</Text> </Button>
+          </View>
+
         </View>
 
       </View>
