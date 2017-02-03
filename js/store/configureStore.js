@@ -32,7 +32,7 @@ var createAppStore = applyMiddleware(thunk, promise, array, analytics, logger)(c
 function configureStore(onComplete: ?() => void) {
     // TODO(frantic): reconsider usage of redux-persist, maybe add cache breaker
     const store = autoRehydrate()(createAppStore)(reducers);
-    persistStore(store, {storage: AsyncStorage}, onComplete);
+    persistStore(store, {storage: AsyncStorage}, onComplete).purge();
     if (isDebuggingInChrome) {
         window.store = store;
     }

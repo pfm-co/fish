@@ -11,7 +11,7 @@ import { logout } from './actions/user';
 
 var TouchableOpacity = require('TouchableOpacity');
 
-import { closeDrawer, openDrawer } from './actions/drawer';
+import { closeDrawer, openDrawer, navigateTo } from './actions/drawer';
 
 import Login from './components/Login';
 import Home from './components/Home';
@@ -73,8 +73,12 @@ class AppNavigator extends Component {
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', () => {
-      const routes = this.props.navigation.routes;
+      console.log("hardwareBackPress");
 
+      if (this.handleBackButton())
+        return true;
+
+      const routes = this.props.navigation.routes;
       if (routes[routes.length - 1].key === 'home' || routes[routes.length - 1].key === 'login') {
         return false;
       }
@@ -110,6 +114,10 @@ class AppNavigator extends Component {
     if (this._drawer) {
       this._drawer.closeDrawer();
     }
+  }
+
+  navigateTo(route) {
+    this.props.navigateTo(route, 'home');
   }
 
   getChildContext() {
@@ -223,7 +231,7 @@ class AppNavigator extends Component {
                 }}
             />
 
-            <View style={{width: null, height:1, backgroundColor: "#d8d8d8"}}/>
+            <View style={{width: null, height:1, backgroundColor: "#d8d8d8", marginTop: 3, marginBottom: 7}}/>
 
             <MenuItem
                 title="درباره"
@@ -231,7 +239,7 @@ class AppNavigator extends Component {
                 selectedIcon={require('../images/maps-icon-active.png')}
                 onPress={() => {
                   this.props.closeDrawer();
-                  this.props.pushRoute({key: 'about'}, this.props.navigation.key);
+                  this.navigateTo('about');
                 }}
             />
 
@@ -290,6 +298,7 @@ function bindAction(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
     closeDrawer: () => dispatch(closeDrawer()),
+    navigateTo: (route, homeRoute) => dispatch(navigateTo(route, homeRoute)),
     popRoute: key => dispatch(popRoute(key)),
     pushRoute: (route, key) => dispatch(pushRoute(route, key)),
     jumpTo: (routeKey, key) => dispatch(jumpTo(routeKey, key)),

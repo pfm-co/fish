@@ -42,11 +42,13 @@ class Login extends Component {
 
   componentWillReceiveProps(nextProps)
   {
-    // user login was successfull, navigate to home page
+    
     console.log("componentWillReceiveProps nextProps.isLoggedIn", nextProps.authState.isLoggedIn);
-    if (nextProps.authState.isLoggedIn == true)
+    if (nextProps.authState.isLoggedIn && !this.props.authState.isLoggedIn)
     {
-        this.props.pushRoute( { key: 'home' } , this.props.navigation.key);
+        // user login was successfull, navigate to home page
+        // this.props.pushRoute( { key: 'home' } , this.props.navigation.key);
+        this.props.replaceAt('login', {key: 'home'}, this.props.navigation.key);
     }
   }
 

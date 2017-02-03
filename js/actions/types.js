@@ -12,6 +12,7 @@ export type Action =
     | { type: 'SWITCH_TAB', tab, data }
     | { type: 'CHANGE_APP_LANGUAGE', language: string }
     | { type: 'SET_PAYSLIP_YEAR_MONTH', month: int; year: int }
+    | { type: 'USER_PROVINCE_INFO', province: string; region: string }
 ;
 
 export type Dispatch = (action: Action | ThunkAction | PromiseAction | Array<Action>) => any;
