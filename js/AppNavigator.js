@@ -168,8 +168,7 @@ class AppNavigator extends Component {
     if (this.props.isLoggedIn) {
 
         accountItem = (
-            <View style={{width: drawerWidth, flex:1, flexDirection:"column", justifyContent: 'space-between',
-                        paddingRight: 40}}>
+            <View style={styles.accountItem}>
               <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
                 <View style={{marginTop: 15, marginRight: 10}}>
                   <Text>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
@@ -193,6 +192,8 @@ class AppNavigator extends Component {
                         {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
                     </Text>
                 </View>
+
+                <Text style={styles.regionText}>{this.props.userInfo.region}</Text>
             </View>
         );
 
@@ -213,16 +214,6 @@ class AppNavigator extends Component {
             </Image>
 
             <MenuItem
-                title="فیش حقوقی"
-                icon={<FontAwesomeIcon name="phone" size={30} color="#900" />}
-                selectedIcon={require('../images/maps-icon-active.png')}
-                onPress={() => {
-                  this.props.closeDrawer();
-                  this.props.jumpTo('home', this.props.navigation.key);
-                }}
-            />
-
-            <MenuItem
                 title="تاریخچه"
                 icon={<FontAwesomeIcon name="calendar" size={30} color="#900" />}
                 selectedIcon={require('../images/maps-icon-active.png')}
@@ -231,6 +222,8 @@ class AppNavigator extends Component {
                   this.datePickerDlg.open();
                 }}
             />
+
+            <View style={{width: null, height:1, backgroundColor: "#d8d8d8"}}/>
 
             <MenuItem
                 title="درباره"
@@ -313,34 +306,50 @@ const mapStoreToProps = store => ({
     lastName: store.user.lastName,
     personelCode: store.user.personelCode,
     nationalCode: store.user.nationalCode,
+    region: store.user.region,
+    province: store.user.province,
   }
 });
 
 
 let styles = StyleSheet.create({
     drawer: {
-        flex: 1,
-        backgroundColor: 'white',
-        zIndex:1000
+      flex: 1,
+      backgroundColor: 'white',
+      zIndex:1000
     },
     content: {
-        flex: 1,
+      flex: 1,
     },
     header: {
-        padding: 20,
-        justifyContent: 'flex-start',
+      padding: 20,
+      paddingBottom: 0,
+      justifyContent: 'flex-start',
+    },
+    accountItem: {
+      width: drawerWidth,
+      flex:1,
+      flexDirection:"column",
+      justifyContent: 'space-between',
+      paddingRight: 40,
+      paddingBottom: 7
     },
     name: {
-        marginTop: 10,
-        color: '#6f0000',
-        fontSize: 23,
-        textShadowColor: "#c06262",
-        textShadowOffset: {width: 0, height: 3},
-        textShadowRadius: 5,
+      marginTop: 10,
+      color: '#6f0000',
+      fontSize: 23,
+      textShadowColor: "#c06262",
+      textShadowOffset: {width: 0, height: 3},
+      textShadowRadius: 5,
+    },
+    regionText: {
+      color: '#6f0000',
+      fontSize: 10,
+      marginTop:7,
     },
     logout: {
-        fontSize: 15,
-        color: '#b80101',
+      fontSize: 15,
+      color: '#b80101',
     },
     profilePic:
     {

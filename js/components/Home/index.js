@@ -15,6 +15,7 @@ const Item = Picker.Item;
 import styles from './styles';
 import I18n from 'react-native-i18n'
 import { openDrawer } from '../../actions/drawer';
+import { updateProvinceInfo } from '../../actions/user';
 
 
 const {
@@ -115,6 +116,7 @@ class Home extends Component {
                 isLoadingPayslip: false,
                 paySlipResult: {status: true, data: result.data},
               });
+              that.props.updateProvinceInfo('', result.data.info[1].value);
             }
             else
             {
@@ -341,6 +343,7 @@ function bindActions(dispatch) {
   return {
     replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
     openDrawer: () => dispatch(openDrawer()),
+    updateProvinceInfo: (province: string, region: string) => dispatch(updateProvinceInfo(province, region)),
   };
 }
 
