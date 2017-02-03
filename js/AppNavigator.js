@@ -17,6 +17,7 @@ import Login from './components/Login';
 import Home from './components/Home';
 import About from './components/About';
 import Help from './components/Help';
+import History from './components/History';
 import ModalDatePicker from './components/ModalDatePicker';
 import SplashPage from './components/SplashScreen';
 import { statusBarColor } from './themes/theme-base';
@@ -166,6 +167,8 @@ class AppNavigator extends Component {
         return <About />;
       case 'help':
         return <Help />;
+      case 'history':
+        return <History />;
       default :
         return <Home />
     }
@@ -229,8 +232,9 @@ class AppNavigator extends Component {
                 selectedIcon={<FontAwesomeIcon name="calendar" size={30} color="#d90101" />}
                 
                 onPress={() => {
-                  this.props.closeDrawer();
-                  this.datePickerDlg.open();
+                  // this.props.closeDrawer();
+                  // this.datePickerDlg.open();
+                  this.navigateTo('history');
                 }}
             />
 
