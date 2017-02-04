@@ -13,6 +13,8 @@ const Item = Picker.Item;
 
 import { changePayslipYearMonth } from '../../actions/settings';
 import { navigateTo } from '../../actions/drawer';
+import { openDrawer } from '../../actions/drawer';
+
 
 
 class History extends Component {
@@ -55,7 +57,7 @@ constructor(props) {
         <Heading2 style={{}}>تاریخچه</Heading2>
         <Paragraph style={{fontSize: 17, marginTop: 15}}> برای تغییر تاریخچه فیش حقوقی، ماه و سال مورد نظر را انتخاب کنید: </Paragraph>
 
-        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center', marginTop: 20}}>
+        <View style={styles.pickerContainer}>
           <Picker
               iosHeader={I18n.t("Home.SelectOne")}
               mode="dropdown"
@@ -73,31 +75,31 @@ constructor(props) {
           <Text style={{marginLeft: 20}}>{I18n.t("Common.Year") + ": "}</Text>
         </View>
 
-        <View style={{flex:1, flexDirection: 'column', marginLeft: 30, marginRight: 30, marginTop: 50}}>
+        <View style={styles.monthsContainer}>
           
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Button bordered info onPress={() => this.onSelectMonth(1)}> <Text>فروردین</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(2)}> <Text>اردیبهشت</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(3)}> <Text>خرداد</Text> </Button>
+          <View style={styles.monthsRow}>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(1)}> <Text>فروردین</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(2)}> <Text>اردیبهشت</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(3)}> <Text>خرداد</Text> </Button>
           </View>
 
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Button bordered info onPress={() => this.onSelectMonth(4)}> <Text>تیر</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(5)}> <Text>مرداد</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(6)}> <Text>شهریور</Text> </Button>
+          <View style={styles.monthsRow}>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(4)}> <Text>تیر</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(5)}> <Text>مرداد</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(6)}> <Text>شهریور</Text> </Button>
           </View>
         
 
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Button bordered info onPress={() => this.onSelectMonth(7)}> <Text>مهر</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(8)}> <Text>آبان</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(9)}> <Text>آذر</Text> </Button>
+          <View style={styles.monthsRow}>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(7)}> <Text>مهر</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(8)}> <Text>آبان</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(9)}> <Text>آذر</Text> </Button>
           </View>
 
-          <View style={{flex:1, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
-            <Button bordered info onPress={() => this.onSelectMonth(10)}> <Text>دی</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(11)}> <Text>بهمن</Text> </Button>
-            <Button bordered info onPress={() => this.onSelectMonth(12)}> <Text>اسفند</Text> </Button>
+          <View style={styles.monthsRow}>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(10)}> <Text>دی</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(11)}> <Text>بهمن</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(12)}> <Text>اسفند</Text> </Button>
           </View>
 
         </View>
@@ -138,6 +140,7 @@ constructor(props) {
 
 function bindActions(dispatch) {
   return {
+      openDrawer: () => dispatch(openDrawer()),
       changePayslipYearMonth: (month: int, year: int) => dispatch(changePayslipYearMonth(month, year)),
       navigateTo: (route, homeRoute) => dispatch(navigateTo(route, homeRoute)),
 

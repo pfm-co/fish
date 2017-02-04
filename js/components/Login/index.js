@@ -75,21 +75,30 @@ class Login extends Component {
 
                 <View style={styles.middleSpacer} />
                 
-                <InputGroup style={[styles.input, {marginTop: 150}]}>
+                <InputGroup 
+                  iconRight={true} 
+                  style={[styles.input, {marginTop: 150}]}
+                >
                   <Icon name="ios-person" />
                   <Input 
                     placeholder={I18n.t("Login.Username")}
                     onChangeText={username => this.setState({ username })}
                     value={this.state.username}
+                    style={{textAlign: 'right'}}
                    />
                 </InputGroup>
-                <InputGroup style={styles.input}>
+
+                <InputGroup 
+                  iconRight={true} 
+                  style={styles.input}
+                >
                   <Icon name="ios-unlock-outline" />
                   <Input
                     placeholder={I18n.t("Login.Password")}
                     secureTextEntry
                     onChangeText={password => this.setState({ password })}
                     value={this.state.password}
+                    style={{textAlign: 'right'}}
                   />
                 </InputGroup>
 

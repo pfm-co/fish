@@ -14,7 +14,7 @@ module.exports = StyleSheet.create({
         flex:1,
         backgroundColor: '#FBFAFA',
     },
-    	header: {
+	header: {
 		...Platform.select({
 			android: {
 			backgroundColor: '#5597B8',

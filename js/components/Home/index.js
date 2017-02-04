@@ -234,7 +234,7 @@ remove_duplicates_safe(arr) {
                   <View style={styles.paymentDetailsItemHeaderView}>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.Remaining") }</Text>
                     <Text style={[styles.paymentDetailsHeaderText, {flex:1}]}>{I18n.t("Home.MoneyAmount") + ' ' + I18n.t("Home.CurrencyUnitPrnth")}</Text>
-                    <Text style={[styles.paymentDetailsHeaderText, {flex:3}]}>{I18n.t("Home.DeductionTitle")}</Text>
+                    <Text style={[styles.paymentDetailsHeaderText, {flex:2.2}]}>{I18n.t("Home.DeductionTitle")}</Text>
                   </View>
 
                 {this.state.paySlipResult.data.deduction.map(deduction => {
@@ -242,7 +242,7 @@ remove_duplicates_safe(arr) {
                     <View style={styles.paymentDetailsItemView} key={'deduction' + deduction.title}>
                       <Text style={[styles.payslipRowValueText, {flex:1}]}>{ (typeof deduction.remain) == "string" ? "" : (this.formatMoney(deduction.remain))}</Text>
                       <Text style={[styles.payslipRowValueText, {flex:1}]}>{this.formatMoney(deduction.value)}</Text>
-                      <Text style={[styles.payslipRowTitleText, {flex:3}]}>{deduction.title}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:2.2}]}>{deduction.title}</Text>
                     </View>
                   );
                 })}
@@ -266,7 +266,7 @@ remove_duplicates_safe(arr) {
                     <View style={[styles.paymentDetailsItemView, 
                         {borderTopWidth: i == 0 ? 0 : 1, marginTop: i == 0 ? 3 : 10}]} key={'jobDetails' + jobDetails.key}>
                       <Text style={[styles.payslipRowValueText, {flex:1}]}>{typeof jobDetails.value === "string" ? jobDetails.value : (this.formatMoney(jobDetails.value) + (jobDetails.value.toString().length > 3 ? ' ' + I18n.t("Home.CurrencyUnit") : '' ))}</Text>
-                      <Text style={[styles.payslipRowTitleText, {flex:3}]}>{jobDetails.title}</Text>
+                      <Text style={[styles.payslipRowTitleText, {flex:1}]}>{jobDetails.title}</Text>
                     </View>
                   );
                 })}

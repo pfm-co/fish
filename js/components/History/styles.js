@@ -47,9 +47,33 @@ module.exports = StyleSheet.create({
     content: {
         padding: 15
     },
+	pickerContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginTop: 20
+	},
 	picker: {
         width: 110,
 		
     },
+	monthsContainer: {
+		flex:1,
+		flexDirection: 'column',
+		marginLeft: 30,
+		marginRight: 30,
+		marginTop: 40
+	},
+	monthsRow: {
+		flex:1,
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		marginBottom: 30
+	},
+	monthBtn: {
+		width: deviceWith < 500 ? 80 : 100
+	}
 
 });

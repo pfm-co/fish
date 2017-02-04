@@ -229,8 +229,8 @@ class AppNavigator extends Component {
             <MenuItem
                 title="تاریخچه"
                 icon={<FontAwesomeIcon name="calendar" size={30} color="#003372" />}
-                selectedIcon={<FontAwesomeIcon name="calendar" size={30} color="#d90101" />}
-                
+                selectedIcon={<FontAwesomeIcon name="calendar" size={30} color="#5bc0de" />}
+                selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'history'}
                 onPress={() => {
                   // this.props.closeDrawer();
                   // this.datePickerDlg.open();
