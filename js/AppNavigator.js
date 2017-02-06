@@ -181,8 +181,8 @@ class AppNavigator extends Component {
             <View style={styles.accountItem}>
               <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
                 <View style={{marginTop: 15, marginRight: 10}}>
-                  <Text>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
-                  <Text>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
+                  <Text style={{color: "#001431"}}>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
+                  <Text style={{color: "#001431"}}>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
                 </View>
 
                 <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
@@ -355,9 +355,6 @@ let styles = StyleSheet.create({
       marginTop: 10,
       color: '#6f0000',
       fontSize: 23,
-      textShadowColor: "#c06262",
-      textShadowOffset: {width: 0, height: 3},
-      textShadowRadius: 5,
     },
     regionText: {
       color: '#6f0000',

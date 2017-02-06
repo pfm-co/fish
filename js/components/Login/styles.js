@@ -63,7 +63,7 @@ module.exports = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 12,
-    backgroundColor: "#19528c",
+    backgroundColor: "#0387d2",
   },
   btnText: {
     fontSize: 20,

@@ -6,7 +6,7 @@ const LOGGING_IN = 'LOGGING_IN';
 const LOGGED_IN = 'LOGGED_IN';
 const LOGIN_ERROR = 'LOGIN_ERROR';
 const LOGGED_OUT = 'LOGGED_OUT';
-const USER_PROVINCE_INFO = 'USER_PROVINCE_INFO';
+const UPDATE_ADDITIONAL_INFO = 'UPDATE_ADDITIONAL_INFO';
 
 import I18n from 'react-native-i18n'
 
@@ -90,12 +90,14 @@ function login(username: ?string, password: ?string) : ThunkAction
 	};
 }
 
-function updateProvinceInfo(province: string, region: string) : Action
+function updateAdditionalInfo(province: string, region: string, bankName: string, accountNumber: string) : Action
 {
 	return {
-		type: USER_PROVINCE_INFO,
+		type: UPDATE_ADDITIONAL_INFO,
 		province,
-		region
+		region,
+		bankName,
+		accountNumber
 	};
 }
 
@@ -108,4 +110,4 @@ function logout() : Action
 }
 
 
-module.exports = { login, logout, updateProvinceInfo, LOGGING_IN, LOGIN_ERROR, LOGGED_OUT, LOGGED_IN, USER_PROVINCE_INFO };
+module.exports = { login, logout, updateAdditionalInfo, LOGGING_IN, LOGIN_ERROR, LOGGED_OUT, LOGGED_IN, UPDATE_ADDITIONAL_INFO };

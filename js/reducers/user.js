@@ -1,7 +1,7 @@
 'use strict';
 
 import type { Action } from '../actions/types';
-import { LOGGING_IN, LOGGED_IN, LOGIN_ERROR, LOGGED_OUT, USER_PROVINCE_INFO} from '../actions/user';
+import { LOGGING_IN, LOGGED_IN, LOGIN_ERROR, LOGGED_OUT, UPDATE_ADDITIONAL_INFO} from '../actions/user';
 
 export type State = {
 	isLoggedIn: boolean,
@@ -35,6 +35,8 @@ const initialState = {
 	region: '',
 	province: '',
 	token: '',
+	bankName: '',
+	accountNumber: '',
 };
 
 
@@ -83,12 +85,15 @@ export default function (state:State = initialState, action:Action): State {
 		console.log("LOGGED_OUT");
 		return initialState;
 	}
-	else if (action.type === USER_PROVINCE_INFO)
+	else if (action.type === UPDATE_ADDITIONAL_INFO)
 	{
 		return {
 			...state,
 			province: action.province,
 			region: action.region,
+			bankName: action.bankName,
+			accountNumber: action.accountNumber,
+
 		};
 	}
 

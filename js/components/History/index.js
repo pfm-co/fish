@@ -45,7 +45,6 @@ constructor(props) {
 
   onSelectMonth(month: int)
   {
-    debugger;
     this.props.changePayslipYearMonth(month.toString(), this.state.payslipYear);
     this.props.navigateTo('home', 'home');
   }

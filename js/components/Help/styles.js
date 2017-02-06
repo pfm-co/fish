@@ -17,7 +17,7 @@ module.exports = StyleSheet.create({
 	header: {
 		...Platform.select({
 			android: {
-			backgroundColor: '#5597B8',
+			backgroundColor: '#0396a6',
 		},
 		})
 	},
@@ -43,6 +43,8 @@ module.exports = StyleSheet.create({
 		color: "#f5f5f5",
 		textAlign: 'center',
 		alignSelf: 'center',
+		fontSize: 21,
+		color: "#f5f5f5"
 	},
     content: {
         padding: 15

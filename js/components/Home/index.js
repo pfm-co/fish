@@ -15,7 +15,7 @@ const Item = Picker.Item;
 import styles from './styles';
 import I18n from 'react-native-i18n'
 import { openDrawer } from '../../actions/drawer';
-import { updateProvinceInfo } from '../../actions/user';
+import { updateAdditionalInfo } from '../../actions/user';
 
 
 const {
@@ -42,6 +42,7 @@ class Home extends Component {
       paySlipResult: {status: false, data: {}},
       hasError: false,
       errorMsg: '',
+      emptyPayslip: false,
     };
 
     this.loadPayslip = this.loadPayslip.bind(this);
@@ -112,11 +113,19 @@ class Home extends Component {
           {
             if (result.status)
             {
+              if (result.data.job.length == 0)
+              {
+                that.setState({
+                  isLoadingPayslip: false,
+                  emptyPayslip: true,
+                });
+              }
               that.setState({
                 isLoadingPayslip: false,
                 paySlipResult: {status: true, data: result.data},
               });
-              that.props.updateProvinceInfo('', result.data.info[1].value);
+              that.props.updateAdditionalInfo('', result.data.info[1].value, result.data.info[0].value,
+                 result.data.info[3].value + '');
             }
             else
             {
@@ -139,12 +148,23 @@ class Home extends Component {
         })
         .catch(e => {
           console.log("Error logging in: ", e);
+          this.setState({
+            isLoadingPayslip: false,
+            hasError: true,
+            errorMsg: "Unresolved error, contact server administrator"
+          });
 
         });
     }
     catch(e)
     {
       console.log("Error logging in: ", e);
+
+      this.setState({
+            isLoadingPayslip: false,
+            hasError: true,
+            errorMsg: "Unresolved error, contact server administrator"
+          });
     }
   }
 
@@ -162,34 +182,10 @@ remove_duplicates_safe(arr) {
 }
 
   render() {
-    const content = this.state.isLoadingPayslip ? (
-      <View style={styles.loadingView}>
-        <ActivityIndicator
-            size="large"
-            color="#382B5C"
-            animating={true}
-            style={{alignSelf: 'center'}}
-        />
-      </View>
-    ) : this.state.paySlipResult.status ?
+    const payslipContent = !this.state.isLoadingPayslip && this.state.paySlipResult.status && !this.state.emptyPayslip ? 
     (
-      <View style={styles.content}>
-        <Card style={styles.card}>
-          <CardItem>
-            <View style={styles.topSummaryView}>
-                <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
-              </View>
-              <Text style={styles.topSalarySummary}>
-              {I18n.t("Home.TotalPayment")} : 
-                {'  ' + this.formatMoney(
-                              this.calculateTotalPayment(this.state.paySlipResult.data.payment) -
-                                 this.calculateTotalDeduction(this.state.paySlipResult.data.deduction)) 
-                                  + '  ' + I18n.t("Home.CurrencyUnit")}
-              </Text>
-            </CardItem>
-        </Card>
-
-            <ExpandablePanel expanded={false} style={styles.expandableLayout}
+    <View>
+      <ExpandablePanel expanded={false} style={styles.expandableLayout}
               headerItem=
               {
                   <View style={styles.payslipHeaderView}>
@@ -303,7 +299,57 @@ remove_duplicates_safe(arr) {
               </View>
             </ExpandablePanel>
 
-            <View style={styles.bottomSpacer}/>
+            <Card style={styles.cardContainer}>
+              <CardItem>
+                <Text style={styles.cardText}>مبلغ فوق به حساب {this.props.userInfo.accountNumber} در بانک {this.props.userInfo.bankName} واریز خواهد شد.</Text>
+              </CardItem>
+            
+            </Card>
+        </View>
+    )
+    :
+    (null)
+    ;
+
+    const content = this.state.isLoadingPayslip ? (
+      <View style={styles.loadingView}>
+        <ActivityIndicator
+            size="large"
+            color="#382B5C"
+            animating={true}
+            style={{alignSelf: 'center'}}
+        />
+      </View>
+    ) : this.state.paySlipResult.status ?
+    (
+      <View style={styles.content}>
+          <Card style={styles.card}>
+            <CardItem>
+              <View style={styles.topSummaryView}>
+                  <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
+                </View>
+                { 
+                  !this.state.emptyPayslip && 
+                  <Text style={styles.topSalarySummary}>
+                    {I18n.t("Home.TotalPayment")} : 
+                      {'  ' + this.formatMoney(
+                                    this.calculateTotalPayment(this.state.paySlipResult.data.payment) -
+                                      this.calculateTotalDeduction(this.state.paySlipResult.data.deduction)) 
+                                        + '  ' + I18n.t("Home.CurrencyUnit")}
+                  </Text> 
+                }
+                {
+                  this.state.emptyPayslip && 
+                  <Text style={styles.topSalarySummary}>
+                    در تاریخ انتخاب شده اطلاعاتی وجود ندارد
+                  </Text>
+                }
+              </CardItem>
+          </Card>
+
+          {payslipContent}
+
+          <View style={styles.bottomSpacer}/>
 
           </View>
         ) : (
@@ -349,7 +395,7 @@ function bindActions(dispatch) {
   return {
     replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
     openDrawer: () => dispatch(openDrawer()),
-    updateProvinceInfo: (province: string, region: string) => dispatch(updateProvinceInfo(province, region)),
+    updateAdditionalInfo: (province: string, region: string, bankName: string, accountNumber: string) => dispatch(updateAdditionalInfo(province, region, bankName, accountNumber)),
   };
 }
 
@@ -359,6 +405,7 @@ const mapStoreToProps = store => ({
   payslipMonth: store.settings.payslipMonth,
   payslipYear: store.settings.payslipYear,
   payslipMonthStr: store.settings.payslipMonthStr,
+  userInfo: store.user
 });
 
 export default connect(mapStoreToProps, bindActions)(Home);

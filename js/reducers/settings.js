@@ -32,11 +32,14 @@ export default function (state:State = initialState, action:Action): State {
   }
   else if (action.type === SET_PAYSLIP_YEAR_MONTH)
   {
+    let monthStr =  m.jMonth(action.month - 1).format('jMMMM');
+    monthStr = monthStr.replace("امرداد", "مرداد");
+
     return {
       ...state,
       payslipMonth: action.month,
       payslipYear: action.year,
-      payslipMonthStr: m.jMonth(action.month - 1).format('jMMMM'),
+      payslipMonthStr: monthStr,
     }
   }
   else if (action.type == APP_STARTED)
