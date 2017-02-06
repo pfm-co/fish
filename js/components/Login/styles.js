@@ -49,13 +49,21 @@ module.exports = StyleSheet.create({
     marginRight: 20,
     marginLeft:20,
   },
+  inputText: {
+    color: "#f5f5f5",
+    textAlign: 'right',
+    paddingRight: 7,
+
+  },
   btn: {
     marginTop: 20,
     alignSelf: 'center',
-    paddingLeft: 40,
-    paddingRight: 40,
-    paddingTop:5,
-    paddingBottom:5,
+    paddingLeft: 70,
+    paddingRight: 70,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingBottom: 12,
+    backgroundColor: "#19528c",
   },
   btnText: {
     fontSize: 20,

@@ -8,13 +8,21 @@ class ExpandablePanel extends Component{
         headerItem: React.PropTypes.element,
     }
 
+  static defaultProps = {
+    ...Component.defaultProps,
+    expanded: true,
+  }
+
     constructor(props){
         super(props);
+
 
         this.state = {
             title       : props.title,
             expanded    : true,
-            animation   : new Animated.Value()
+            animation   : new Animated.Value(),
+            didSetMaxHeight: false,
+            minHeight: 0,
         };
     }
 
@@ -30,21 +38,30 @@ class ExpandablePanel extends Component{
         Animated.spring(
             this.state.animation,
             {
-                toValue: finalValue
+                toValue: finalValue,
+                overshootClamping: false,
+                bounciness: 0,
+                speed: 10
             }
         ).start();
+
+        this.props.onToggle && this.props.onToggle();
     }
 
     _setMaxHeight(event){
-        this.setState({
-            maxHeight   : event.nativeEvent.layout.height
-        });
+        if (!this.state.didSetMaxHeight)
+        {
+            this.setState({
+                maxHeight   : event.nativeEvent.layout.height,
+                didSetMaxHeight: true,
+            });
+        }
     }
 
     _setMinHeight(event){
-        this.setState({
-            minHeight   : event.nativeEvent.layout.height
-        });
+        // this.setState({
+        //     minHeight   : 0
+        // });
     }
 
     render(){
@@ -54,13 +71,12 @@ class ExpandablePanel extends Component{
         }
 
         return (
-            <Animated.View 
-                style={[styles.container, {height: this.state.animation}]}>
-                <Card>
+            
+                <Card style={styles.container}>
                     <CardItem style={styles.titleContainer} onLayout={this._setMinHeight.bind(this)}>
                         <TouchableOpacity
                             onPress={this.toggle.bind(this)}
-                            underlayColor="#f1f1f1"
+                            underlayColor="#959595"
                             style={{flex:1}}>
                             <View style={{flex:1}}>
                                 {this.props.headerItem}
@@ -68,23 +84,28 @@ class ExpandablePanel extends Component{
                         </TouchableOpacity>
                     </CardItem>
                     
-                    <CardItem onLayout={this._setMaxHeight.bind(this)}>
-                        {this.props.children}
-                    </CardItem>
+                    <Animated.View 
+                        style={[{height: this.state.animation}]}>
+                        <CardItem onLayout={this._setMaxHeight.bind(this)}>
+                            {this.props.children}
+                        </CardItem>
+                    </Animated.View>
                 </Card>
-            </Animated.View>
+            
         );
     }
 }
 
 var styles = StyleSheet.create({
     container   : {
-        margin:10,
-        overflow:'hidden'
+        overflow:'hidden',
+        marginLeft: 10,
+        marginRight: 10,
+        marginBottom: 20,
     },
     titleContainer : {
         flex: 1,
-        flexDirection: 'row'
+        flexDirection: 'row',
     },
     button      : {
 

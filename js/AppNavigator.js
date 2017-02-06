@@ -75,8 +75,6 @@ class AppNavigator extends Component {
 
   componentDidMount() {
     BackAndroid.addEventListener('hardwareBackPress', () => {
-      console.log("hardwareBackPress");
-
       if (this.handleBackButton())
         return true;
 
@@ -175,7 +173,6 @@ class AppNavigator extends Component {
   }
 
   renderNavigationView() {
-    console.log("navigator.getCurrentRoutes()", this.props);
     let accountItem, myAppItem, loginItem;
 
     if (this.props.isLoggedIn) {

@@ -74,12 +74,12 @@ class Login extends Component {
                   iconRight={true} 
                   style={[styles.input, {marginTop: 150}]}
                 >
-                  <Icon name="ios-person" />
+                  <Icon name="ios-person" style={{fontSize: 23, color: "#f5f5f5"}} />
                   <Input 
                     placeholder={I18n.t("Login.Username")}
                     onChangeText={username => this.setState({ username })}
                     value={this.state.username}
-                    style={{textAlign: 'right'}}
+                    style={styles.inputText}
                    />
                 </InputGroup>
 
@@ -87,13 +87,13 @@ class Login extends Component {
                   iconRight={true} 
                   style={styles.input}
                 >
-                  <Icon name="ios-unlock-outline" />
+                  <Icon name="ios-unlock-outline" style={{fontSize: 23, color: "#f5f5f5"}} />
                   <Input
                     placeholder={I18n.t("Login.Password")}
                     secureTextEntry
                     onChangeText={password => this.setState({ password })}
                     value={this.state.password}
-                    style={{textAlign: 'right'}}
+                    style={styles.inputText}
                   />
                 </InputGroup>
 

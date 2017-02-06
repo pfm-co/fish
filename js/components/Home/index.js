@@ -2,7 +2,7 @@
 
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, Picker, Card, CardItem, InputGroup, Input, Button, Icon, View } from 'native-base';
@@ -188,7 +188,8 @@ remove_duplicates_safe(arr) {
             </CardItem>
         </Card>
 
-            <ExpandablePanel headerItem=
+            <ExpandablePanel expanded={false} style={styles.expandableLayout}
+              headerItem=
               {
                   <View style={styles.payslipHeaderView}>
                     <Text style={styles.payslipHeaderText}>
@@ -221,7 +222,8 @@ remove_duplicates_safe(arr) {
             </ExpandablePanel>
 
 
-            <ExpandablePanel headerItem=
+            <ExpandablePanel expanded={false} style={styles.expandableLayout}
+              headerItem=
               {
                   <View style={styles.payslipHeaderView}>
                     <Text style={styles.payslipHeaderText}>{this.formatMoney(this.calculateTotalDeduction(this.state.paySlipResult.data.deduction))} {I18n.t("Home.CurrencyUnit")}</Text>
@@ -251,7 +253,8 @@ remove_duplicates_safe(arr) {
             </ExpandablePanel>
             
 
-            <ExpandablePanel headerItem=
+            <ExpandablePanel expanded={false} style={styles.expandableLayout}
+              headerItem=
               {
                   <View style={styles.payslipHeaderView}>
                     <View style={{flex:1}}></View>
@@ -275,7 +278,12 @@ remove_duplicates_safe(arr) {
             </ExpandablePanel>
 
 
-            <ExpandablePanel headerItem=
+            <ExpandablePanel expanded={false} style={styles.expandableLayout}
+              onToggle={() => {
+                debugger;
+                this.refs.Content.scrollToEnd();
+              console.log("onToggle called")}}
+              headerItem=
               {
                   <View style={styles.payslipHeaderView}>
                     <View style={{flex:1}}></View>
@@ -324,11 +332,11 @@ remove_duplicates_safe(arr) {
               </View>
           </FmHeader>
 
-          <Content>
+          <ScrollView ref="Content">
             
             {content}
 
-          </Content>
+          </ScrollView>
         </View>
       </Container>
     );
