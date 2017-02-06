@@ -19,18 +19,36 @@ class ExpandablePanel extends Component{
 
         this.state = {
             title       : props.title,
-            expanded    : true,
+            expanded    : props.expanded,
+            didUserInteract: false,
             animation   : new Animated.Value(),
             didSetMaxHeight: false,
             minHeight: 0,
         };
+        this.init = this.init.bind(this);
+        
+    }
+
+    componentDidMount()
+    {
+        
+    }
+    
+    init()
+    {
+        let initialValue    = this.state.expanded ? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
+            finalValue      = this.state.expanded ? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
+
+        this.state.animation.setValue(initialValue);
     }
 
     toggle(){
+        
         let initialValue    = this.state.expanded ? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
             finalValue      = this.state.expanded ? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
 
         this.setState({
+            didUserInteract: true,
             expanded : !this.state.expanded
         });
 
@@ -90,7 +108,7 @@ class ExpandablePanel extends Component{
                     </CardItem>
                     
                     <Animated.View 
-                        style={[{height: this.state.animation}]}>
+                        style={[{height: this.state.animation}, !this.state.didUserInteract && !this.state.expanded ? {position: 'absolute', top: -2000} : {}]}>
                         <CardItem onLayout={this._setMaxHeight.bind(this)}>
                             {this.props.children}
                         </CardItem>
@@ -106,7 +124,7 @@ var styles = StyleSheet.create({
         overflow:'hidden',
         marginLeft: 10,
         marginRight: 10,
-        marginBottom: 20,
+        marginBottom: 10,
     },
     titleContainer : {
         flex: 1,

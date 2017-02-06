@@ -293,9 +293,9 @@ remove_duplicates_safe(arr) {
 
                 {this.state.paySlipResult.data.insurance.map((insuranceDetails, i) => {
                   return (
-                    <View style={[styles.paymentDetailsItemView, {borderTopWidth: i == 0 ? 0 : 1}]} key={'insuranceDetails' + insuranceDetails.key}>
-                      <Text style={styles.payslipRowValueText}>{insuranceDetails.value}</Text>
-                      <Text style={styles.payslipRowTitleText}>{insuranceDetails.title}</Text>
+                    <View style={[styles.paymentDetailsItemView, {borderTopWidth: i == 0 ? 0 : 1,  marginTop: i == 0 ? 3 : 10}]} key={'insuranceDetails' + insuranceDetails.key}>
+                      <Text style={[styles.payslipRowValueText]}>{insuranceDetails.value}</Text>
+                      <Text style={[styles.payslipRowValueText]}>{insuranceDetails.title}</Text>
                     </View>
                   );
                 })}
