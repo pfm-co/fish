@@ -55,6 +55,12 @@ module.exports = StyleSheet.create({
 		fontSize: 23,
 		color: "#360000"
 	},
+	loadingView: {
+		height: deviceHeight * 0.95,
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
 	content: {
 		flex: 1,
 	},

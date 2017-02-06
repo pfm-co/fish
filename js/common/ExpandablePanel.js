@@ -35,7 +35,7 @@ class ExpandablePanel extends Component{
         });
 
         this.state.animation.setValue(initialValue);
-        Animated.spring(
+        let springAnim = Animated.spring(
             this.state.animation,
             {
                 toValue: finalValue,
@@ -43,9 +43,14 @@ class ExpandablePanel extends Component{
                 bounciness: 0,
                 speed: 10
             }
-        ).start();
+        );
 
-        this.props.onToggle && this.props.onToggle();
+        this.state.animation.addListener(() => {
+            this.props.onToggle && this.props.onToggle();
+        });
+
+        springAnim.start(() => {this.props.onToggle && this.props.onToggle()});
+        
     }
 
     _setMaxHeight(event){

@@ -163,11 +163,12 @@ remove_duplicates_safe(arr) {
 
   render() {
     const content = this.state.isLoadingPayslip ? (
-      <View>
+      <View style={styles.loadingView}>
         <ActivityIndicator
-            size="small"
+            size="large"
             color="#382B5C"
             animating={true}
+            style={{alignSelf: 'center'}}
         />
       </View>
     ) : this.state.paySlipResult.status ?
@@ -279,10 +280,7 @@ remove_duplicates_safe(arr) {
 
 
             <ExpandablePanel expanded={false} style={styles.expandableLayout}
-              onToggle={() => {
-                debugger;
-                this.refs.Content.scrollToEnd();
-              console.log("onToggle called")}}
+              onToggle={() => { this.refs.Content.scrollToEnd() }}
               headerItem=
               {
                   <View style={styles.payslipHeaderView}>
