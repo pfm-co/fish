@@ -121,7 +121,7 @@ constructor(props) {
               }}
               >
               <View style={styles.headerContent}>
-                  <View><Text style={styles.headerContentText}>{I18n.t("Common.AppName")}</Text></View>
+                  <View><Text style={styles.headerContentText}>تاریخچه</Text></View>
               </View>
           </FmHeader>
 
