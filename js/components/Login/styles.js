@@ -12,6 +12,7 @@ module.exports = StyleSheet.create({
     flex:1,
     backgroundColor: '#FBFAFA',
   },
+  
   shadow: {
     flex: 1,
     width: deviceWith,
@@ -61,9 +62,20 @@ module.exports = StyleSheet.create({
     color: '#DBDBDB'
   },
   loginError: {
-    fontSize: 20,
-    color: '#ea0000',
-    marginTop: 15,
+    fontSize: 16,
+    color: '#f1f1f1',
     alignSelf: 'center',
+  },
+  modal: {
+    height: deviceHeight / 4,
+    width: deviceWith * 0.90,
+    borderRadius: 10,
+    backgroundColor: "#EB1D36",
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 30,
+    paddingBottom: 20,
+    paddingRight: 15,
+    paddingLeft: 15,
   },
 });

@@ -20,10 +20,10 @@ export type State = {
 }
 
 const initialState = {
-	// username: '0569394910',
-	// password: '3qag8pbv',
-	username: '',
-	password: '',
+	username: '0569394910',
+	password: '3qag8pbv',
+	// username: '',
+	// password: '',
 	firstName: '',
 	lastName: '',
 	personelCode: '',
@@ -46,6 +46,8 @@ export default function (state:State = initialState, action:Action): State {
 			username: action.data.username,
 			password: action.data.password,
 			isLoginInProgress: true,
+			hasError: false,
+			errorMsg: '',
 		};
 	}
 	else if (action.type === LOGGED_IN)

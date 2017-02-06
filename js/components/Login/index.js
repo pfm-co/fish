@@ -6,6 +6,7 @@ import { Image } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
+var Modal   = require('react-native-modalbox');
 var { Text } = require('../../common/FmText');
 const ActivityIndicator = require('ActivityIndicator');
 import styles from './styles';
@@ -50,21 +51,15 @@ class Login extends Component {
         // this.props.pushRoute( { key: 'home' } , this.props.navigation.key);
         this.props.replaceAt('login', {key: 'home'}, this.props.navigation.key);
     }
+
+    if (nextProps.authState.hasError)
+    {
+      this.modalDlg.open();
+    }
   }
 
 
   render() {
-    let errorMsg;
-    if (this.props.authState.hasError) {
-        errorMsg = (
-            <Text style={styles.loginError}>
-                { I18n.t('Login.LoginError') + '  ' +
-                  this.props.authState.errorMsg
-                }
-            </Text>
-        );
-    }
-
     return (
       <Container>
         <View style={styles.container}>
@@ -115,12 +110,29 @@ class Login extends Component {
                   <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
                 </Button>
 
-                {errorMsg}
+                
                 
               <View style={styles.bottomSpacer} />
 
               </View>
             </Image>
+
+          <Modal 
+            style={[styles.modal]} 
+            backdrop={true}  
+            position={"center"}
+            ref={(modalDlg) => {
+                this.modalDlg = modalDlg;
+            }}
+            >
+
+            <Text style={styles.loginError}>
+                { I18n.t('Login.LoginError') + '، ' +
+                  this.props.authState.errorMsg
+                }
+            </Text>
+            
+          </Modal>
           </Content>
         </View>
       </Container>

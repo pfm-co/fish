@@ -14,7 +14,6 @@ import I18n from 'react-native-i18n'
 function login(username: ?string, password: ?string) : ThunkAction
 {
 	return (dispatch) => {
-		console.log("Logging in, username:", username, "password: ", password);
 		dispatch({
 	        type: LOGGING_IN,
 	        data: { username: username, password: password}
@@ -40,7 +39,6 @@ function login(username: ?string, password: ?string) : ThunkAction
 		    .then(result => {
 		    	if (result)
 		    	{
-					console.log("login result", result);
 		    		if (result.status)
 		    		{
 	    				dispatch({
