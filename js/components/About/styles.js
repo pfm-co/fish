@@ -44,7 +44,8 @@ module.exports = StyleSheet.create({
 		textAlign: 'center',
 		alignSelf: 'center',
 		fontSize: 21,
-		color: "#f5f5f5"
+		color: "#f5f5f5",
+		width: deviceWith * 0.93
 	},
     content: {
         padding: 15

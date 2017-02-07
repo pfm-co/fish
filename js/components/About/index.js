@@ -70,7 +70,7 @@ constructor(props) {
               }}
               >
               <View style={styles.headerContent}>
-                  <View><Text style={styles.headerContentText}>درباره</Text></View>
+                  <Text style={styles.headerContentText}> درباره </Text>
               </View>
           </FmHeader>
 

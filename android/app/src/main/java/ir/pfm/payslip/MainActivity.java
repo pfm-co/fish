@@ -1,4 +1,4 @@
-package com.payslip;
+package ir.pfm.payslip;
 
 import com.facebook.react.ReactActivity;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;

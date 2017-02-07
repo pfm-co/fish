@@ -1,7 +1,9 @@
-import {StyleSheet, View, Image, TouchableOpacity, Animated} from 'react-native';
+import {StyleSheet, View, Image, TouchableOpacity, Animated, Easing} from 'react-native';
 import React, {Component} from 'react';
 import {Card, CardItem} from 'native-base';
 var { Text } = require('./FmText');
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 class ExpandablePanel extends Component{
     static propTypes = {
@@ -22,10 +24,10 @@ class ExpandablePanel extends Component{
             expanded    : props.expanded,
             didUserInteract: false,
             animation   : new Animated.Value(),
+            rotateAnimation: new Animated.Value(0),
             didSetMaxHeight: false,
             minHeight: 0,
         };
-        this.init = this.init.bind(this);
         
     }
 
@@ -34,13 +36,6 @@ class ExpandablePanel extends Component{
         
     }
     
-    init()
-    {
-        let initialValue    = this.state.expanded ? this.state.maxHeight + this.state.minHeight : this.state.minHeight,
-            finalValue      = this.state.expanded ? this.state.minHeight : this.state.maxHeight + this.state.minHeight;
-
-        this.state.animation.setValue(initialValue);
-    }
 
     toggle(){
         
@@ -69,6 +64,18 @@ class ExpandablePanel extends Component{
 
         springAnim.start(() => {this.props.onToggle && this.props.onToggle()});
         
+
+        this.state.rotateAnimation.setValue(this.state.expanded ? 100 : 0);
+
+        Animated.timing(
+            this.state.rotateAnimation,
+        {
+            toValue: this.state.expanded ? 0 : 100,
+            duration: 400,
+            easing: Easing.linear
+        }
+        ).start()
+
     }
 
     _setMaxHeight(event){
@@ -88,10 +95,19 @@ class ExpandablePanel extends Component{
     }
 
     render(){
+        var interpolatedRotateAnimation = this.state.rotateAnimation.interpolate({
+            inputRange: [0, 100],
+            outputRange: ['0deg', '180deg']
+        });
 
-        if(this.state.expanded){
-            // icon = this.icons['up'];
-        }
+        let icon = <Animated.View style={[styles.arrowIcon, {
+            transform: [
+                {translateX: 0},
+                {rotate: interpolatedRotateAnimation},
+                {translateY: 0}
+                ] }]}>
+                     <Icon name="ios-arrow-dropdown" size={20} color="#858585" />
+                    </Animated.View>;
 
         return (
             
@@ -101,8 +117,9 @@ class ExpandablePanel extends Component{
                             onPress={this.toggle.bind(this)}
                             underlayColor="#959595"
                             style={{flex:1}}>
-                            <View style={{flex:1}}>
+                            <View style={{flex:1, flexDirection: 'row', justifyContent: 'center', alignItems: 'center'}}>
                                 {this.props.headerItem}
+                                {icon}
                             </View>
                         </TouchableOpacity>
                     </CardItem>
@@ -121,7 +138,7 @@ class ExpandablePanel extends Component{
 
 var styles = StyleSheet.create({
     container   : {
-        overflow:'hidden',
+        overflow: 'hidden',
         marginLeft: 10,
         marginRight: 10,
         marginBottom: 10,
@@ -129,10 +146,14 @@ var styles = StyleSheet.create({
     titleContainer : {
         flex: 1,
         flexDirection: 'row',
+        backgroundColor: "#ececec"
     },
     button      : {
 
     },
+    arrowIcon: {
+        marginLeft: 5
+    }
 });
 
 module.exports = ExpandablePanel;
