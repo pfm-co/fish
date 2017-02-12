@@ -264,7 +264,6 @@ class AppNavigator extends Component {
                 onPress={() => {
                   this.props.closeDrawer();
                   this.modalDlg.open();
-                  // this.props.logout();
                 }}
             />
 
@@ -311,12 +310,25 @@ class AppNavigator extends Component {
             }}
             >
 
-            <Text>
+            <Text style={styles.dlgConfirmText}>
               آیا برای خروج مطمئن هستید؟
             </Text>
 
-            <Button primary> بله </Button>
-            <Button primary> خیر </Button>
+            <View style={{flex:1}} />
+
+            <View style={styles.dlgButtonsView}>
+              <Button transparent 
+                style={styles.dlgButton}
+                onPress={() =>  this.modalDlg.close() }
+                > خیر </Button>
+              <Button transparent 
+                style={[styles.dlgButton, {marginLeft: 20}]}
+                onPress={() =>  {
+                  this.modalDlg.close();
+                  this.props.logout();
+                }}
+                > بله </Button>
+            </View>
             
           </Modal>
       </FmDrawer>

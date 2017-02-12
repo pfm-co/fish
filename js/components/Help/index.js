@@ -11,7 +11,7 @@ import I18n from 'react-native-i18n'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { openDrawer } from '../../actions/drawer';
-
+import { navigateTo } from '../../actions/drawer';  
 
 
 class Help extends Component {
@@ -86,6 +86,7 @@ constructor(props) {
 function bindActions(dispatch) {
   return {
     openDrawer: () => dispatch(openDrawer()),
+    navigateTo: (route, homeRoute) => dispatch(navigateTo(route, homeRoute)),
   };
 }
 

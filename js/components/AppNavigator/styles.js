@@ -28,6 +28,21 @@ module.exports = StyleSheet.create({
       paddingRight: 15,
       paddingLeft: 15,
     },
+    dlgConfirmText: {
+      color: "#B20E0E",
+      fontSize: 18,
+    },
+    dlgButtonsView: {
+      flex:1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    dlgButton: {
+      paddingLeft: 30,
+      paddingRight: 30,
+
+    },
     header: {
       padding: 20,
       paddingBottom: 0,
