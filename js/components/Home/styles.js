@@ -92,6 +92,7 @@ module.exports = StyleSheet.create({
 		color: "#00032a",
 	},
 	payslipDetailsView: {
+		flex: 1,
 		flexDirection: 'column',
 		marginTop: 10,
 	},

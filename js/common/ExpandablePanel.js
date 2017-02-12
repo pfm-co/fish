@@ -125,7 +125,7 @@ class ExpandablePanel extends Component{
                     </CardItem>
                     
                     <Animated.View 
-                        style={[{height: this.state.animation}, !this.state.didUserInteract && !this.state.expanded ? {position: 'absolute', top: -2000} : {}]}>
+                        style={[!this.state.didUserInteract && !this.state.expanded ? {position: 'absolute', top: -2000} : {height: this.state.didSetMaxHeight ? this.state.animation : null} ]}>
                         <CardItem onLayout={this._setMaxHeight.bind(this)}>
                             {this.props.children}
                         </CardItem>
