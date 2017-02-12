@@ -2,7 +2,7 @@
 
 
 import React, { Component } from 'react';
-import { Image, ScrollView } from 'react-native';
+import { Image, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, Picker, Card, CardItem, InputGroup, Input, Button, Icon, View } from 'native-base';
@@ -11,11 +11,13 @@ import ExpandablePanel from '../../common/ExpandablePanel';
 const ActivityIndicator = require('ActivityIndicator');
 const FmHeader = require('../../common/FmHeader');
 const Item = Picker.Item;
+import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
 import I18n from 'react-native-i18n'
 import { openDrawer } from '../../actions/drawer';
 import { updateAdditionalInfo } from '../../actions/user';
+import { changePayslipYearMonth } from '../../actions/settings';
 
 
 const {
@@ -88,6 +90,19 @@ class Home extends Component {
     }
 
     return totalDeduction;
+  }
+
+  onNextMonth()
+  {
+    let year = this.props.payslipYear;
+    let nextMonth = this.props.payslipMonth + 1;
+    if (nextMonth > 12)
+    {
+      nextMonth = 1;
+      year++;
+    }
+    
+    this.props.changePayslipYearMonth(nextMonth, this.props.payslipYear);
   }
 
   loadPayslip(month: int, year:int)
@@ -327,8 +342,23 @@ remove_duplicates_safe(arr) {
           <Card style={styles.card}>
             <CardItem>
               <View style={styles.topSummaryView}>
+                  <TouchableOpacity 
+                    style={styles.btnChangeMonth} 
+                    onPress={() => this.onSelectMonth(9)}>
+                      <Ionicon name="ios-arrow-back" size={15} color="#04436c" style={{marginRight: 5}}  />
+                      <Text style={{color: "#0a619a"}}>ماه قبل</Text>
+                  </TouchableOpacity>
+
                   <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
-                </View>
+
+                  <TouchableOpacity 
+                    style={styles.btnChangeMonth} 
+                    onPress={() => this.onSelectMonth(9)}>
+                      <Text style={{color: "#0a619a"}}>ماه بعد</Text>
+                      <Ionicon name="ios-arrow-forward" size={15} color="#04436c" style={{marginLeft: 5}}  />
+                  </TouchableOpacity>
+                  
+              </View>
                 { 
                   !this.state.emptyPayslip && 
                   <Text style={styles.topSalarySummary}>
@@ -397,6 +427,7 @@ function bindActions(dispatch) {
     replaceAt: (routeKey, route, key) => dispatch(replaceAt(routeKey, route, key)),
     openDrawer: () => dispatch(openDrawer()),
     updateAdditionalInfo: (province: string, region: string, bankName: string, accountNumber: string) => dispatch(updateAdditionalInfo(province, region, bankName, accountNumber)),
+    changePayslipYearMonth: (month: int, year: int) => dispatch(changePayslipYearMonth(month, year)),
   };
 }
 

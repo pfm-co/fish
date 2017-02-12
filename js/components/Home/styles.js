@@ -52,10 +52,13 @@ module.exports = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'center',
 		justifyContent: 'space-between',
+		marginBottom: 20,
 	},
 	periodText: {
+		textAlign: 'center',
 		fontSize: 23,
-		color: "#360000"
+		color: "#360000",
+		flex:1,
 	},
 	loadingView: {
 		height: deviceHeight * 0.95,
@@ -69,6 +72,11 @@ module.exports = StyleSheet.create({
 	card: {
 		marginLeft:10,
 		marginRight:10,
+	},
+	btnChangeMonth: {
+		flexDirection: 'row',
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
 	topSalarySummary: {
 		alignSelf: 'center',

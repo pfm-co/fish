@@ -152,7 +152,7 @@ var styles = StyleSheet.create({
 
     },
     arrowIcon: {
-        marginLeft: 5
+        marginLeft: 10
     }
 });
 

@@ -77,28 +77,28 @@ constructor(props) {
         <View style={styles.monthsContainer}>
           
           <View style={styles.monthsRow}>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(1)}> <Text>فروردین</Text> </Button>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(2)}> <Text>اردیبهشت</Text> </Button>
             <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(3)}> <Text>خرداد</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(2)}> <Text>اردیبهشت</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(1)}> <Text>فروردین</Text> </Button>
           </View>
 
           <View style={styles.monthsRow}>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(4)}> <Text>تیر</Text> </Button>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(5)}> <Text>مرداد</Text> </Button>
             <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(6)}> <Text>شهریور</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(5)}> <Text>مرداد</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(4)}> <Text>تیر</Text> </Button>
           </View>
         
 
           <View style={styles.monthsRow}>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(7)}> <Text>مهر</Text> </Button>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(8)}> <Text>آبان</Text> </Button>
             <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(9)}> <Text>آذر</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(8)}> <Text>آبان</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(7)}> <Text>مهر</Text> </Button>
           </View>
 
           <View style={styles.monthsRow}>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(10)}> <Text>دی</Text> </Button>
-            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(11)}> <Text>بهمن</Text> </Button>
             <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(12)}> <Text>اسفند</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(11)}> <Text>بهمن</Text> </Button>
+            <Button bordered info style={styles.monthBtn} onPress={() => this.onSelectMonth(10)}> <Text>دی</Text> </Button>
           </View>
 
         </View>

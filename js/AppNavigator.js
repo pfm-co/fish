@@ -9,8 +9,6 @@ import Icon from 'react-native-vector-icons/Entypo';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { logout } from './actions/user';
 
-var TouchableOpacity = require('TouchableOpacity');
-
 import { closeDrawer, openDrawer, navigateTo } from './actions/drawer';
 
 import Login from './components/Login';
@@ -188,16 +186,7 @@ class AppNavigator extends Component {
                 <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
               </View>
 
-                <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'space-between'}}>
-                    <TouchableOpacity
-                      accessibilityTraits="button"
-                      onPress={() => { 
-                        this.props.closeDrawer();
-                        this.props.logout();
-                      }}>
-                        <Text style={styles.logout}>{I18n.t("Login.Logout")}</Text>
-                    </TouchableOpacity>
-
+                <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
                     <Text style={styles.name}>
                         {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
                     </Text>
@@ -262,6 +251,17 @@ class AppNavigator extends Component {
                 icon={<FontAwesomeIcon name="phone" size={30} color="#003372" />}
                 onPress={() => {
                   phonecall("02188402938", true);
+                }}
+            />
+
+            <View style={{width: null, height:1, backgroundColor: "#d8d8d8", marginTop: 7, marginBottom: 3}}/>
+
+            <MenuItem
+                title="خروج"
+                icon={<EntypoIcon name="log-out" size={30} color="#003372" />}
+                onPress={() => {
+                  this.props.closeDrawer();
+                  this.props.logout();
                 }}
             />
         </View>
@@ -358,7 +358,7 @@ let styles = StyleSheet.create({
     },
     regionText: {
       color: '#6f0000',
-      fontSize: 10,
+      fontSize: 13,
       marginTop:7,
     },
     logout: {
