@@ -11,6 +11,8 @@ import ExpandablePanel from '../../common/ExpandablePanel';
 const ActivityIndicator = require('ActivityIndicator');
 const FmHeader = require('../../common/FmHeader');
 const Item = Picker.Item;
+const moment = require('moment-jalaali');
+
 import Ionicon from 'react-native-vector-icons/Ionicons';
 
 import styles from './styles';
@@ -39,15 +41,22 @@ class Home extends Component {
 
   constructor(props) {
     super(props);
+
+    let m = moment();
+
     this.state = {
       isLoadingPayslip: false,
       paySlipResult: {status: false, data: {}},
       hasError: false,
       errorMsg: '',
       emptyPayslip: false,
+      currentYear: m.jYear(),
+      currentMonth: m.jMonth()
     };
 
     this.loadPayslip = this.loadPayslip.bind(this);
+    this.onNextMonth = this.onNextMonth.bind(this);
+    this.onPrevMonth = this.onPrevMonth.bind(this);
 
   }
 
@@ -94,20 +103,44 @@ class Home extends Component {
 
   onNextMonth()
   {
+
+
     let year = this.props.payslipYear;
-    let nextMonth = this.props.payslipMonth + 1;
-    if (nextMonth > 12)
+    let nextMonth = this.props.payslipMonth;
+    if (nextMonth == 11)
     {
-      nextMonth = 1;
-      year++;
+      if (year != this.state.currentYear)
+      {
+        nextMonth = 0;
+        year++;
+      }
     }
+    else if (nextMonth < this.state.currentMonth)
+      nextMonth++;
     
-    this.props.changePayslipYearMonth(nextMonth, this.props.payslipYear);
+    this.props.changePayslipYearMonth(nextMonth, year);
+  }
+
+  onPrevMonth()
+  {
+    let year = this.props.payslipYear;
+    let prevMonth = this.props.payslipMonth;
+    if (prevMonth == 0 && year != this.state.currentYear - 5)
+    {
+      prevMonth = 11;
+      year--;
+    }
+    else
+      prevMonth--;
+    
+    this.props.changePayslipYearMonth(prevMonth, year);
   }
 
   loadPayslip(month: int, year:int)
   {
     let that = this;
+    // moment's months are 0 indexed, we need 1 indexed months (1 - 12)
+    month++;
     try
     {
         this.setState({
@@ -131,16 +164,25 @@ class Home extends Component {
               if (result.data.job.length == 0)
               {
                 that.setState({
+                  hasError: false,
+                  errorMsg: '',
                   isLoadingPayslip: false,
                   emptyPayslip: true,
+                  paySlipResult: {status: true, data: result.data},
+                  
                 });
               }
-              that.setState({
-                isLoadingPayslip: false,
-                paySlipResult: {status: true, data: result.data},
-              });
-              that.props.updateAdditionalInfo('', result.data.info[1].value, result.data.info[0].value,
-                 result.data.info[3].value + '');
+              else
+              {
+                that.setState({
+                  isLoadingPayslip: false,
+                  emptyPayslip: false,
+                  paySlipResult: {status: true, data: result.data},
+                });
+
+                that.props.updateAdditionalInfo('', result.data.info[1].value, result.data.info[0].value,
+                  result.data.info[3].value + '');
+              }
             }
             else
             {
@@ -331,10 +373,13 @@ remove_duplicates_safe(arr) {
       <View style={styles.loadingView}>
         <ActivityIndicator
             size="large"
-            color="#382B5C"
+            color="#0067EA"
             animating={true}
             style={{alignSelf: 'center'}}
         />
+
+        <Text style={{marginTop: 20}}>در حال دریافت فیش حقوقی...</Text>
+
       </View>
     ) : this.state.paySlipResult.status ?
     (
@@ -344,19 +389,25 @@ remove_duplicates_safe(arr) {
               <View style={styles.topSummaryView}>
                   <TouchableOpacity 
                     style={styles.btnChangeMonth} 
-                    onPress={() => this.onSelectMonth(9)}>
+                    onPress={() => this.onPrevMonth()}>
                       <Ionicon name="ios-arrow-back" size={15} color="#04436c" style={{marginRight: 5}}  />
                       <Text style={{color: "#0a619a"}}>ماه قبل</Text>
                   </TouchableOpacity>
 
                   <Text style={styles.periodText}>{this.props.payslipMonthStr} {this.props.payslipYear}</Text>
 
-                  <TouchableOpacity 
-                    style={styles.btnChangeMonth} 
-                    onPress={() => this.onSelectMonth(9)}>
-                      <Text style={{color: "#0a619a"}}>ماه بعد</Text>
-                      <Ionicon name="ios-arrow-forward" size={15} color="#04436c" style={{marginLeft: 5}}  />
-                  </TouchableOpacity>
+                  {
+                    (this.state.currentYear != this.props.payslipYear || 
+                      (this.state.currentYear == this.props.payslipYear && this.props.payslipMonth) < this.state.currentMonth) ?
+                    <TouchableOpacity 
+                      style={styles.btnChangeMonth} 
+                      onPress={() => this.onNextMonth()}>
+                        <Text style={{color: "#0a619a"}}>ماه بعد</Text>
+                        <Ionicon name="ios-arrow-forward" size={15} color="#04436c" style={{marginLeft: 5}}  />
+                    </TouchableOpacity>
+                    :
+                    <View style={{flex: 0.3}} />
+                  }
                   
               </View>
                 { 

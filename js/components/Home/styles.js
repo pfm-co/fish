@@ -55,14 +55,14 @@ module.exports = StyleSheet.create({
 		marginBottom: 20,
 	},
 	periodText: {
+		flex: 1,
 		textAlign: 'center',
 		fontSize: 23,
 		color: "#360000",
-		flex:1,
 	},
 	loadingView: {
-		height: deviceHeight * 0.95,
 		flex: 1,
+		height: deviceHeight * 0.95,
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
@@ -74,6 +74,7 @@ module.exports = StyleSheet.create({
 		marginRight:10,
 	},
 	btnChangeMonth: {
+		flex: 0.3,
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',

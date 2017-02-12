@@ -68,6 +68,12 @@ constructor(props) {
                   icon: require('../../common/img/hamburger.png'),
                   onPress: () => this.props.openDrawer(),
               }}
+              leftItem={{
+                layout: 'icon',
+                title: 'Back',
+                icon: require('../../common/img/back_white.png'),
+                onPress: () => this.props.navigateTo('home', 'home')
+              }}
               >
               <View style={styles.headerContent}>
                   <Text style={styles.headerContentText}> درباره </Text>

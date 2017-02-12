@@ -45,7 +45,7 @@ constructor(props) {
 
   onSelectMonth(month: int)
   {
-    this.props.changePayslipYearMonth(month.toString(), this.state.payslipYear);
+    this.props.changePayslipYearMonth(month - 1, this.state.payslipYear);
     this.props.navigateTo('home', 'home');
   }
 
@@ -118,9 +118,15 @@ constructor(props) {
                   icon: require('../../common/img/hamburger.png'),
                   onPress: () => this.props.openDrawer(),
               }}
+              leftItem={{
+                layout: 'icon',
+                title: 'Back',
+                icon: require('../../common/img/back_white.png'),
+                onPress: () => this.props.navigateTo('home', 'home')
+              }}
               >
               <View style={styles.headerContent}>
-                  <View><Text style={styles.headerContentText}>تاریخچه</Text></View>
+                  <Text style={styles.headerContentText}>تاریخچه</Text>
               </View>
           </FmHeader>
 

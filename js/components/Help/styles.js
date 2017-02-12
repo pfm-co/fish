@@ -22,29 +22,21 @@ module.exports = StyleSheet.create({
 		})
 	},
 	headerContent: {
-		...Platform.select({
-		android: {
-			flex: 1,
-			flexDirection: 'row',
-			alignItems: 'center',
-			justifyContent: 'space-between',
-			// very very strangely, settings backgroundColor fixed alignment of inner text of headerContent!!!
-			backgroundColor: "#00000000",
-			marginRight: 40,
-		},
-		ios: {
-			height: 65,
-			alignItems: 'center',
-			justifyContent: 'center',
-		}
-	})
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-around',
+		// very very strangely, settings backgroundColor fixed alignment of inner text of headerContent!!!
+		backgroundColor: "#00000000",
+		width: deviceWith * 0.70,
 	},
 	headerContentText: {
 		color: "#f5f5f5",
 		textAlign: 'center',
 		alignSelf: 'center',
 		fontSize: 21,
-		color: "#f5f5f5"
+		color: "#f5f5f5",
+		flex: 1,
 	},
     content: {
         padding: 15
