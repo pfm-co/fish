@@ -2,6 +2,7 @@
 
 import type { Action } from '../actions/types';
 import { LOGGING_IN, LOGGED_IN, LOGIN_ERROR, LOGGED_OUT, UPDATE_ADDITIONAL_INFO} from '../actions/user';
+import { APP_STARTED } from '../actions/settings';
 
 export type State = {
 	isLoggedIn: boolean,
@@ -54,7 +55,7 @@ export default function (state:State = initialState, action:Action): State {
 	}
 	else if (action.type === LOGGED_IN)
 	{
-		console.log("LOGGED_IN");
+		console.log("LOGGED_IN", action.data);
 
 		return {
 			...state,
@@ -93,6 +94,15 @@ export default function (state:State = initialState, action:Action): State {
 			region: action.region,
 			bankName: action.bankName,
 			accountNumber: action.accountNumber,
+
+		};
+	}
+	else if (action.type === APP_STARTED)
+	{
+		return {
+			...state,
+			hasError: false,
+			errorMsg: '',
 
 		};
 	}

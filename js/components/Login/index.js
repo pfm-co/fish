@@ -68,51 +68,50 @@ class Login extends Component {
               <View style={styles.bg}>
                 <Image source={appLogo} style={styles.appLogo} />
 
-                <View style={styles.middleSpacer} />
-                
-                <InputGroup 
-                  iconRight={true} 
-                  style={[styles.input, {marginTop: 150}]}
-                >
-                  <Icon name="ios-person" style={{fontSize: 23, color: "#f5f5f5"}} />
-                  <Input 
-                    placeholder={I18n.t("Login.Username")}
-                    onChangeText={username => this.setState({ username })}
-                    value={this.state.username}
-                    style={styles.inputText}
-                   />
-                </InputGroup>
 
-                <InputGroup 
-                  iconRight={true} 
-                  style={styles.input}
-                >
-                  <Icon name="ios-unlock-outline" style={{fontSize: 23, color: "#f5f5f5"}} />
-                  <Input
-                    placeholder={I18n.t("Login.Password")}
-                    secureTextEntry
-                    onChangeText={password => this.setState({ password })}
-                    value={this.state.password}
-                    style={styles.inputText}
+                <View style={styles.loginForm}> 
+                  <InputGroup 
+                    iconRight={true} 
+                    style={[styles.input, {marginTop: 150}]}
+                  >
+                    <Icon name="ios-person" style={{fontSize: 23, color: "#f5f5f5"}} />
+                    <Input 
+                      placeholder={I18n.t("Login.Username")}
+                      onChangeText={username => this.setState({ username })}
+                      value={this.state.username}
+                      style={styles.inputText}
+                    />
+                  </InputGroup>
+
+                  <InputGroup 
+                    iconRight={true} 
+                    style={styles.input}
+                  >
+                    <Icon name="ios-unlock-outline" style={{fontSize: 23, color: "#f5f5f5"}} />
+                    <Input
+                      placeholder={I18n.t("Login.Password")}
+                      secureTextEntry
+                      onChangeText={password => this.setState({ password })}
+                      value={this.state.password}
+                      style={styles.inputText}
+                    />
+                  </InputGroup>
+
+                  <ActivityIndicator
+                      size="small"
+                      color="#382B5C"
+                      animating={this.props.authState.isLoginInProgress}
                   />
-                </InputGroup>
 
-                <ActivityIndicator
-                    size="small"
-                    color="#382B5C"
-                    animating={this.props.authState.isLoginInProgress}
-                />
+                  
+                  <Button primary style={styles.btn} onPress={() => { 
+                    this.props.login(this.state.username, this.state.password);
+                  }}>
+                    <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
+                  </Button>
 
+              </View>
                 
-                <Button primary style={styles.btn} onPress={() => { 
-                  this.props.login(this.state.username, this.state.password);
-                }}>
-                  <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
-                </Button>
-
-                
-                
-              <View style={styles.bottomSpacer} />
 
               </View>
             </Image>

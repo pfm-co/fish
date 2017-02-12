@@ -21,11 +21,13 @@ module.exports = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'column',
   },
-  middleSpacer: {
+  loginForm: {
+    flexDirection: 'column',
     flex: 1,
+    
   },
   bottomSpacer: {
-    flex: 1,
+    flex: 0.1,
   },
   bg: {
     flex: 1,
@@ -41,7 +43,7 @@ module.exports = StyleSheet.create({
     width: 120,
     height: 120,
     resizeMode: 'cover',
-    marginTop: 50,
+    marginTop: 20,
     alignSelf: 'center',
   },
   input: {
@@ -56,10 +58,9 @@ module.exports = StyleSheet.create({
 
   },
   btn: {
+    width: deviceWith * 0.90,
     marginTop: 20,
     alignSelf: 'center',
-    paddingLeft: 70,
-    paddingRight: 70,
     alignItems: 'center',
     justifyContent: 'center',
     paddingBottom: 12,
