@@ -67,7 +67,8 @@ module.exports = StyleSheet.create({
 		marginBottom: 30
 	},
 	monthBtn: {
-		width: deviceWith < 500 ? 80 : 100
+		width: deviceWith < 500 ? 80 : 100,
+		
 	}
 
 });

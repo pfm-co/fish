@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { Container, Content, Text, View } from 'native-base';
 import Modal from 'react-native-modalbox';
 
-import AppNavigator from './AppNavigator';
+import AppNavigator from './components/AppNavigator';
 import ProgressBar from './components/loaders/ProgressBar';
 
 import theme from './themes/theme-base';

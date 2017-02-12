@@ -3,31 +3,33 @@ import React, { Component } from 'react';
 import { View, StyleSheet, BackAndroid, Image, StatusBar, NavigationExperimental, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import { Button } from 'native-base';
-var { Text } = require('./common/FmText');
+var { Text } = require('../../common/FmText');
 import Icon from 'react-native-vector-icons/Entypo';
 
 import { actions } from 'react-native-navigation-redux-helpers';
-import { logout } from './actions/user';
+import { logout } from '../../actions/user';
 
-import { closeDrawer, openDrawer, navigateTo } from './actions/drawer';
+import { closeDrawer, openDrawer, navigateTo } from '../../actions/drawer';
 
-import Login from './components/Login';
-import Home from './components/Home';
-import About from './components/About';
-import Help from './components/Help';
-import History from './components/History';
-import ModalDatePicker from './components/ModalDatePicker';
-import SplashPage from './components/SplashScreen';
-import { statusBarColor } from './themes/theme-base';
-import FmDrawer from './common/FmDrawer';
+import Login from '../Login';
+import Home from '../Home';
+import About from '../About';
+import Help from '../Help';
+import History from '../History';
+// import ModalDatePicker from '../ModalDatePicker';
+import SplashPage from '../SplashScreen';
+import { statusBarColor } from '../../themes/theme-base';
+import FmDrawer from '../../common/FmDrawer';
 import I18n from 'react-native-i18n'
-import { zeroPad } from './common/Helper'
+import { zeroPad } from '../../common/Helper'
 
-let MenuItem = require('./common/MenuItem');
+let MenuItem = require('../../common/MenuItem');
 import { phonecall } from 'react-native-communications';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+var Modal   = require('react-native-modalbox');
 
+import styles from './styles';
 
 const deviceHeight = Dimensions.get('window').height;
 const deviceWith = Dimensions.get('window').width;
@@ -177,17 +179,17 @@ class AppNavigator extends Component {
 
         accountItem = (
             <View style={styles.accountItem}>
-              <View style={{flex:1, flexDirection: 'row', justifyContent: 'flex-end', marginTop: 30}}>
+              <View style={styles.topAccountDetails}>
                 <View style={{marginTop: 15, marginRight: 10}}>
-                  <Text style={{color: "#001431"}}>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
-                  <Text style={{color: "#001431"}}>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
+                  <Text style={styles.accountIdText}>{I18n.t("Common.NationalCode")}:  {zeroPad(this.props.userInfo.nationalCode, 10)}</Text>
+                  <Text style={styles.accountIdText}>{I18n.t("Common.PersonelCode")}:  {this.props.userInfo.personelCode}</Text>
                 </View>
 
-                <Image style={styles.profilePic} source={require('../images/default_profile_photo.png')}/>                
+                <Image style={styles.profilePic} source={require('../../../images/default_profile_photo.png')}/>                
               </View>
 
-                <View style={{flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end'}}>
-                    <Text style={styles.name}>
+                <View style={styles.nameView}>
+                    <Text style={styles.nameText}>
                         {this.props.userInfo.firstName + ' ' + this.props.userInfo.lastName}
                     </Text>
                 </View>
@@ -208,7 +210,7 @@ class AppNavigator extends Component {
         <View style={styles.drawer}>
             <Image
                 style={styles.header}
-                source={require('../images/drawer-header.png')}>
+                source={require('../../../images/drawer-header.png')}>
                 {accountItem}
             </Image>
 
@@ -261,9 +263,12 @@ class AppNavigator extends Component {
                 icon={<EntypoIcon name="log-out" size={30} color="#003372" />}
                 onPress={() => {
                   this.props.closeDrawer();
-                  this.props.logout();
+                  this.modalDlg.open();
+                  // this.props.logout();
                 }}
             />
+
+
         </View>
     )
 }
@@ -296,7 +301,24 @@ class AppNavigator extends Component {
             renderScene={this._renderScene}
           />
 
-          <ModalDatePicker refr={(datePickerDlg) => { this.datePickerDlg = datePickerDlg; }} />
+          { /* <ModalDatePicker refr={(datePickerDlg) => { this.datePickerDlg = datePickerDlg; }} /> */}
+          <Modal 
+            style={[styles.modal]} 
+            backdrop={true}  
+            position={"center"}
+            ref={(modalDlg) => {
+                this.modalDlg = modalDlg;
+            }}
+            >
+
+            <Text>
+              آیا برای خروج مطمئن هستید؟
+            </Text>
+
+            <Button primary> بله </Button>
+            <Button primary> خیر </Button>
+            
+          </Modal>
       </FmDrawer>
     );
   }
@@ -328,51 +350,6 @@ const mapStoreToProps = store => ({
   }
 });
 
-
-let styles = StyleSheet.create({
-    drawer: {
-      flex: 1,
-      backgroundColor: 'white',
-      zIndex:1000
-    },
-    content: {
-      flex: 1,
-    },
-    header: {
-      padding: 20,
-      paddingBottom: 0,
-      justifyContent: 'flex-start',
-    },
-    accountItem: {
-      width: drawerWidth,
-      flex:1,
-      flexDirection:"column",
-      justifyContent: 'space-between',
-      paddingRight: 40,
-      paddingBottom: 7
-    },
-    name: {
-      marginTop: 10,
-      color: '#6f0000',
-      fontSize: 23,
-    },
-    regionText: {
-      color: '#6f0000',
-      fontSize: 13,
-      marginTop:7,
-    },
-    logout: {
-      fontSize: 15,
-      color: '#b80101',
-    },
-    profilePic:
-    {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
-    }
-
-});
 
 AppNavigator.childContextTypes = {
     addBackButtonListener: React.PropTypes.func,
