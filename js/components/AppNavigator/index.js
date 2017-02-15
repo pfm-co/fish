@@ -17,7 +17,6 @@ import About from '../About';
 import Help from '../Help';
 import History from '../History';
 // import ModalDatePicker from '../ModalDatePicker';
-import SplashPage from '../SplashScreen';
 import { statusBarColor } from '../../themes/theme-base';
 import FmDrawer from '../../common/FmDrawer';
 import I18n from 'react-native-i18n'
@@ -155,8 +154,6 @@ class AppNavigator extends Component {
     if (!this.props.isLoggedIn)
       return <Login />;
     switch (props.scene.route.key) {
-      case 'splashscreen':
-        return <SplashPage />;
       case 'login':
           return <Login /> 
       case 'home':
