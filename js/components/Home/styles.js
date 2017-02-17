@@ -5,7 +5,7 @@ const { StyleSheet, Dimensions } = React;
 const Platform = require('Platform');
 
 const deviceHeight = Dimensions.get('window').height;
-const deviceWith = Dimensions.get('window').width;
+const deviceWidth = Dimensions.get('window').width;
 
 
 
@@ -148,6 +148,32 @@ module.exports = StyleSheet.create({
 	{
 		flex:1,
 		height: 25,
-	}
+	},
+	errorViewContainer:
+	{
+		flex:1,
+		width: deviceWidth,
+		height: deviceHeight * 0.80,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	errorView:
+	{
+		flexDirection: 'column',
+		alignItems: 'center',
+		justifyContent: 'center',
+		padding: 15,
+		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: "#eeeeee",
+		borderStyle: 'solid',
+		margin: 10,
+	},
+	errorText: {
+		textAlign: 'center',
+		fontSize: 16,
+		color: "#d51800",
+		marginTop: 30
+	},
 
 });

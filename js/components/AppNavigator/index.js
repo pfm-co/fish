@@ -70,6 +70,9 @@ class AppNavigator extends Component {
       this._renderScene = this._renderScene.bind(this);
       this.renderNavigationView = this.renderNavigationView.bind(this);
       this.openDrawer = this.openDrawer.bind(this);
+      this.onDlgBackButton = this.onDlgBackButton.bind(this);
+
+      this.state = {modalDlgSelector: 'logoutPrompt'};
   }
 
   componentDidMount() {
@@ -79,7 +82,10 @@ class AppNavigator extends Component {
 
       const routes = this.props.navigation.routes;
       if (routes[routes.length - 1].key === 'home' || routes[routes.length - 1].key === 'login') {
-        return false;
+        // TODO:: show prompt to exit
+        this.setState({modalDlgSelector: 'exitPrompt'});
+        this.modalDlg.open();
+        return true;
       }
 
       this.props.popRoute(this.props.navigation.key);
@@ -149,6 +155,11 @@ class AppNavigator extends Component {
 
       return false;
   }
+
+onDlgBackButton() {
+  this.modalDlg.close();
+  return true;
+}
 
   _renderScene(props) { // eslint-disable-line class-methods-use-this
     if (!this.props.isLoggedIn)
@@ -260,6 +271,7 @@ class AppNavigator extends Component {
                 icon={<EntypoIcon name="log-out" size={25} color="#003372" />}
                 onPress={() => {
                   this.props.closeDrawer();
+                  this.setState({modalDlgSelector: 'logoutPrompt'});
                   this.modalDlg.open();
                 }}
             />
@@ -306,10 +318,12 @@ class AppNavigator extends Component {
             ref={(modalDlg) => {
                 this.modalDlg = modalDlg;
             }}
+            onOpened={() => this.addBackButtonListener(this.onDlgBackButton)}
+            onClosed={() => this.removeBackButtonListener(this.onDlgBackButton)}
             >
 
             <Text style={styles.dlgConfirmText}>
-              آیا می خواهید از حساب کاربری خود خارج شوید؟
+              {this.state.modalDlgSelector === 'logoutPrompt' ? I18n.t("Common.LogoutPrompt") : I18n.t("Common.ExitPrompt")}
             </Text>
 
             <View style={{flex:1}} />
@@ -318,14 +332,19 @@ class AppNavigator extends Component {
               <Button transparent 
                 style={styles.dlgButton}
                 onPress={() =>  this.modalDlg.close() }
-                > خیر </Button>
+                > {I18n.t("Common.No")} </Button>
               <Button transparent 
                 style={[styles.dlgButton, {marginLeft: 20}]}
                 onPress={() =>  {
-                  this.modalDlg.close();
-                  this.props.logout();
+                  if (this.state.modalDlgSelector === 'logoutPrompt')
+                  {
+                    this.modalDlg.close();
+                    this.props.logout();
+                  }
+                  else
+                    BackAndroid.exitApp();
                 }}
-                > بله </Button>
+                > {I18n.t("Common.Yes")} </Button>
             </View>
             
           </Modal>

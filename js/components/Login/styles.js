@@ -51,17 +51,19 @@ module.exports = StyleSheet.create({
     textAlign: 'right',
     paddingRight: 7,
     fontSize: 17,
+    fontFamily: require('../../env').fontFamily,
 
   },
   btn: {
     width: deviceWidth * 0.90,
-    marginTop: 60,
+    marginTop: 30,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingBottom: 12,
+    paddingBottom: 7,
+    paddingTop: 5,
     backgroundColor: "#0387d2",
-    zIndex: 2,
+    borderRadius: 4,
   },
   btnText: {
     fontSize: 20,

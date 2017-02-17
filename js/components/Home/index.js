@@ -14,6 +14,7 @@ const Item = Picker.Item;
 const moment = require('moment-jalaali');
 
 import Ionicon from 'react-native-vector-icons/Ionicons';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 
 import styles from './styles';
 import I18n from 'react-native-i18n'
@@ -158,7 +159,6 @@ class Home extends Component {
           return result.json()
         })
         .then(result => {
-          console.log('webservice result: ', result);
           if (result)
           {
             if (result.status)
@@ -437,10 +437,12 @@ remove_duplicates_safe(arr) {
 
           </View>
         ) : (
-          <View>
-            <Text>ERRRRORRR this is intentialy left ugly!</Text>
+          <View style={styles.errorViewContainer}>
+            <View style={styles.errorView}>
+              <MaterialIcon name="error-outline" size={50} color="#f05900" />
+              <Text style={styles.errorText}>{I18n.t("Home.NetworkError")}</Text>
+            </View>
           </View>
-
         );
 
     return (

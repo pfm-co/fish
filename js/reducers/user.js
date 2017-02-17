@@ -43,7 +43,6 @@ const initialState = {
 
 export default function (state:State = initialState, action:Action): State {
 	if (action.type === LOGGING_IN) {
-		console.log("LOGGING_IN");
 		return {
 			...state,
 			username: action.data.username,
@@ -55,8 +54,6 @@ export default function (state:State = initialState, action:Action): State {
 	}
 	else if (action.type === LOGGED_IN)
 	{
-		console.log("LOGGED_IN", action.data);
-
 		return {
 			...state,
 			firstName: action.data.firstName,
@@ -72,7 +69,6 @@ export default function (state:State = initialState, action:Action): State {
 	}
   	else if (action.type === LOGIN_ERROR)
 	{
-		console.log("LOGIN_ERROR");
 		return {
 			...state,
 			isLoggedIn: false,
@@ -83,7 +79,6 @@ export default function (state:State = initialState, action:Action): State {
 	}
   	else if (action.type === LOGGED_OUT)
 	{
-		console.log("LOGGED_OUT");
 		return initialState;
 	}
 	else if (action.type === UPDATE_ADDITIONAL_INFO)

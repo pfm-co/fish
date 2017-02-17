@@ -30,6 +30,9 @@ build/
 local.properties
 *.iml
 
+#react native debugger
+debuggerWorker.js
+
 # node.js
 #
 node_modules/

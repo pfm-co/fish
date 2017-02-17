@@ -2,7 +2,7 @@
 
 
 import React, { Component } from 'react';
-import { Image } from 'react-native';
+import { Image, TouchableOpacity} from 'react-native';
 import { connect } from 'react-redux';
 import { actions } from 'react-native-navigation-redux-helpers';
 import { Container, Content, InputGroup, Input, Button, Icon, View } from 'native-base';
@@ -35,6 +35,9 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
+
+    this.handleBackButton = this.handleBackButton.bind(this);
+
     this.state = {
       username: props.username,
       password: props.password,
@@ -44,7 +47,6 @@ class Login extends Component {
   componentWillReceiveProps(nextProps)
   {
     
-    console.log("componentWillReceiveProps nextProps.isLoggedIn", nextProps.authState.isLoggedIn);
     if (nextProps.authState.isLoggedIn && !this.props.authState.isLoggedIn)
     {
         // user login was successfull, navigate to home page
@@ -56,6 +58,11 @@ class Login extends Component {
     {
       this.modalDlg.open();
     }
+  }
+
+  handleBackButton(): boolean {
+      this.modalDlg.close();
+      return true;
   }
 
 
@@ -72,7 +79,7 @@ class Login extends Component {
                 iconRight={true} 
                 style={[styles.input, {marginTop: 65}]}
               >
-                <Icon name="ios-person" style={{fontSize: 27, color: "#135ca1"}} />
+                <Icon name="ios-person" style={{fontSize: 28, color: "#135ca1"}} />
                 <Input 
                   placeholder={I18n.t("Login.Username")}
                   onChangeText={username => this.setState({ username })}
@@ -85,7 +92,7 @@ class Login extends Component {
                 iconRight={true} 
                 style={styles.input}
               >
-                <Icon name="ios-unlock-outline" style={{fontSize: 27, color: "#135ca1"}} />
+                <Icon name="ios-unlock-outline" style={{fontSize: 28, color: "#135ca1"}} />
                 <Input
                   placeholder={I18n.t("Login.Password")}
                   secureTextEntry
@@ -101,13 +108,13 @@ class Login extends Component {
                   animating={this.props.authState.isLoginInProgress}
               />
 
-              
-              <Button primary style={styles.btn} onPress={() => { 
+              <TouchableOpacity
+                style={styles.btn} onPress={() => { 
                 this.modalDlg.close();
                 this.props.login(this.state.username, this.state.password);
               }}>
                 <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
-              </Button>
+              </TouchableOpacity>
 
             </View>
             
@@ -124,22 +131,22 @@ class Login extends Component {
                 this.modalDlg = modalDlg;
             }}
             animationDuration={200}
+            onOpened={() => this.context.addBackButtonListener(this.handleBackButton)}
+            onClosed={() => this.context.removeBackButtonListener(this.handleBackButton)}
             >
             <Text style={styles.loginError}>
                 { I18n.t('Login.LoginError') + '، ' +
                   this.props.authState.errorMsg
                 }
             </Text>
+            
           </Modal>
 
         </Content>
       </Container>
     );
   }
-
-
 }
-
 
 
 function bindActions(dispatch) {
@@ -163,5 +170,11 @@ const mapStoreToProps = store => ({
   }
 
 });
+
+
+Login.contextTypes = {
+    addBackButtonListener: React.PropTypes.func,
+    removeBackButtonListener: React.PropTypes.func,
+};
 
 export default connect(mapStoreToProps, bindActions)(Login);
