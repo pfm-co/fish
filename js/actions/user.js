@@ -13,6 +13,17 @@ const UPDATE_ADDITIONAL_INFO = 'UPDATE_ADDITIONAL_INFO';
 
 import I18n from 'react-native-i18n'
 
+function translateErrorMsg(errorMsg: string)
+{
+	switch (errorMsg)
+	{
+		case 'invalidNationalCode':
+		case 'invalidPassword':
+			return I18n.t("Login.InvalidCredentials");
+		default: 
+			return I18n.t("Login.UnknownError");
+	}
+}
 
 function login(username: ? string, password : ? string): ThunkAction {
 	return (dispatch) => {
@@ -56,9 +67,10 @@ function login(username: ? string, password : ? string): ThunkAction {
 								}
 							});
 						} else {
+							console.log(result);
 							dispatch({
 								type: LOGIN_ERROR,
-								errorMsg: result.message,
+								errorMsg: translateErrorMsg(result.message),
 							})
 						}
 					} else {

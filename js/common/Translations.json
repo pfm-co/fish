@@ -16,6 +16,7 @@
   		"LoginError": "خطا در ورود",
   		"UnknownError": "مشکلی در ورود به حساب پیش آمده، دوباره تلاش کنید",
   		"ServerTimeout": "دسترسی به سرور امکان پذیر نیست",
+      "InvalidCredentials": "کد ملی یا رمز عبور اشتباه است",
   	},
     "Common": {
       "DownloadingUpdate": "دریافت بروزرسانی...",

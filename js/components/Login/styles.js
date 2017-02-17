@@ -33,6 +33,8 @@ module.exports = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexDirection: 'column',
+    width: deviceWidth,
+    height: deviceHeight,
   },
   appLogo: {
     width: 120,
