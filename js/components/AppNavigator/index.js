@@ -213,8 +213,8 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="تاریخچه"
-                icon={<FontAwesomeIcon name="calendar" size={30} color="#003372" />}
-                selectedIcon={<FontAwesomeIcon name="calendar" size={30} color="#5bc0de" />}
+                icon={<FontAwesomeIcon name="calendar" size={25} color="#003372" />}
+                selectedIcon={<FontAwesomeIcon name="calendar" size={25} color="#5bc0de" />}
                 selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'history'}
                 onPress={() => {
                   // this.props.closeDrawer();
@@ -227,8 +227,8 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="درباره"
-                icon={<FontAwesomeIcon name="quote-left" size={30} color="#003372" />}
-                selectedIcon={<FontAwesomeIcon name="quote-left" size={30} color="#5bc0de" />}
+                icon={<FontAwesomeIcon name="quote-left" size={25} color="#003372" />}
+                selectedIcon={<FontAwesomeIcon name="quote-left" size={25} color="#5bc0de" />}
                 selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'about'}
                 onPress={() => {
                   this.navigateTo('about');
@@ -237,8 +237,8 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="راهنما"
-                icon={<EntypoIcon name="help-with-circle" size={30} color="#003372" />}
-                selectedIcon={<EntypoIcon name="help-with-circle" size={30} color="#1c54a9" />}
+                icon={<EntypoIcon name="help-with-circle" size={25} color="#003372" />}
+                selectedIcon={<EntypoIcon name="help-with-circle" size={25} color="#5bc0de" />}
                 selected={this.props.navigation.routes[this.props.navigation.routes.length - 1].key === 'help'}
                 onPress={() => {
                   this.navigateTo('help');
@@ -247,7 +247,7 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="تماس با پشتیبانی"
-                icon={<FontAwesomeIcon name="phone" size={30} color="#003372" />}
+                icon={<FontAwesomeIcon name="phone" size={25} color="#003372" />}
                 onPress={() => {
                   phonecall("02188402938", true);
                 }}
@@ -257,7 +257,7 @@ class AppNavigator extends Component {
 
             <MenuItem
                 title="خروج"
-                icon={<EntypoIcon name="log-out" size={30} color="#003372" />}
+                icon={<EntypoIcon name="log-out" size={25} color="#003372" />}
                 onPress={() => {
                   this.props.closeDrawer();
                   this.modalDlg.open();

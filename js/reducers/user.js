@@ -21,10 +21,10 @@ export type State = {
 }
 
 const initialState = {
-	// username: '0569394910',
-	// password: '3qag8pbv',
-	username: '',
-	password: '',
+	username: '0569394910',
+	password: '3qag8pbv',
+	// username: '',
+	// password: '',
 	firstName: '',
 	lastName: '',
 	personelCode: '',

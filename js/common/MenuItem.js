@@ -9,7 +9,7 @@
 var theme = require('../themes/theme-base');
 var React = require('React');
 var View = require('View');
-var Text = require('Text');
+var { Text } = require('./FmText');
 var Image = require('Image');
 var StyleSheet = require('StyleSheet');
 var FmTouchable = require('TouchableNativeFeedback');
@@ -43,12 +43,12 @@ class MenuItem extends React.Component {
         return (
             <FmTouchable onPress={this.props.onPress}>
                 <View style={styles.container}>
-                    <View style={styles.icon}>
-                        {icon}
-                    </View>
                     <Text style={[styles.title, selectedTitleStyle]}>
                         {this.props.title}
                     </Text>
+                    <View style={styles.icon}>
+                        {icon}
+                    </View>
                     {badge}
                 </View>
             </FmTouchable>
@@ -62,15 +62,16 @@ var styles = StyleSheet.create({
         flexDirection: 'row',
         height: 50,
         alignItems: 'center',
-        paddingHorizontal: 20,
+        paddingHorizontal: 0,
     },
     icon: {
-        marginRight: 20,
+        marginRight: 5,
     },
     title: {
         flex: 1,
         fontSize: 17,
         color: '#032250',
+        marginRight:10,
     },
     selectedTitle: {
         color: '#7F91A7',
