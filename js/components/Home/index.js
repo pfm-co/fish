@@ -127,8 +127,10 @@ class Home extends Component {
     let prevMonth = this.props.payslipMonth;
     if (prevMonth == 0 && year != this.state.currentYear - 5)
     {
-      prevMonth = 11;
-      year--;
+      // Due to employer request, limit year to current year, for now
+      return;
+      // prevMonth = 11;
+      // year--;
     }
     else
       prevMonth--;

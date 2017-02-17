@@ -32,7 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new VectorIconsPackage(),
-          new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey), getApplicationContext(), BuildConfig.DEBUG)
+          new CodePush(getResources().getString(R.string.reactNativeCodePush_androidDeploymentKey_Production), getApplicationContext(), BuildConfig.DEBUG)
       );
     }
   };

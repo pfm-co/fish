@@ -1,4 +1,6 @@
 <resources>
-    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey">3c-PBe4Eba9IZoUQpAV09d_nnzj3Ny61qC8Bz</string>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey_Production">W4_2Z7M7PERTzTyz4hHavGInRt7JNy61qC8Bz</string>
+    <string moduleConfig="true" name="reactNativeCodePush_androidDeploymentKey_Staging">yEBq_z2N58t8Mu5KYTRb4Rfgx_JANy61qC8Bz</string>
+    <string moduleConfig="true" name="access_key">PsAUIsEEUWMfK-0Nx2BH81ciVBttNy61qC8Bz</string>
     <string name="app_name">فیش حقوقی فرهنگیان</string>
 </resources>

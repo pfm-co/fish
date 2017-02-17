@@ -24,19 +24,23 @@ module.exports = StyleSheet.create({
       justifyContent: 'center',
       alignItems: 'center',
       paddingTop: 30,
-      paddingBottom: 20,
+      paddingBottom: 35,
       paddingRight: 15,
       paddingLeft: 15,
     },
     dlgConfirmText: {
       color: "#B20E0E",
       fontSize: 18,
+      alignSelf: 'center',
+      textAlign: 'center'
     },
     dlgButtonsView: {
       flex:1,
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      marginTop: 20,
+      marginBottom: 15
     },
     dlgButton: {
       paddingLeft: 30,

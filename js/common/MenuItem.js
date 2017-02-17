@@ -65,13 +65,13 @@ var styles = StyleSheet.create({
         paddingHorizontal: 0,
     },
     icon: {
-        marginRight: 5,
+        marginRight: 7,
     },
     title: {
         flex: 1,
         fontSize: 17,
         color: '#032250',
-        marginRight:10,
+        marginRight:13,
     },
     selectedTitle: {
         color: '#7F91A7',

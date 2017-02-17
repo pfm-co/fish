@@ -4,7 +4,7 @@ const React = require('react-native');
 const { StyleSheet, Dimensions } = React;
 
 const deviceHeight = Dimensions.get('window').height;
-const deviceWith = Dimensions.get('window').width;
+const deviceWidth = Dimensions.get('window').width;
 
 
 module.exports = StyleSheet.create({
@@ -12,38 +12,33 @@ module.exports = StyleSheet.create({
     flex:1,
     backgroundColor: '#FBFAFA',
   },
-  
   shadow: {
     flex: 1,
-    width: deviceWith,
+    width: deviceWidth,
     height: deviceHeight,
     bottom: 0,
-    justifyContent: 'space-between',
-    flexDirection: 'column',
   },
   loginForm: {
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     flexDirection: 'column',
     flex: 1,
-    
   },
   bottomSpacer: {
-    flex: 0.1,
+    flex: 1,
+    height:300
   },
   bg: {
     flex: 1,
-    paddingTop: 20,
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingBottom: 30,
-    width: null,
-    height: null,
-    bottom: 0,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexDirection: 'column',
   },
   appLogo: {
     width: 120,
     height: 120,
     resizeMode: 'cover',
-    marginTop: 20,
+    marginTop: 40,
     alignSelf: 'center',
   },
   input: {
@@ -52,14 +47,15 @@ module.exports = StyleSheet.create({
     marginLeft:20,
   },
   inputText: {
-    color: "#f5f5f5",
+    color: "#135ca1",
     textAlign: 'right',
     paddingRight: 7,
+    fontSize: 17,
 
   },
   btn: {
-    width: deviceWith * 0.90,
-    marginTop: 20,
+    width: deviceWidth * 0.90,
+    marginTop: 60,
     alignSelf: 'center',
     alignItems: 'center',
     justifyContent: 'center',
@@ -69,7 +65,7 @@ module.exports = StyleSheet.create({
   },
   btnText: {
     fontSize: 20,
-    color: '#DBDBDB'
+    color: '#FFF'
   },
   loginError: {
     fontSize: 16,
@@ -78,7 +74,7 @@ module.exports = StyleSheet.create({
   },
   modal: {
     height: deviceHeight / 4,
-    width: deviceWith * 0.90,
+    width: deviceWidth * 0.90,
     borderRadius: 10,
     backgroundColor: "#EB1D36",
     justifyContent: 'center',

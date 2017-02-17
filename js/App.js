@@ -85,8 +85,8 @@ class App extends Component {
         }
       },
       ({ receivedBytes, totalBytes }) => {
-        console.log("receivedBytes:", receivedBytes, "totalBytes:", totalBytes, "progress:",
-          parseInt(this.state.downloadProgress, 10));
+        
+          parseInt(this.state.downloadProgress, 10);
 
         this.setState({ downloadProgress: (receivedBytes / totalBytes) * 100 });
       }

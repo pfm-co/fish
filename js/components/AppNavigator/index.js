@@ -309,7 +309,7 @@ class AppNavigator extends Component {
             >
 
             <Text style={styles.dlgConfirmText}>
-              آیا برای خروج مطمئن هستید؟
+              آیا می خواهید از حساب کاربری خود خارج شوید؟
             </Text>
 
             <View style={{flex:1}} />

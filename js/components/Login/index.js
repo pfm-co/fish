@@ -22,7 +22,7 @@ const {
 
 
 const background = require('../../../images/bg3_small.jpg');
-const appLogo = require('../../../images/appLogo.png');
+const appLogo = require('../../../images/appLogo_black.png');
 
 class Login extends Component {
   static propTypes = {
@@ -62,60 +62,58 @@ class Login extends Component {
   render() {
     return (
       <Container>
-        <View style={styles.container}>
-          <Content  scrollEnabled={false}>
-            <Image source={background} style={styles.shadow}>
-              <View style={styles.bg}>
-                <Image source={appLogo} style={styles.appLogo} />
+        <Content scrollEnabled={false}>
+          <View style={styles.bg}>
 
+            <Image source={appLogo} style={styles.appLogo} />
 
-                <View style={styles.loginForm}> 
-                  <InputGroup 
-                    iconRight={true} 
-                    style={[styles.input, {marginTop: 150}]}
-                  >
-                    <Icon name="ios-person" style={{fontSize: 23, color: "#f5f5f5"}} />
-                    <Input 
-                      placeholder={I18n.t("Login.Username")}
-                      onChangeText={username => this.setState({ username })}
-                      value={this.state.username}
-                      style={styles.inputText}
-                    />
-                  </InputGroup>
+            <View style={styles.loginForm}> 
+              <InputGroup 
+                iconRight={true} 
+                style={[styles.input, {marginTop: 65}]}
+              >
+                <Icon name="ios-person" style={{fontSize: 27, color: "#135ca1"}} />
+                <Input 
+                  placeholder={I18n.t("Login.Username")}
+                  onChangeText={username => this.setState({ username })}
+                  value={this.state.username}
+                  style={styles.inputText}
+                />
+              </InputGroup>
 
-                  <InputGroup 
-                    iconRight={true} 
-                    style={styles.input}
-                  >
-                    <Icon name="ios-unlock-outline" style={{fontSize: 23, color: "#f5f5f5"}} />
-                    <Input
-                      placeholder={I18n.t("Login.Password")}
-                      secureTextEntry
-                      onChangeText={password => this.setState({ password })}
-                      value={this.state.password}
-                      style={styles.inputText}
-                    />
-                  </InputGroup>
+              <InputGroup 
+                iconRight={true} 
+                style={styles.input}
+              >
+                <Icon name="ios-unlock-outline" style={{fontSize: 27, color: "#135ca1"}} />
+                <Input
+                  placeholder={I18n.t("Login.Password")}
+                  secureTextEntry
+                  onChangeText={password => this.setState({ password })}
+                  value={this.state.password}
+                  style={styles.inputText}
+                />
+              </InputGroup>
 
-                  <ActivityIndicator
-                      size="small"
-                      color="#382B5C"
-                      animating={this.props.authState.isLoginInProgress}
-                  />
+              <ActivityIndicator
+                  size="small"
+                  color="#382B5C"
+                  animating={this.props.authState.isLoginInProgress}
+              />
 
-                  
-                  <Button primary style={styles.btn} onPress={() => { 
-                    this.modalDlg.close();
-                    this.props.login(this.state.username, this.state.password);
-                  }}>
-                    <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
-                  </Button>
+              
+              <Button primary style={styles.btn} onPress={() => { 
+                this.modalDlg.close();
+                this.props.login(this.state.username, this.state.password);
+              }}>
+                <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
+              </Button>
 
-              </View>
-                
+            </View>
+            
+            <View style={styles.bottomSpacer} />
 
-              </View>
-            </Image>
+          </View>
 
           <Modal 
             style={[styles.modal]} 
@@ -127,16 +125,14 @@ class Login extends Component {
             }}
             animationDuration={200}
             >
-
             <Text style={styles.loginError}>
                 { I18n.t('Login.LoginError') + '، ' +
                   this.props.authState.errorMsg
                 }
             </Text>
-            
           </Modal>
-          </Content>
-        </View>
+
+        </Content>
       </Container>
     );
   }
