@@ -285,6 +285,7 @@ class AppNavigator extends Component {
           if (this.props.drawerState == "opened")
             this.props.closeDrawer();
         }}
+        drawerLockMode={this.props.isLoggedIn ? 'unlocked' : 'locked-closed'}
         >
 
           <StatusBar
