@@ -105,6 +105,7 @@ class Login extends Component {
 
                   
                   <Button primary style={styles.btn} onPress={() => { 
+                    this.modalDlg.close();
                     this.props.login(this.state.username, this.state.password);
                   }}>
                     <Text style={styles.btnText}>{I18n.t("Login.Login")}</Text>
@@ -120,9 +121,11 @@ class Login extends Component {
             style={[styles.modal]} 
             backdrop={true}  
             position={"center"}
+            backdropOpacity={0.3}
             ref={(modalDlg) => {
                 this.modalDlg = modalDlg;
             }}
+            animationDuration={200}
             >
 
             <Text style={styles.loginError}>

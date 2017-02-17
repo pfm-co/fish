@@ -65,6 +65,7 @@ module.exports = StyleSheet.create({
     justifyContent: 'center',
     paddingBottom: 12,
     backgroundColor: "#0387d2",
+    zIndex: 2,
   },
   btnText: {
     fontSize: 20,
@@ -86,5 +87,7 @@ module.exports = StyleSheet.create({
     paddingBottom: 20,
     paddingRight: 15,
     paddingLeft: 15,
+    zIndex: 10000,
+    
   },
 });

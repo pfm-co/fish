@@ -65,10 +65,6 @@ constructor(props) {
               style={styles.picker}
           >
               <Item label="1395" value="1395" />
-              <Item label="1394" value="1394" />
-              <Item label="1393" value="1393" />
-              <Item label="1392" value="1392" />
-              <Item label="1391" value="1391" />
           </Picker>
 
           <Text style={{marginLeft: 20}}>{I18n.t("Common.Year") + ": "}</Text>
